@@ -1,9 +1,13 @@
 package main.java.chattingSystem.entities.ChatRoom;
 
-import com.sun.jdi.CharType;
+import main.java.chattingSystem.entities.Message.TextMessage;
+import main.java.chattingSystem.entities.User.User;
+
+import java.util.List;
 
 public class CommonChatRoomFactory implements ChatRoomFactory{
-    public ChatRoom create(List<User> member, List<Message> chatHistory) {
-        return CommonChatRoom(member, chatHistory);
+    @Override
+    public ChatRoom create(List<User> member, List<TextMessage> chatHistory) {
+        return new CommonChatRoom(member, chatHistory);
     }
 }
