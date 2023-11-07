@@ -1,13 +1,16 @@
 package main.java.chattingSystem.entities.ChatRoom;
 
+import main.java.chattingSystem.entities.Message.TextMessage;
+import main.java.chattingSystem.entities.User.User;
+
 import java.util.List;
 
 public class CommonChatRoom implements ChatRoom {
     private final List<User> member;
 
-    private final List<Message> chatHistory;
+    private final List<TextMessage> chatHistory;
 
-    CommonChatRoom(List<User> member, List<Message> chatHistory) {
+    CommonChatRoom(List<User> member, List<TextMessage> chatHistory) {
         this.chatHistory = chatHistory;
         this.member = member;
     }
@@ -16,7 +19,7 @@ public class CommonChatRoom implements ChatRoom {
         return member;
     }
 
-    public list<Message> getChatHistory() {
+    public List<TextMessage> getChatHistory() {
         return chatHistory;
     }
 }

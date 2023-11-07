@@ -1,8 +1,8 @@
-package entity;
+package main.java.chattingSystem.entities.User;
 
 import java.time.LocalDateTime;
 
-class User {
+public class CommonUser implements User{
     private final String username;
     private final String userid;
     private final String password;
@@ -11,19 +11,20 @@ class User {
      * @param username
      * @param userid
      * @param password
+     * @param creationTime
      */
-    User(String username, String userid, String password, LocalDateTime creationTime) {
+    CommonUser(String username, String userid, String password, LocalDateTime creationTime) {
         this.username = username;
         this.userid = userid;
         this.password = password;
         this.creationTime= creationTime;
     }
     @Override
-    public String getUsername(){return username};
+    public String getUsername(){return username;};
     @Override
-    public String getUserid(){return userid};
+    public String getUserid(){return userid;};
     @Override
-    public String getPassword(){return password};
+    public String getPassword(){return password;};
     @Override
-    public LocalDateTime getCreationTime(){return creationTime};
+    public LocalDateTime getCreationTime(){return creationTime;};
 }
