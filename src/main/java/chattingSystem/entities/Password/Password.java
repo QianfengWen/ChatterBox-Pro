@@ -4,16 +4,19 @@ public class Password {
     private String password;
 
 
-    private Criteria criteria;
-
-    public Password(String password, Criteria criteria){
+    public Password(String password){
         this.password = password;
-        this.criteria = criteria;
     }
 
     public String getPassword() {
         return password;
     }
 
+    public boolean isValid(){
+        if (password.length() < 8) return false;
+        if (!password.matches(".*[a-zA-Z]+.*")) return false;
+        if (!password.matches(".*[0-9]+.*")) return false;
+        return true;
+    }
 }
 
