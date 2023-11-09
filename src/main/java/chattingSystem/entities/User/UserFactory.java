@@ -1,5 +1,7 @@
 package main.java.chattingSystem.entities.User;
 
+import main.java.chattingSystem.entities.Password.Password;
+
 import java.time.LocalDateTime;
 
 public interface UserFactory {
@@ -8,5 +10,5 @@ public interface UserFactory {
      * @param userid
      * @param password
      */
-    CommonUser create(String username, String userid, String password, LocalDateTime creationTime);
+    User create(String username, String userid, String password, LocalDateTime creationTime);
 }
