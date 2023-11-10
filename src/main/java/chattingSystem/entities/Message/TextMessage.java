@@ -1,17 +1,20 @@
 package main.java.chattingSystem.entities.Message;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
-public class TextMessage extends Message{
-    private final String text;
+public abstract class Message {
+    int messageID;
+    private String senderID;
 
-    public TextMessage(int messageID, String senderID, String senderName, Date timestamp, String text){
-        super(messageID, senderID, senderName, timestamp);
-        this.text = text;
-    }
+    private String senderName;
+    private LocalDateTime timestamp;
 
-    public String getText() {
-        return text;
+    public Message(int messageID, String senderID, String senderName, LocalDateTime timestamp) {
+        this.messageID = messageID;
+        this.senderID = senderID;
+        this.senderName = senderName;
+        this.timestamp = timestamp;
     }
 
 }
