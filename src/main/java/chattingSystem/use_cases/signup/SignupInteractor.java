@@ -23,11 +23,11 @@ public class SignupInteractor implements SignupInputBoundary {
     @Override
     public void execute(SignupInputData signupInputData) {
         if (userDataAccessObject.existsByName(signupInputData.getUsername())) {
-            userPresenter.prepareFailView("User already exists.");
+            userPresenter.prepareNameFailView("User already exists.");
         } else if (!signupInputData.getPassword().equals(signupInputData.getRepeatPassword())) {
-            userPresenter.prepareFailView("Passwords don't match.");
+            userPresenter.prepareRepeatPWFailView("Passwords don't match.");
         } else if (!signupInputData.isValidPassword()) {
-            userPresenter.prepareFailView("Password is not valid. It must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, and one number.");
+            userPresenter.prepareInvalidPWFailView("Password is not valid. It must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, and one number.");
         } else {
 
             LocalDateTime now = LocalDateTime.now();

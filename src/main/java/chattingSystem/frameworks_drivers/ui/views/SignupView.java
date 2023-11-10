@@ -249,7 +249,9 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
 
 
     public void actionPerformed(ActionEvent evt) {
-        JOptionPane.showConfirmDialog(this, "Cancel not implemented yet.");
+        // This method is called whenever the timer fires an action event.
+        // We don't need to do anything here, but we need to implement this method
+        // because we're implementing the ActionListener interface.
     }
 
     @Override
@@ -257,6 +259,16 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         SignupState state = (SignupState) evt.getNewValue();
         if (state.getUsernameError() != null) {
             JOptionPane.showMessageDialog(this, state.getUsernameError());
+            state.setUsernameError(null);
+        }else if (state.getPasswordError() != null) {
+            JOptionPane.showMessageDialog(this, state.getPasswordError());
+            state.setPasswordError(null);
+        }else if (state.getRepeatPasswordError() != null) {
+            JOptionPane.showMessageDialog(this, state.getRepeatPasswordError());
+            state.setRepeatPasswordError(null);
+        }else{
+            JOptionPane.showMessageDialog(this, "Signup successful!");
         }
+
     }
 }
