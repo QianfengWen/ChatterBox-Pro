@@ -2,7 +2,9 @@ package main.java.chattingSystem.interface_adapter.presenter;
 
 
 
+import main.java.chattingSystem.interface_adapter.state.LoginState;
 import main.java.chattingSystem.interface_adapter.state.SignupState;
+import main.java.chattingSystem.interface_adapter.view_models.LoginViewModel;
 import main.java.chattingSystem.interface_adapter.view_models.SignupViewModel;
 import main.java.chattingSystem.interface_adapter.view_models.ViewManagerModel;
 import main.java.chattingSystem.use_cases.signup.SignupOutputBoundary;
@@ -15,10 +17,14 @@ public class SignupPresenter implements SignupOutputBoundary {
     private final SignupViewModel signupViewModel;
     private ViewManagerModel viewManagerModel;
 
+    private final LoginViewModel loginViewModel;
+
     public SignupPresenter(ViewManagerModel viewManagerModel,
-                           SignupViewModel signupViewModel) {
+                           SignupViewModel signupViewModel,
+                           LoginViewModel loginViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.signupViewModel = signupViewModel;
+        this.loginViewModel = loginViewModel;
     }
 
     @Override
@@ -26,14 +32,14 @@ public class SignupPresenter implements SignupOutputBoundary {
         // On success, switch to the login view.
         LocalDateTime responseTime = LocalDateTime.parse(response.getCreationTime());
         response.setCreationTime(responseTime.format(DateTimeFormatter.ofPattern("hh:mm:ss")));
-
-//        LoginState loginState = loginViewModel.getState();
-//        loginState.setUsername(response.getUsername());
-//        this.loginViewModel.setState(loginState);
-//        loginViewModel.firePropertyChanged();
-//
-//        viewManagerModel.setActiveView(loginViewModel.getViewName());
         signupViewModel.firePropertyChanged();
+
+        LoginState loginState = loginViewModel.getState();
+        loginState.setUsername(response.getUsername());
+        loginViewModel.setState(loginState);
+        loginViewModel.firePropertyChanged();
+
+        viewManagerModel.setActiveView(loginViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }
 

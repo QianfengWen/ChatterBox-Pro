@@ -1,11 +1,14 @@
 package main.java.chattingSystem.frameworks_drivers.ui.views;
 
+import main.java.chattingSystem.entities.ChatRoom.ChatRoom;
 import main.java.chattingSystem.interface_adapter.view_models.ViewManagerModel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ViewManager implements PropertyChangeListener {
     private final CardLayout cardLayout;
@@ -18,6 +21,9 @@ public class ViewManager implements PropertyChangeListener {
         this.viewManagerModel = viewManagerModel;
         this.viewManagerModel.addPropertyChangeListener(this);
     }
+    public void addView(JPanel view, String viewnName) {
+        views.add(view, viewnName);
+    }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
@@ -26,4 +32,5 @@ public class ViewManager implements PropertyChangeListener {
             cardLayout.show(views, viewModelName);
         }
     }
+
 }

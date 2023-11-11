@@ -2,8 +2,12 @@ package main.java.chattingSystem.interface_adapter.view_models;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class ViewManagerModel {
+
     private String activeViewName;
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);

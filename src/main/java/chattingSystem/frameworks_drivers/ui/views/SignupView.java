@@ -9,27 +9,34 @@ import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import main.java.chattingSystem.interface_adapter.controllers.CreateChatRoomController;
 import main.java.chattingSystem.interface_adapter.view_models.SignupViewModel;
 import main.java.chattingSystem.interface_adapter.controllers.SignupController;
 import main.java.chattingSystem.interface_adapter.state.SignupState;
+import main.java.chattingSystem.interface_adapter.view_models.ViewManagerModel;
 
 public class SignupView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "sign up";
     private final SignupViewModel signupViewModel;
+    private final ViewManagerModel viewManagerModel;
     private final JTextField usernameInputField = new JTextField(15);
     private final JPasswordField passwordInputField = new JPasswordField(15);
     private final JPasswordField repeatPasswordInputField = new JPasswordField(15);
     private final SignupController signupController;
+    private final CreateChatRoomController createChatRoomController;
     private final JButton signUp;
     private final JButton cancel;
+
     private final JLabel passwordHintLabel = new JLabel("<html>Password must be at least 8 characters long and include:<ul>" +
             "<li>At least one uppercase letter</li>" +
             "<li>At least one lowercase letter</li>" +
             "<li>At least one number</li></ul></html>");
 
-    public SignupView(SignupController controller, SignupViewModel signupViewModel) {
+    public SignupView(SignupController controller, CreateChatRoomController createChatRoomController, SignupViewModel signupViewModel, ViewManagerModel viewManagerModel) {
         this.signupController = controller;
+        this.createChatRoomController = createChatRoomController;
         this.signupViewModel = signupViewModel;
+        this.viewManagerModel = viewManagerModel;
         signupViewModel.addPropertyChangeListener(this);
 
         setLayout(new GridBagLayout());
@@ -117,6 +124,7 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
                     }
                 }
         );
+
         cancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource().equals(cancel)) {
@@ -144,6 +152,9 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
                     // Handle any other logic that should occur after canceling the signup,
                     // such as switching to a different view, if applicable.
                     // ...
+                    viewManagerModel.setActiveView("log in");
+
+                    viewManagerModel.firePropertyChanged();
                 }
             }
         });
@@ -177,11 +188,7 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
                         currentState.setPassword(passwordInputField.getText() + e.getKeyChar());
                         signupViewModel.setState(currentState);
                         int passwordLength = passwordInputField.getPassword().length;
-                        if (passwordLength > 0) {
-                            passwordHintLabel.setVisible(true);
-                        } else {
-                            passwordHintLabel.setVisible(false);
-                        }
+                        passwordHintLabel.setVisible(passwordLength > 0);
                     }
 
                     @Override
@@ -223,9 +230,6 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         // Consider using a UIManager to set a theme or custom styling
         // ...
 
-        // making the window bigger
-        setPreferredSize(new Dimension(400, 300));
-
         // making the caption more beautiful
         usernameInputField.setFont(new Font("Times", Font.BOLD, 12));
         passwordInputField.setFont(new Font("Times", Font.BOLD, 12));
@@ -256,19 +260,21 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        SignupState state = (SignupState) evt.getNewValue();
-        if (state.getUsernameError() != null) {
-            JOptionPane.showMessageDialog(this, state.getUsernameError());
-            state.setUsernameError(null);
-        }else if (state.getPasswordError() != null) {
-            JOptionPane.showMessageDialog(this, state.getPasswordError());
-            state.setPasswordError(null);
-        }else if (state.getRepeatPasswordError() != null) {
-            JOptionPane.showMessageDialog(this, state.getRepeatPasswordError());
-            state.setRepeatPasswordError(null);
-        }else{
-            JOptionPane.showMessageDialog(this, "Signup successful!");
-        }
+            SignupState state = (SignupState) evt.getNewValue();
+            if (state.getUsernameError() != null) {
+                JOptionPane.showMessageDialog(this, state.getUsernameError());
+                state.setUsernameError(null);
+            }else if (state.getPasswordError() != null) {
+                JOptionPane.showMessageDialog(this, state.getPasswordError());
+                state.setPasswordError(null);
+            }else if (state.getRepeatPasswordError() != null) {
+                JOptionPane.showMessageDialog(this, state.getRepeatPasswordError());
+                state.setRepeatPasswordError(null);
+            }else{
+                if (viewManagerModel.getActiveView().equals("sign up")) {
+                    JOptionPane.showMessageDialog(this, "Signup successful!");
+                }
+            }
 
     }
 }

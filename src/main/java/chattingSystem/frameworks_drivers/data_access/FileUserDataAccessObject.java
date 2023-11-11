@@ -2,6 +2,8 @@ package main.java.chattingSystem.frameworks_drivers.data_access;
 
 import main.java.chattingSystem.entities.User.User;
 import main.java.chattingSystem.entities.User.UserFactory;
+import main.java.chattingSystem.use_cases.get_chat_room.GetUser;
+import main.java.chattingSystem.use_cases.login.LoginUserDataAccessInterface;
 import main.java.chattingSystem.use_cases.signup.SignupUserDataAccessInterface;
 
 import java.io.*;
@@ -10,7 +12,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class FileUserDataAccessObject implements SignupUserDataAccessInterface{
+public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface, GetUser {
 
     private final File csvFile;
 
@@ -100,6 +102,11 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface{
     @Override
     public String generateUserid() {
         return String.valueOf(accounts.size() + 1);
+    }
+
+    @Override
+    public User getUser(String username) {
+        return accounts.get(username);
     }
 
 //    @Override
