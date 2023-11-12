@@ -7,7 +7,12 @@ import java.util.List;
 
 public interface ChatRoom {
 
-    List<User> getMember();
+    List<User> getMembers();
+    String getMembersString();
 
     List<TextMessage> getChatHistory();
+    String getChatHistoryString();
+    void addMessage(TextMessage message);
+    void addMember(User user);
+    String getChatRoomID();
 }

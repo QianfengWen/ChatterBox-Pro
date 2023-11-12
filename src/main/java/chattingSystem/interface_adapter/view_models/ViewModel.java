@@ -3,6 +3,8 @@ package main.java.chattingSystem.interface_adapter.view_models;
 import main.java.chattingSystem.interface_adapter.state.ViewState;
 
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class ViewModel {
     // Abstract methods that can be overridden by concrete ViewModel classes
