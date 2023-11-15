@@ -1,5 +1,6 @@
 package main.java.chattingSystem.App;
 
+import main.java.chattingSystem.entities.ChatRoom.CommonChatRoomFactory;
 import main.java.chattingSystem.entities.User.CommonUserFactory;
 import main.java.chattingSystem.frameworks_drivers.data_access.ChatRoomDataAccessObject;
 import main.java.chattingSystem.frameworks_drivers.data_access.FileUserDataAccessObject;
@@ -38,7 +39,7 @@ public class main {
         LoginViewModel loginViewModel = new LoginViewModel();
 
         FileUserDataAccessObject userDataAccessObject;
-        ChatRoomDataAccessObject chatRoomDataAccessObject = new ChatRoomDataAccessObject();
+
 
         try {
             userDataAccessObject = new FileUserDataAccessObject("./users.csv", new CommonUserFactory());
@@ -46,12 +47,16 @@ public class main {
             throw new RuntimeException(e);
         }
 
+        ChatRoomDataAccessObject chatRoomDataAccessObject = new ChatRoomDataAccessObject("./chatrooms.csv",
+                new CommonChatRoomFactory(),
+                new CommonUserFactory(),
+                userDataAccessObject);
+
 
         SignupView signupView = SignupUseCaseFactory.create(viewManagerModel,
                 signupViewModel,
                 loginViewModel,
-                userDataAccessObject,
-                chatRoomDataAccessObject
+                userDataAccessObject
                 );
         assert signupView != null;
 

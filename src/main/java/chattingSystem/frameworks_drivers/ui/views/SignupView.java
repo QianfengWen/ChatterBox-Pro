@@ -9,7 +9,6 @@ import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import main.java.chattingSystem.interface_adapter.controllers.CreateChatRoomController;
 import main.java.chattingSystem.interface_adapter.view_models.SignupViewModel;
 import main.java.chattingSystem.interface_adapter.controllers.SignupController;
 import main.java.chattingSystem.interface_adapter.state.SignupState;
@@ -23,7 +22,6 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
     private final JPasswordField passwordInputField = new JPasswordField(15);
     private final JPasswordField repeatPasswordInputField = new JPasswordField(15);
     private final SignupController signupController;
-    private final CreateChatRoomController createChatRoomController;
     private final JButton signUp;
     private final JButton cancel;
 
@@ -32,9 +30,8 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
             "<li>At least one lowercase letter</li>" +
             "<li>At least one number</li></ul></html>");
 
-    public SignupView(SignupController controller, CreateChatRoomController createChatRoomController, SignupViewModel signupViewModel, ViewManagerModel viewManagerModel) {
+    public SignupView(SignupController controller, SignupViewModel signupViewModel, ViewManagerModel viewManagerModel) {
         this.signupController = controller;
-        this.createChatRoomController = createChatRoomController;
         this.signupViewModel = signupViewModel;
         this.viewManagerModel = viewManagerModel;
         signupViewModel.addPropertyChangeListener(this);
@@ -272,6 +269,17 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
                 state.setRepeatPasswordError(null);
             }else{
                 if (viewManagerModel.getActiveView().equals("sign up")) {
+                    // Clear the input fields
+                    usernameInputField.setText("");
+                    passwordInputField.setText("");
+                    repeatPasswordInputField.setText("");
+
+                    // Reset the state if needed
+                    SignupState currentState = signupViewModel.getState();
+                    currentState.setUsername("");
+                    currentState.setPassword("");
+                    currentState.setRepeatPassword("");
+                    signupViewModel.setState(currentState);
                     JOptionPane.showMessageDialog(this, "Signup successful!");
                 }
             }

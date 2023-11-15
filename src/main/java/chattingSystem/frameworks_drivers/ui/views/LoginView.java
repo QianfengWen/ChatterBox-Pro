@@ -20,7 +20,6 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
     public final String viewName = "log in";
     private final LoginViewModel loginViewModel;
     private final ViewManagerModel viewManagerModel;
-    private int loginSuccess = 0;
     private final JTextField usernameInputField = new JTextField(15);
     private final JPasswordField passwordInputField = new JPasswordField(15);
     private final LoginController loginController;
@@ -229,8 +228,10 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
             } else if (state.getPasswordError() != null) {
                 JOptionPane.showMessageDialog(this, state.getPasswordError());
                 state.setPasswordError(null);
+            } else if (state.SignupSuccess()){
+                state.setSignupSuccess(false);
             }
-            else{
+            else if (state.loginSuccess()){
                     LoginState currentState = loginViewModel.getState();
                         try {
                             joinChatRoomController.execute(currentState.getUsername());
@@ -238,15 +239,15 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
                             throw new RuntimeException(e);
                         }
                         JOptionPane.showMessageDialog(this, "Login successful!");
-                        loginSuccess++;
                         // Clear the input fields
                         usernameInputField.setText("");
                         passwordInputField.setText("");
                         // Reset the state if needed
                         currentState.setUsername("");
                         currentState.setPassword("");
+                        currentState.setLoginSuccess(false);
                         loginViewModel.setState(currentState);
-                        viewManagerModel.setActiveView("logged in");
+                        viewManagerModel.setActiveView("log in");
             }
 
     }
