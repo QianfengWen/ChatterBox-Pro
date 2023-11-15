@@ -8,6 +8,7 @@ import main.java.chattingSystem.interface_adapter.state.LoginState;
 import main.java.chattingSystem.interface_adapter.view_models.ChatRoomViewModel;
 import main.java.chattingSystem.interface_adapter.view_models.LoginViewModel;
 import main.java.chattingSystem.interface_adapter.view_models.ViewManagerModel;
+import main.java.chattingSystem.use_cases.log_out.LogOutDataAccessBoundary;
 import main.java.chattingSystem.use_cases.login.LoginOutputData;
 import main.java.chattingSystem.use_cases.login.LoginOutputBoundary;
 
@@ -29,7 +30,7 @@ public class LoginPresenter implements LoginOutputBoundary{
     }
 
     @Override
-    public void prepareSuccessView(LoginOutputData response) {
+    public void prepareSuccessView(LoginOutputData response, LogOutDataAccessBoundary logOutDataAccessBoundary) {
         // TODO replace the logic to load chatroom and create a new chatroom view for current user
         if (viewManagerModel.getActiveView().equals("log in")) {
             loginViewModel.firePropertyChanged();
@@ -42,7 +43,7 @@ public class LoginPresenter implements LoginOutputBoundary{
             chatRoomViewModel.setState(chatRoomState);
             chatRoomViewModel.firePropertyChanged();
             // create a new chat room view
-            createChatRoomFrame(chatRoomViewModel);
+            createChatRoomFrame(chatRoomViewModel, logOutDataAccessBoundary);
         }
 
 

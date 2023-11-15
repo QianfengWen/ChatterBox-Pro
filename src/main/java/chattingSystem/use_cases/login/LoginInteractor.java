@@ -1,14 +1,18 @@
 package main.java.chattingSystem.use_cases.login;
 import main.java.chattingSystem.entities.User.User;
+import main.java.chattingSystem.use_cases.log_out.LogOutDataAccessBoundary;
 
 public class LoginInteractor implements LoginInputBoundary{
     final LoginUserDataAccessInterface userDataAccessObject;
     final LoginOutputBoundary loginPresenter;
+    private LogOutDataAccessBoundary logOutDataAccessBoundary;
 
     public LoginInteractor(LoginUserDataAccessInterface userDataAccessInterface,
-                           LoginOutputBoundary loginOutputBoundary) {
+                           LoginOutputBoundary loginOutputBoundary,
+                            LogOutDataAccessBoundary logOutDataAccessBoundary) {
         this.userDataAccessObject = userDataAccessInterface;
         this.loginPresenter = loginOutputBoundary;
+        this.logOutDataAccessBoundary = logOutDataAccessBoundary;
     }
 
     @Override
@@ -30,7 +34,7 @@ public class LoginInteractor implements LoginInputBoundary{
                 //set user online
                 user.setOnline(true);
                 LoginOutputData loginOutputData = new LoginOutputData(user.getUsername(), false);
-                loginPresenter.prepareSuccessView(loginOutputData);
+                loginPresenter.prepareSuccessView(loginOutputData, logOutDataAccessBoundary);
             }
         }
 

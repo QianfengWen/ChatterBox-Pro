@@ -5,6 +5,7 @@ import main.java.chattingSystem.entities.User.User;
 import main.java.chattingSystem.frameworks_drivers.ui.views.ChatRoomView;
 import main.java.chattingSystem.frameworks_drivers.ui.views.ChatRoomViewManager;
 import main.java.chattingSystem.frameworks_drivers.ui.views.ViewManager;
+import main.java.chattingSystem.interface_adapter.controllers.LogOutController;
 import main.java.chattingSystem.interface_adapter.state.ChatRoomState;
 import main.java.chattingSystem.interface_adapter.state.LoginState;
 import main.java.chattingSystem.interface_adapter.view_models.ChatRoomViewManagerModel;
@@ -15,6 +16,7 @@ import main.java.chattingSystem.use_cases.create_chat_room.CreateChatRoomOutputB
 import main.java.chattingSystem.use_cases.create_chat_room.CreateChatRoomOutputData;
 import main.java.chattingSystem.use_cases.join_chat_room.JoinChatRoomOutpurBoundary;
 import main.java.chattingSystem.use_cases.join_chat_room.JoinChatRoomOutputData;
+import main.java.chattingSystem.use_cases.log_out.LogOutDataAccessBoundary;
 import main.java.chattingSystem.use_cases.log_out.LogOutOutputBoundary;
 import main.java.chattingSystem.use_cases.log_out.LogOutOutputData;
 import main.java.chattingSystem.use_cases.send_message.SendMessageOutputBoundary;
@@ -52,7 +54,7 @@ public class ChatRoomPresenter implements CreateChatRoomOutputBoundary, JoinChat
     }
 
     @Override
-    public void prepareSuccessView(JoinChatRoomOutputData joinChatRoomOutputData){
+    public void prepareSuccessView(JoinChatRoomOutputData joinChatRoomOutputData, LogOutDataAccessBoundary logOutDataAccessBoundary){
         ChatRoomState chatRoomState = new ChatRoomState();
         User user = joinChatRoomOutputData.getUser();
         String username = user.getUsername();
@@ -61,7 +63,7 @@ public class ChatRoomPresenter implements CreateChatRoomOutputBoundary, JoinChat
         chatRoomViewModel.setUserNameLabel(username);
         this.chatRoomViewModel.setState(chatRoomState);
         this.chatRoomViewModel.firePropertyChanged();
-        createChatRoomFrame(chatRoomViewModel);
+        createChatRoomFrame(chatRoomViewModel, logOutDataAccessBoundary);
     }
 
     @Override
@@ -69,6 +71,9 @@ public class ChatRoomPresenter implements CreateChatRoomOutputBoundary, JoinChat
     }
     @Override
     public void prepareSuccessView(LogOutOutputData logOutOutputData){
+        ChatRoomState chatRoomState = new ChatRoomState();
+        this.chatRoomViewModel.setState(chatRoomState);
+        this.chatRoomViewModel.firePropertyChanged();
         deleteChatRoomFrame();
         this.viewManagerModel.setActiveView(loginViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();

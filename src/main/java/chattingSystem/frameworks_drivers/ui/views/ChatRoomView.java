@@ -1,5 +1,7 @@
 package main.java.chattingSystem.frameworks_drivers.ui.views;
 
+import main.java.chattingSystem.interface_adapter.controllers.LogOutController;
+import main.java.chattingSystem.interface_adapter.state.ChatRoomState;
 import main.java.chattingSystem.interface_adapter.view_models.ChatRoomViewManagerModel;
 import main.java.chattingSystem.interface_adapter.view_models.ChatRoomViewModel;
 import main.java.chattingSystem.interface_adapter.view_models.LoginViewModel;
@@ -20,15 +22,18 @@ public class ChatRoomView extends JPanel implements ActionListener, PropertyChan
 
     private final JButton logOut;
     public ChatRoomViewModel chatRoomViewModel;
+    public LogOutController logOutController;
 
     private final ChatRoomViewManagerModel chatRoomViewManagerModel;
 
     public ChatRoomView(ChatRoomViewModel chatRoomViewModel,
                         ChatRoomViewManagerModel chatRoomViewManagerModel,
-                        ChatRoomViewManager chatRoomViewManager) {
+                        ChatRoomViewManager chatRoomViewManager,
+                        LogOutController logOutController) {
         this.viewName = chatRoomViewModel.getViewName();
         this.chatRoomViewModel = chatRoomViewModel;
         this.chatRoomViewManagerModel = chatRoomViewManagerModel;
+        this.logOutController = logOutController;
         chatRoomViewManager.addView(this, viewName);
         chatRoomViewModel.addPropertyChangeListener(this);
 
@@ -103,7 +108,17 @@ public class ChatRoomView extends JPanel implements ActionListener, PropertyChan
 
 
         customizeComponents();
-
+        logOut.addActionListener(
+                // This creates an anonymous subclass of ActionListener and instantiates it.
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(logOut)) {
+                            ChatRoomState currentState = chatRoomViewModel.getState();
+                            logOutController.execute(currentState.getUsername());
+                        }
+                    }
+                }
+        );
 
     }
     private void customizeComponents() {
