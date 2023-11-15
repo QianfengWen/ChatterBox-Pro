@@ -18,6 +18,7 @@ import main.java.chattingSystem.use_cases.join_chat_room.JoinChatRoomDataAccessB
 import main.java.chattingSystem.use_cases.join_chat_room.JoinChatRoomInputBoundary;
 import main.java.chattingSystem.use_cases.join_chat_room.JoinChatRoomInteractor;
 import main.java.chattingSystem.use_cases.join_chat_room.JoinChatRoomOutpurBoundary;
+import main.java.chattingSystem.use_cases.log_out.LogOutDataAccessBoundary;
 import main.java.chattingSystem.use_cases.login.LoginInputBoundary;
 import main.java.chattingSystem.use_cases.login.LoginInteractor;
 import main.java.chattingSystem.use_cases.login.LoginOutputBoundary;
@@ -36,12 +37,13 @@ public class LoginUseCaseFactory {
             FileUserDataAccessObject userDataAccessObject,
             JoinChatRoomDataAccessBoundary joinChatRoomDataAccessBoundary,
             GetChatRoomDataAccessBoundary getChatRoomDataAccessBoundary,
+            LogOutDataAccessBoundary logOutDataAccessBoundary,
             GetUser getUser
     ) {
 
         try {
-            LoginController loginController = createLoginUseCase(viewManagerModel, viewManager, loginViewModel, userDataAccessObject);
-            JoinChatRoomController joinChatRoomController = createJoinChatRoomUseCase(joinChatRoomDataAccessBoundary, getChatRoomDataAccessBoundary, getUser);
+            LoginController loginController = createLoginUseCase(viewManagerModel, viewManager, loginViewModel, logOutDataAccessBoundary,userDataAccessObject);
+            JoinChatRoomController joinChatRoomController = createJoinChatRoomUseCase(joinChatRoomDataAccessBoundary, getChatRoomDataAccessBoundary, logOutDataAccessBoundary, getUser);
             return new LoginView(loginController, joinChatRoomController, loginViewModel, viewManagerModel);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
@@ -54,6 +56,7 @@ public class LoginUseCaseFactory {
             ViewManagerModel viewManagerModel,
             ViewManager viewManager,
             LoginViewModel loginViewModel,
+            LogOutDataAccessBoundary logOutDataAccessBoundary,
             LoginUserDataAccessInterface userDataAccessObject) throws IOException {
 
         // Notice how we pass this method's parameters to the Presenter.
@@ -64,13 +67,14 @@ public class LoginUseCaseFactory {
         UserFactory userFactory = new CommonUserFactory();
 
         LoginInputBoundary loginInteractor = new LoginInteractor(
-                userDataAccessObject, loginOutputBoundary);
+                userDataAccessObject, loginOutputBoundary, logOutDataAccessBoundary);
 
         return new LoginController(loginInteractor);
     }
     public static JoinChatRoomController createJoinChatRoomUseCase(
             JoinChatRoomDataAccessBoundary joinChatRoomDataAccessBoundary,
             GetChatRoomDataAccessBoundary getChatRoomDataAccessBoundary,
+            LogOutDataAccessBoundary logOutDataAccessBoundary,
             GetUser getUser) throws IOException {
 
         // Notice how we pass this method's parameters to the Presenter.
@@ -81,6 +85,7 @@ public class LoginUseCaseFactory {
         JoinChatRoomInputBoundary joinChatRoomInteractor = new JoinChatRoomInteractor(joinChatRoomOutpurBoundary,
                 joinChatRoomDataAccessBoundary,
                 getChatRoomDataAccessBoundary,
+                logOutDataAccessBoundary,
                 getUser);
 
 

@@ -3,6 +3,7 @@ package main.java.chattingSystem.frameworks_drivers.data_access;
 import main.java.chattingSystem.entities.User.User;
 import main.java.chattingSystem.entities.User.UserFactory;
 import main.java.chattingSystem.use_cases.get_chat_room.GetUser;
+import main.java.chattingSystem.use_cases.log_out.LogOutDataAccessBoundary;
 import main.java.chattingSystem.use_cases.login.LoginUserDataAccessInterface;
 import main.java.chattingSystem.use_cases.signup.SignupUserDataAccessInterface;
 
@@ -12,7 +13,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface, GetUser {
+public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface, GetUser, LogOutDataAccessBoundary {
 
     private final File csvFile;
 
@@ -107,6 +108,12 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
     @Override
     public User getUser(String username) {
         return accounts.get(username);
+    }
+    @Override
+    public void logOut(String username){
+        User userLoggingOut = accounts.get(username);
+        userLoggingOut.setOnline(false);
+        accounts.put(username, userLoggingOut);
     }
 
 //    @Override
