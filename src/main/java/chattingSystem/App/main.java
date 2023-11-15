@@ -12,10 +12,11 @@ import main.java.chattingSystem.use_cases.login.LoginUserDataAccessInterface;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         // Build the main program window, the main panel containing the
         // various cards, and the layout, and stitch them together.
 

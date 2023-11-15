@@ -7,13 +7,17 @@ import main.java.chattingSystem.use_cases.create_chat_room.CreateChatRoomDataAcc
 import main.java.chattingSystem.use_cases.get_chat_room.GetChatRoomDataAccessBoundary;
 import main.java.chattingSystem.use_cases.join_chat_room.JoinChatRoomDataAccessBoundary;
 
+import java.io.*;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class ChatRoomDataAccessObject implements CreateChatRoomDataAccessBoundary, GetChatRoomDataAccessBoundary, JoinChatRoomDataAccessBoundary {
     private final Map<String, ChatRoom> chatRooms = new HashMap<>();
+    private final Map<String, Integer> headers = new LinkedHashMap<>();
 
-    public ChatRoomDataAccessObject() {
+
+    public ChatRoomDataAccessObject() throws FileNotFoundException {
     }
 
     @Override
@@ -30,6 +34,9 @@ public class ChatRoomDataAccessObject implements CreateChatRoomDataAccessBoundar
     @Override
     public void save(ChatRoom chatRoom) {
         chatRooms.put(chatRoom.getChatRoomID(), chatRoom);
+    }
+
+    public void save() {
     }
 
     @Override
