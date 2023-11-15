@@ -9,6 +9,7 @@ import java.awt.*;
 import java.io.IOException;
 
 public class ChatRoomFrameFactory {
+    private static JFrame currentChatRoomFrame;
     public static void createChatRoomFrame(ChatRoomViewModel chatRoomViewModel){
         JFrame chatRoomFrame = new JFrame("Chat Room");
         chatRoomFrame.setVisible(false);
@@ -23,6 +24,12 @@ public class ChatRoomFrameFactory {
         chatRoomViews.add(chatRoomView, chatRoomView.viewName);
         chatRoomFrame.pack();
         chatRoomFrame.setVisible(true);
+        currentChatRoomFrame = chatRoomFrame;
+    }
+    public static void deleteChatRoomFrame() {
+        if (currentChatRoomFrame != null && currentChatRoomFrame.isVisible()) {
+            currentChatRoomFrame.dispose();
+        }
     }
 
 }

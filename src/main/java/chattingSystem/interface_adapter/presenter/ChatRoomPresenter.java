@@ -9,11 +9,14 @@ import main.java.chattingSystem.interface_adapter.state.ChatRoomState;
 import main.java.chattingSystem.interface_adapter.state.LoginState;
 import main.java.chattingSystem.interface_adapter.view_models.ChatRoomViewManagerModel;
 import main.java.chattingSystem.interface_adapter.view_models.ChatRoomViewModel;
+import main.java.chattingSystem.interface_adapter.view_models.LoginViewModel;
 import main.java.chattingSystem.interface_adapter.view_models.ViewManagerModel;
 import main.java.chattingSystem.use_cases.create_chat_room.CreateChatRoomOutputBoundary;
 import main.java.chattingSystem.use_cases.create_chat_room.CreateChatRoomOutputData;
 import main.java.chattingSystem.use_cases.join_chat_room.JoinChatRoomOutpurBoundary;
 import main.java.chattingSystem.use_cases.join_chat_room.JoinChatRoomOutputData;
+import main.java.chattingSystem.use_cases.log_out.LogOutOutputBoundary;
+import main.java.chattingSystem.use_cases.log_out.LogOutOutputData;
 import main.java.chattingSystem.use_cases.send_message.SendMessageOutputBoundary;
 import main.java.chattingSystem.use_cases.signup.SignupOutputData;
 
@@ -22,15 +25,20 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static main.java.chattingSystem.App.ChatRoomFrameFactory.createChatRoomFrame;
+import static main.java.chattingSystem.App.ChatRoomFrameFactory.deleteChatRoomFrame;
 
-public class ChatRoomPresenter implements CreateChatRoomOutputBoundary, JoinChatRoomOutpurBoundary {
+public class ChatRoomPresenter implements CreateChatRoomOutputBoundary, JoinChatRoomOutpurBoundary, LogOutOutputBoundary {
     // the presenter for the chat room, will be used for sending messages
     // and receiving messages
     private final ChatRoomViewModel chatRoomViewModel;
+    private final LoginViewModel loginViewModel;
+    private ViewManagerModel viewManagerModel;
 
     public ChatRoomPresenter() {
         // every time we create a new chat room presenter, we create a new chat room view model, so that different User could use the chat room
         this.chatRoomViewModel = new ChatRoomViewModel();
+        this.viewManagerModel = new ViewManagerModel();
+        this.loginViewModel = new LoginViewModel();
     }
 
     @Override
@@ -58,5 +66,14 @@ public class ChatRoomPresenter implements CreateChatRoomOutputBoundary, JoinChat
 
     @Override
     public void prepareFailView(JoinChatRoomOutputData joinChatRoomOutputData) {
+    }
+    @Override
+    public void prepareSuccessView(LogOutOutputData logOutOutputData){
+        deleteChatRoomFrame();
+        this.viewManagerModel.setActiveView(loginViewModel.getViewName());
+        this.viewManagerModel.firePropertyChanged();
+    }
+    @Override
+    public void prepareFailView(LogOutOutputData logOutOutputData) {
     }
 }
