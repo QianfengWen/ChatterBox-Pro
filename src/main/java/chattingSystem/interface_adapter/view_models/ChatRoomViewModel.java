@@ -28,9 +28,7 @@ public class ChatRoomViewModel extends ViewModel{
         super("chat room");
     }
 
-    public ChatRoomState getState() {
-        return state;
-    }
+    public ChatRoomState getState() {return state;}
 
     public void setState(ChatRoomState chatRoomState) {
         this.state = chatRoomState;

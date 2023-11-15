@@ -8,12 +8,11 @@ public class ChatRoomState {
     private String chatRoomName = "";
     private String userName = "";
 
-    public ChatRoomState getState() {
-        return null;
-    }
-
     public void setUsername(String username) {
         userName = username;
+    }
+    public String getUsername() {
+        return userName;
     }
 
     public void ChatRoomName(User user) {

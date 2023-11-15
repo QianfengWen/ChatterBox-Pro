@@ -64,6 +64,7 @@ public class main {
                 userDataAccessObject,
                 chatRoomDataAccessObject,
                 chatRoomDataAccessObject,
+                userDataAccessObject,
                 userDataAccessObject
                 );
         assert loginView != null;
