@@ -2,7 +2,7 @@ package main.java.chattingSystem.frameworks_drivers.data_access;
 
 import main.java.chattingSystem.entities.Message.Message;
 import main.java.chattingSystem.entities.Message.MessageFactory;
-import main.java.chattingSystem.use_cases.sendmessage.ChatroomUserDataAccessInterface;
+import main.java.chattingSystem.use_cases.send_message.SendMessageUserDataAccessInterface;
 
 import java.io.*;
 import java.time.LocalDateTime;
@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class ChatroomUserDataAccessObject implements ChatroomUserDataAccessInterface {
+public class ChatroomUserDataAccessObject implements SendMessageUserDataAccessInterface {
     private final File csvFile;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private final Map<Integer, Message> history = new HashMap<>();
