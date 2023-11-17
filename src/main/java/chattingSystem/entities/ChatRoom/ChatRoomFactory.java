@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface ChatRoomFactory {
 
-    ChatRoom create(String id, LocalDateTime creationTime);
+    ChatRoom create(String id, List<User> Members, String Messages, LocalDateTime creationTime);
 }

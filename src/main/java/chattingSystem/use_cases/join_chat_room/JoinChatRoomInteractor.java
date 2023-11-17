@@ -39,13 +39,14 @@ public class JoinChatRoomInteractor implements JoinChatRoomInputBoundary {
         } else {
             ChatRoom chatRoom = getChatRoomDataAccessBoundary.getChatRoom("0");
             User user = getUser.getUser(username);
-            joinChatRoomDataAccessBoundary.joinChatRoom(user);
             if (chatRoom.getMembers().contains(user)) {
                 joinChatRoomOutpurBoundary.prepareSuccessView(new JoinChatRoomOutputData(user, true, "0"), logOutDataAccessBoundary);
 
             } else {
-                joinChatRoomOutpurBoundary.prepareFailView(new JoinChatRoomOutputData(user, false, "-1"));
+                joinChatRoomDataAccessBoundary.joinChatRoom(user);
+                joinChatRoomOutpurBoundary.prepareSuccessView(new JoinChatRoomOutputData(user, true, "0"), logOutDataAccessBoundary);
             }
+
             }
         }
     }

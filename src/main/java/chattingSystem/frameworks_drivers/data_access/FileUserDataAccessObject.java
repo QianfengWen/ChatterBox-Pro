@@ -109,6 +109,15 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
     public User getUser(String username) {
         return accounts.get(username);
     }
+
+    public User getUserById(String userid) {
+        for (User user : accounts.values()) {
+            if (user.getUserid().equals(userid)) {
+                return user;
+            }
+        }
+        return null;
+    }
     @Override
     public void logOut(String username){
         User userLoggingOut = accounts.get(username);

@@ -33,17 +33,21 @@ public class LoginPresenter implements LoginOutputBoundary{
     public void prepareSuccessView(LoginOutputData response, LogOutDataAccessBoundary logOutDataAccessBoundary) {
         // TODO replace the logic to load chatroom and create a new chatroom view for current user
         if (viewManagerModel.getActiveView().equals("log in")) {
+            LoginState loginState = loginViewModel.getState();
+            loginState.setLoginSuccess(true);
             loginViewModel.firePropertyChanged();
-            String username = response.getUsername();
-            ChatRoomViewModel chatRoomViewModel =  new ChatRoomViewModel();
-            ChatRoomState chatRoomState = new ChatRoomState();
-            chatRoomState.setUsername(username);
-            chatRoomViewModel.setChatRoomIdLabel("0");
-            chatRoomViewModel.setUserNameLabel(username);
-            chatRoomViewModel.setState(chatRoomState);
-            chatRoomViewModel.firePropertyChanged();
-            // create a new chat room view
-            createChatRoomFrame(chatRoomViewModel, logOutDataAccessBoundary);
+
+//
+//            String username = response.getUsername();
+//            ChatRoomViewModel chatRoomViewModel =  new ChatRoomViewModel();
+//            ChatRoomState chatRoomState = new ChatRoomState();
+//            chatRoomState.setUsername(username);
+//            chatRoomViewModel.setChatRoomIdLabel("0");
+//            chatRoomViewModel.setUserNameLabel(username);
+//            chatRoomViewModel.setState(chatRoomState);
+//            chatRoomViewModel.firePropertyChanged();
+//            // create a new chat room view
+//            createChatRoomFrame(chatRoomViewModel, logOutDataAccessBoundary);
         }
 
 

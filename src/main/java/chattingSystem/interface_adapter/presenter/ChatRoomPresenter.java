@@ -12,8 +12,6 @@ import main.java.chattingSystem.interface_adapter.view_models.ChatRoomViewManage
 import main.java.chattingSystem.interface_adapter.view_models.ChatRoomViewModel;
 import main.java.chattingSystem.interface_adapter.view_models.LoginViewModel;
 import main.java.chattingSystem.interface_adapter.view_models.ViewManagerModel;
-import main.java.chattingSystem.use_cases.create_chat_room.CreateChatRoomOutputBoundary;
-import main.java.chattingSystem.use_cases.create_chat_room.CreateChatRoomOutputData;
 import main.java.chattingSystem.use_cases.join_chat_room.JoinChatRoomOutpurBoundary;
 import main.java.chattingSystem.use_cases.join_chat_room.JoinChatRoomOutputData;
 import main.java.chattingSystem.use_cases.log_out.LogOutDataAccessBoundary;
@@ -29,7 +27,7 @@ import java.time.format.DateTimeFormatter;
 import static main.java.chattingSystem.App.ChatRoomFrameFactory.createChatRoomFrame;
 import static main.java.chattingSystem.App.ChatRoomFrameFactory.deleteChatRoomFrame;
 
-public class ChatRoomPresenter implements CreateChatRoomOutputBoundary, JoinChatRoomOutpurBoundary, LogOutOutputBoundary {
+public class ChatRoomPresenter implements JoinChatRoomOutpurBoundary, LogOutOutputBoundary {
     // the presenter for the chat room, will be used for sending messages
     // and receiving messages
     private final ChatRoomViewModel chatRoomViewModel;
@@ -43,15 +41,7 @@ public class ChatRoomPresenter implements CreateChatRoomOutputBoundary, JoinChat
         this.loginViewModel = new LoginViewModel();
     }
 
-    @Override
-    public void prepareFailView(String s) {
-    }
 
-
-
-    @Override
-    public void prepareSuccessView(CreateChatRoomOutputData response) {
-    }
 
     @Override
     public void prepareSuccessView(JoinChatRoomOutputData joinChatRoomOutputData, LogOutDataAccessBoundary logOutDataAccessBoundary){
