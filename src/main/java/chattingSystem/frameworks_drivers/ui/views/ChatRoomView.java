@@ -114,7 +114,13 @@ public class ChatRoomView extends JPanel implements ActionListener, PropertyChan
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(logOut)) {
                             ChatRoomState currentState = chatRoomViewModel.getState();
-                            logOutController.execute(currentState.getUsername());
+                            int JOP = JOptionPane.showConfirmDialog(null, "Are you sure you want to log out?", "Log out", JOptionPane.YES_NO_OPTION);
+                            if (JOP == JOptionPane.YES_OPTION){
+                                logOutController.execute(currentState.getUsername());
+                                JFrame currentFrame = chatRoomViewModel.getCurrentframe();
+                                currentFrame.dispose();
+                            }
+
                         }
                     }
                 }

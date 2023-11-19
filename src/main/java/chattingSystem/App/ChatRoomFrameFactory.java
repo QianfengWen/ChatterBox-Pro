@@ -1,19 +1,10 @@
 package main.java.chattingSystem.App;
 
-import main.java.chattingSystem.entities.User.CommonUserFactory;
-import main.java.chattingSystem.entities.User.UserFactory;
 import main.java.chattingSystem.frameworks_drivers.ui.views.ChatRoomView;
 import main.java.chattingSystem.frameworks_drivers.ui.views.ChatRoomViewManager;
-import main.java.chattingSystem.interface_adapter.controllers.JoinChatRoomController;
 import main.java.chattingSystem.interface_adapter.controllers.LogOutController;
 import main.java.chattingSystem.interface_adapter.presenter.ChatRoomPresenter;
 import main.java.chattingSystem.interface_adapter.view_models.*;
-import main.java.chattingSystem.use_cases.get_chat_room.GetChatRoomDataAccessBoundary;
-import main.java.chattingSystem.use_cases.get_chat_room.GetUser;
-import main.java.chattingSystem.use_cases.join_chat_room.JoinChatRoomDataAccessBoundary;
-import main.java.chattingSystem.use_cases.join_chat_room.JoinChatRoomInputBoundary;
-import main.java.chattingSystem.use_cases.join_chat_room.JoinChatRoomInteractor;
-import main.java.chattingSystem.use_cases.join_chat_room.JoinChatRoomOutpurBoundary;
 import main.java.chattingSystem.use_cases.log_out.LogOutDataAccessBoundary;
 import main.java.chattingSystem.use_cases.log_out.LogOutInputBoundary;
 import main.java.chattingSystem.use_cases.log_out.LogOutInteractor;
@@ -40,13 +31,10 @@ public class ChatRoomFrameFactory {
         chatRoomViews.add(chatRoomView, chatRoomView.viewName);
         chatRoomFrame.pack();
         chatRoomFrame.setVisible(true);
+        chatRoomViewModel.setCurrentframe(chatRoomFrame);
         currentChatRoomFrame = chatRoomFrame;
     }
-    public static void deleteChatRoomFrame() {
-        if (currentChatRoomFrame != null && currentChatRoomFrame.isVisible()) {
-            currentChatRoomFrame.dispose();
-        }
-    }
+
     public static LogOutController createLogOutUseCase(
             LogOutDataAccessBoundary logOutDataAccessBoundary
             ) {
