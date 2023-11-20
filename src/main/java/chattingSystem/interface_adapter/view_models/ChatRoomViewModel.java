@@ -3,11 +3,14 @@ package main.java.chattingSystem.interface_adapter.view_models;
 import main.java.chattingSystem.entities.ChatRoom.ChatRoom;
 import main.java.chattingSystem.interface_adapter.state.ChatRoomState;
 
+import javax.swing.*;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.List;
 
 public class ChatRoomViewModel extends ViewModel{
+
+    private JFrame currentframe;
     public String TITLE_LABEL = "ChatRoom";
     public static final String SEND_MESSAGE_BUTTON_LABEL = "Send";
 
@@ -26,6 +29,12 @@ public class ChatRoomViewModel extends ViewModel{
 
     public ChatRoomViewModel() {
         super("chat room");
+    }
+    public JFrame getCurrentframe() {
+        return currentframe;
+    }
+    public void setCurrentframe(JFrame currentframe) {
+        this.currentframe = currentframe;
     }
 
     public ChatRoomState getState() {return state;}

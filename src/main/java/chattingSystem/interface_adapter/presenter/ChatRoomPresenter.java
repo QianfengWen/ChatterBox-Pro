@@ -25,20 +25,15 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static main.java.chattingSystem.App.ChatRoomFrameFactory.createChatRoomFrame;
-import static main.java.chattingSystem.App.ChatRoomFrameFactory.deleteChatRoomFrame;
 
 public class ChatRoomPresenter implements JoinChatRoomOutpurBoundary, LogOutOutputBoundary {
     // the presenter for the chat room, will be used for sending messages
     // and receiving messages
-    private final ChatRoomViewModel chatRoomViewModel;
-    private final LoginViewModel loginViewModel;
     private ViewManagerModel viewManagerModel;
 
     public ChatRoomPresenter() {
         // every time we create a new chat room presenter, we create a new chat room view model, so that different User could use the chat room
-        this.chatRoomViewModel = new ChatRoomViewModel();
         this.viewManagerModel = new ViewManagerModel();
-        this.loginViewModel = new LoginViewModel();
     }
 
 
@@ -46,13 +41,14 @@ public class ChatRoomPresenter implements JoinChatRoomOutpurBoundary, LogOutOutp
     @Override
     public void prepareSuccessView(JoinChatRoomOutputData joinChatRoomOutputData, LogOutDataAccessBoundary logOutDataAccessBoundary){
         ChatRoomState chatRoomState = new ChatRoomState();
+        ChatRoomViewModel chatRoomViewModel = new ChatRoomViewModel();
         User user = joinChatRoomOutputData.getUser();
         String username = user.getUsername();
         chatRoomState.setUsername(username);
         chatRoomViewModel.setChatRoomIdLabel(joinChatRoomOutputData.getChatRoomId());
         chatRoomViewModel.setUserNameLabel(username);
-        this.chatRoomViewModel.setState(chatRoomState);
-        this.chatRoomViewModel.firePropertyChanged();
+        chatRoomViewModel.setState(chatRoomState);
+        chatRoomViewModel.firePropertyChanged();
         createChatRoomFrame(chatRoomViewModel, logOutDataAccessBoundary);
     }
 
@@ -61,12 +57,8 @@ public class ChatRoomPresenter implements JoinChatRoomOutpurBoundary, LogOutOutp
     }
     @Override
     public void prepareSuccessView(LogOutOutputData logOutOutputData){
-        ChatRoomState chatRoomState = new ChatRoomState();
-        this.chatRoomViewModel.setState(chatRoomState);
-        this.chatRoomViewModel.firePropertyChanged();
-        deleteChatRoomFrame();
-        this.viewManagerModel.setActiveView(loginViewModel.getViewName());
-        this.viewManagerModel.firePropertyChanged();
+        System.out.println("Log out successfully");
+
     }
     @Override
     public void prepareFailView(LogOutOutputData logOutOutputData) {
