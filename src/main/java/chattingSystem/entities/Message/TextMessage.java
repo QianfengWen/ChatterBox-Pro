@@ -3,14 +3,14 @@ package main.java.chattingSystem.entities.Message;
 import java.time.LocalDateTime;
 
 public class TextMessage implements Message{
-    int messageID;
+    String messageID;
     private final String senderID;
 
     private final String senderName;
     private final LocalDateTime timestamp;
     private final String text;
 
-    public TextMessage(int messageID, String senderID, String senderName, LocalDateTime timestamp, String text) {
+    public TextMessage(String messageID, String senderID, String senderName, LocalDateTime timestamp, String text) {
         this.messageID = messageID;
         this.senderID = senderID;
         this.senderName = senderName;
@@ -19,7 +19,7 @@ public class TextMessage implements Message{
     }
 
     @Override
-    public int getMessageID() {
+    public String getMessageID() {
         return messageID;
     }
 
