@@ -1,5 +1,6 @@
 package main.java.chattingSystem.entities.ChatRoom;
 
+import main.java.chattingSystem.entities.Message.Message;
 import main.java.chattingSystem.entities.Message.TextMessage;
 import main.java.chattingSystem.entities.User.CommonUser;
 import main.java.chattingSystem.entities.User.User;
@@ -68,7 +69,7 @@ public class CommonChatRoom implements ChatRoom {
 
 
     @Override
-    public void addMessage(TextMessage message) {
+    public void addMessage(Message message) {
 
 //        chatHistory.add(message);
         return;

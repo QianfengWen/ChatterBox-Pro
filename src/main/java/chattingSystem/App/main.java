@@ -70,7 +70,8 @@ public class main {
                 chatRoomDataAccessObject,
                 chatRoomDataAccessObject,
                 userDataAccessObject,
-                userDataAccessObject
+                userDataAccessObject,
+                chatRoomDataAccessObject
                 );
         assert loginView != null;
         views.add(loginView, loginView.viewName);

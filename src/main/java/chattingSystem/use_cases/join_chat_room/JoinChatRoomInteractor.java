@@ -8,6 +8,7 @@ import main.java.chattingSystem.use_cases.get_chat_room.GetUser;
 import main.java.chattingSystem.use_cases.log_out.LogOutDataAccessBoundary;
 import main.java.chattingSystem.use_cases.login.LoginOutputBoundary;
 import main.java.chattingSystem.use_cases.login.LoginOutputData;
+import main.java.chattingSystem.use_cases.send_message.SendMessageUserDataAccessInterface;
 
 import java.io.IOException;
 
@@ -16,17 +17,20 @@ public class JoinChatRoomInteractor implements JoinChatRoomInputBoundary {
     private JoinChatRoomDataAccessBoundary joinChatRoomDataAccessBoundary;
     private GetChatRoomDataAccessBoundary getChatRoomDataAccessBoundary;
     private LogOutDataAccessBoundary logOutDataAccessBoundary;
+    private SendMessageUserDataAccessInterface sendMessageUserDataAccessInterface;
     private GetUser getUser;
     public JoinChatRoomInteractor(JoinChatRoomOutpurBoundary joinChatRoomOutpurBoundary,
                                   JoinChatRoomDataAccessBoundary joinChatRoomDataAccessBoundary,
-                                    GetChatRoomDataAccessBoundary getChatRoomDataAccessBoundary,
+                                  GetChatRoomDataAccessBoundary getChatRoomDataAccessBoundary,
                                   LogOutDataAccessBoundary logOutDataAccessBoundary,
-                                  GetUser getUser) {
+                                  GetUser getUser,
+                                  SendMessageUserDataAccessInterface sendMessageUserDataAccessInterface) {
         this.joinChatRoomOutpurBoundary = joinChatRoomOutpurBoundary;
         this.joinChatRoomDataAccessBoundary = joinChatRoomDataAccessBoundary;
         this.getChatRoomDataAccessBoundary = getChatRoomDataAccessBoundary;
         this.logOutDataAccessBoundary = logOutDataAccessBoundary;
         this.getUser = getUser;
+        this.sendMessageUserDataAccessInterface = sendMessageUserDataAccessInterface;
     }
 
 
@@ -40,11 +44,11 @@ public class JoinChatRoomInteractor implements JoinChatRoomInputBoundary {
             ChatRoom chatRoom = getChatRoomDataAccessBoundary.getChatRoom("0");
             User user = getUser.getUser(username);
             if (chatRoom.getMembers().contains(user)) {
-                joinChatRoomOutpurBoundary.prepareSuccessView(new JoinChatRoomOutputData(user, true, "0"), logOutDataAccessBoundary);
+                joinChatRoomOutpurBoundary.prepareSuccessView(new JoinChatRoomOutputData(user, true, "0"), logOutDataAccessBoundary, sendMessageUserDataAccessInterface);
 
             } else {
                 joinChatRoomDataAccessBoundary.joinChatRoom(user);
-                joinChatRoomOutpurBoundary.prepareSuccessView(new JoinChatRoomOutputData(user, true, "0"), logOutDataAccessBoundary);
+                joinChatRoomOutpurBoundary.prepareSuccessView(new JoinChatRoomOutputData(user, true, "0"), logOutDataAccessBoundary, sendMessageUserDataAccessInterface);
             }
 
             }

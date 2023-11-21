@@ -23,7 +23,7 @@ public class SendMessageOutputData {
     }
 
     public String getChatRoomId() {return chatRoomId;}
-    public  String  getUsername() {return username;}
+    public String getUsername() {return username;}
     public String getMessage() {return message;}
     public String getSenderId() {return senderId;}
 }

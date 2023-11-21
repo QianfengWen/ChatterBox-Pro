@@ -18,6 +18,8 @@ import main.java.chattingSystem.use_cases.log_out.LogOutDataAccessBoundary;
 import main.java.chattingSystem.use_cases.log_out.LogOutOutputBoundary;
 import main.java.chattingSystem.use_cases.log_out.LogOutOutputData;
 import main.java.chattingSystem.use_cases.send_message.SendMessageOutputBoundary;
+import main.java.chattingSystem.use_cases.send_message.SendMessageOutputData;
+import main.java.chattingSystem.use_cases.send_message.SendMessageUserDataAccessInterface;
 import main.java.chattingSystem.use_cases.signup.SignupOutputData;
 
 import java.io.IOException;
@@ -44,16 +46,18 @@ public class ChatRoomPresenter implements JoinChatRoomOutpurBoundary, LogOutOutp
 
 
     @Override
-    public void prepareSuccessView(JoinChatRoomOutputData joinChatRoomOutputData, LogOutDataAccessBoundary logOutDataAccessBoundary){
+    public void prepareSuccessView(JoinChatRoomOutputData joinChatRoomOutputData, LogOutDataAccessBoundary logOutDataAccessBoundary, SendMessageUserDataAccessInterface sendMessageUserDataAccessInterface){
         ChatRoomState chatRoomState = new ChatRoomState();
         User user = joinChatRoomOutputData.getUser();
         String username = user.getUsername();
         chatRoomState.setUsername(username);
+        chatRoomState.setSenderId(user.getUserid());
+        //chatRoomState.setMessageHistory("");
         chatRoomViewModel.setChatRoomIdLabel(joinChatRoomOutputData.getChatRoomId());
         chatRoomViewModel.setUserNameLabel(username);
         this.chatRoomViewModel.setState(chatRoomState);
         this.chatRoomViewModel.firePropertyChanged();
-        createChatRoomFrame(chatRoomViewModel, logOutDataAccessBoundary);
+        createChatRoomFrame(chatRoomViewModel, logOutDataAccessBoundary, sendMessageUserDataAccessInterface);
     }
 
     @Override

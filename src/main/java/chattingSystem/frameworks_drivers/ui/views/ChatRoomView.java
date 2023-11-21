@@ -1,6 +1,7 @@
 package main.java.chattingSystem.frameworks_drivers.ui.views;
 
 import main.java.chattingSystem.interface_adapter.controllers.LogOutController;
+import main.java.chattingSystem.interface_adapter.controllers.SendMessageController;
 import main.java.chattingSystem.interface_adapter.state.ChatRoomState;
 import main.java.chattingSystem.interface_adapter.view_models.ChatRoomViewManagerModel;
 import main.java.chattingSystem.interface_adapter.view_models.ChatRoomViewModel;
@@ -13,6 +14,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Objects;
 
 public class ChatRoomView extends JPanel implements ActionListener, PropertyChangeListener {
 
@@ -23,17 +27,20 @@ public class ChatRoomView extends JPanel implements ActionListener, PropertyChan
     private final JButton logOut;
     public ChatRoomViewModel chatRoomViewModel;
     public LogOutController logOutController;
+    public SendMessageController sendMessageController;
 
     private final ChatRoomViewManagerModel chatRoomViewManagerModel;
 
     public ChatRoomView(ChatRoomViewModel chatRoomViewModel,
                         ChatRoomViewManagerModel chatRoomViewManagerModel,
                         ChatRoomViewManager chatRoomViewManager,
-                        LogOutController logOutController) {
+                        LogOutController logOutController,
+                        SendMessageController sendMessageController) {
         this.viewName = chatRoomViewModel.getViewName();
         this.chatRoomViewModel = chatRoomViewModel;
         this.chatRoomViewManagerModel = chatRoomViewManagerModel;
         this.logOutController = logOutController;
+        this.sendMessageController = sendMessageController;
         chatRoomViewManager.addView(this, viewName);
         chatRoomViewModel.addPropertyChangeListener(this);
 
@@ -119,8 +126,31 @@ public class ChatRoomView extends JPanel implements ActionListener, PropertyChan
                     }
                 }
         );
-
+        send.addActionListener(
+                // This creates an anonymous subclass of ActionListener and instantiates it.
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(send)) {
+                            ChatRoomState currentState = chatRoomViewModel.getState();
+                            String currentMessage = messageInput.getText();
+                            if (!Objects.equals(currentMessage, "")) {
+                                LocalDateTime timestamp = LocalDateTime.now();
+                                sendMessageController.execute(currentState.getUsername(), currentState.getSenderId(), currentMessage, timestamp, currentState.getChatRoomId());
+                                ArrayList<String> messages = currentState.getMessageHistory();
+                                messageDisplay.setText(null);
+                                for (String message : messages) {
+                                    messageDisplay.append(message + "\n");
+                                }
+                                messageInput.setText("");
+                            } else {
+                                JOptionPane.showMessageDialog(ChatRoomView.this, "The message is empty.");
+                            }
+                        }
+                    }
+                }
+        );
     }
+
     private void customizeComponents() {
         // customize components
         // more beautiful buttons in organized format
