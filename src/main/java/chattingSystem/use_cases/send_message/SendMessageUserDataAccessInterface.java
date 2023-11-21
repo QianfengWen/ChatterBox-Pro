@@ -3,10 +3,9 @@ package main.java.chattingSystem.use_cases.send_message;
 import main.java.chattingSystem.entities.Message.Message;
 
 public interface SendMessageUserDataAccessInterface {
-    String get(String username);
+    String getUsername(String username);
 
+    void save(String id, Message message);
 
-    void save(Message message);
-
-    int generateMessageid();
+    String generateMessageid(String id);
 }

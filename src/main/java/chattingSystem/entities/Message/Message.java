@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Locale;
 
 public interface Message {
-    int getMessageID();
+    String getMessageID();
     String getSenderID();
     String getSenderName();
     String getText();

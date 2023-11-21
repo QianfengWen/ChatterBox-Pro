@@ -3,10 +3,10 @@ package main.java.chattingSystem.use_cases.send_message;
 import java.time.LocalDateTime;
 
 public class SendMessageInputData {
-    final private String username;
-    final private String senderID;
-    final private String message;
-    final private LocalDateTime timestamp;
+    private String username;
+    private String senderID;
+    private String message;
+    private LocalDateTime timestamp;
 
     public SendMessageInputData(String username, String senderID, String message, LocalDateTime timestamp) {
         this.username = username;

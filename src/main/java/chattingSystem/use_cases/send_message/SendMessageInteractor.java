@@ -11,22 +11,24 @@ public class SendMessageInteractor implements SendMessageInputBoundary {
     final MessageFactory messageFactory;
 
     public SendMessageInteractor(SendMessageUserDataAccessInterface userDataAccessInterface,
-                                 SendMessageOutputBoundary chatroomMessagePresenter,
+                                 SendMessageOutputBoundary sendMessagePresenter,
                                  MessageFactory messageFactory) {
         this.userDataAccessInterface = userDataAccessInterface;
-        this.chatroomMessagePresenter = chatroomMessagePresenter;
+        this.chatroomMessagePresenter = sendMessagePresenter;
         this.messageFactory = messageFactory;
     }
 
     @Override
-    public void execute(SendMessageInputData chatroominputData) {
+    public void execute(SendMessageInputData sendMessageInputData, String chatRoomId) {
         LocalDateTime now = LocalDateTime.now();
-        int id = userDataAccessInterface.generateMessageid();
-        Message message= messageFactory.create(id, chatroominputData.getSenderID(), chatroominputData.getUsername(),
-                now, chatroominputData.getMessage());
-        userDataAccessInterface.save(message);
+        String id = userDataAccessInterface.generateMessageid(chatRoomId);
+        Message message = messageFactory.create(id, sendMessageInputData.getSenderID(),
+                sendMessageInputData.getUsername(), now, sendMessageInputData.getMessage());
+        userDataAccessInterface.save(chatRoomId, message);
 
-        SendMessageOutputData chatroomOutputData = new SendMessageOutputData(false);
-        chatroomMessagePresenter.prepareSuccessView(chatroomOutputData);
+        // need some change to connect with DataAccess.
+        SendMessageOutputData sendMessageOutputData = new SendMessageOutputData(sendMessageInputData.getSenderID(),
+                sendMessageInputData.getUsername(), chatRoomId, sendMessageInputData.getMessage(), false);
+        chatroomMessagePresenter.prepareSuccessView(sendMessageOutputData);
     }
 }
