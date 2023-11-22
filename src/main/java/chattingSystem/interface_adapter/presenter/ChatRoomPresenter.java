@@ -17,6 +17,7 @@ import main.java.chattingSystem.use_cases.log_out.LogOutDataAccessBoundary;
 import main.java.chattingSystem.use_cases.log_out.LogOutOutputBoundary;
 import main.java.chattingSystem.use_cases.log_out.LogOutOutputData;
 import main.java.chattingSystem.use_cases.send_message.SendMessageOutputBoundary;
+import main.java.chattingSystem.use_cases.send_message.SendMessageUserDataAccessInterface;
 import main.java.chattingSystem.use_cases.show_weather.ShowWeatherOutputBoundary;
 import main.java.chattingSystem.use_cases.signup.SignupOutputData;
 
@@ -39,7 +40,7 @@ public class ChatRoomPresenter implements JoinChatRoomOutpurBoundary, LogOutOutp
 
 
     @Override
-    public void prepareSuccessView(JoinChatRoomOutputData joinChatRoomOutputData, LogOutDataAccessBoundary logOutDataAccessBoundary) {
+    public void prepareSuccessView(JoinChatRoomOutputData joinChatRoomOutputData, LogOutDataAccessBoundary logOutDataAccessBoundary, SendMessageUserDataAccessInterface sendMessageUserDataAccessInterface) {
         ChatRoomState chatRoomState = new ChatRoomState();
         ChatRoomViewModel chatRoomViewModel = new ChatRoomViewModel();
         User user = joinChatRoomOutputData.getUser();
@@ -49,7 +50,7 @@ public class ChatRoomPresenter implements JoinChatRoomOutpurBoundary, LogOutOutp
         chatRoomViewModel.setUserNameLabel(username);
         chatRoomViewModel.setState(chatRoomState);
         chatRoomViewModel.firePropertyChanged();
-        createChatRoomFrame(chatRoomViewModel, logOutDataAccessBoundary);
+        createChatRoomFrame(chatRoomViewModel, logOutDataAccessBoundary, sendMessageUserDataAccessInterface);
     }
 
     @Override

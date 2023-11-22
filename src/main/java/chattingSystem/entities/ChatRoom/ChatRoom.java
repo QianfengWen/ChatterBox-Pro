@@ -1,6 +1,6 @@
 package main.java.chattingSystem.entities.ChatRoom;
 
-import main.java.chattingSystem.entities.Message.TextMessage;
+import main.java.chattingSystem.entities.Message.Message;
 import main.java.chattingSystem.entities.User.User;
 
 import java.time.LocalDateTime;
@@ -14,7 +14,7 @@ public interface ChatRoom {
 
     String getChatHistory();
     String getChatHistoryString();
-    void addMessage(TextMessage message);
+    void addMessage(Message message);
     void addMember(User user);
     String getChatRoomID();
 
