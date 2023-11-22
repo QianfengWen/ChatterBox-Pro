@@ -1,11 +1,11 @@
 package main.java.chattingSystem.frameworks_drivers.ui.views;
 
 import main.java.chattingSystem.interface_adapter.controllers.LogOutController;
+import main.java.chattingSystem.interface_adapter.controllers.ShowWeatherController;
 import main.java.chattingSystem.interface_adapter.state.ChatRoomState;
 import main.java.chattingSystem.interface_adapter.view_models.ChatRoomViewManagerModel;
 import main.java.chattingSystem.interface_adapter.view_models.ChatRoomViewModel;
-import main.java.chattingSystem.interface_adapter.view_models.LoginViewModel;
-import main.java.chattingSystem.interface_adapter.view_models.ViewManagerModel;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
 
 public class ChatRoomView extends JPanel implements ActionListener, PropertyChangeListener {
 
@@ -23,17 +24,20 @@ public class ChatRoomView extends JPanel implements ActionListener, PropertyChan
     private final JButton logOut;
     public ChatRoomViewModel chatRoomViewModel;
     public LogOutController logOutController;
+    public ShowWeatherController showWeatherController;
 
     private final ChatRoomViewManagerModel chatRoomViewManagerModel;
 
     public ChatRoomView(ChatRoomViewModel chatRoomViewModel,
                         ChatRoomViewManagerModel chatRoomViewManagerModel,
                         ChatRoomViewManager chatRoomViewManager,
-                        LogOutController logOutController) {
+                        LogOutController logOutController,
+                        ShowWeatherController showWeatherController) {
         this.viewName = chatRoomViewModel.getViewName();
         this.chatRoomViewModel = chatRoomViewModel;
         this.chatRoomViewManagerModel = chatRoomViewManagerModel;
         this.logOutController = logOutController;
+        this.showWeatherController = showWeatherController;
         chatRoomViewManager.addView(this, viewName);
         chatRoomViewModel.addPropertyChangeListener(this);
 
@@ -121,6 +125,20 @@ public class ChatRoomView extends JPanel implements ActionListener, PropertyChan
                                 currentFrame.dispose();
                             }
 
+                        }
+                    }
+                }
+        );
+        getWeather.addActionListener(
+                // This creates an anonymous subclass of ActionListener and instantiates it.
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(getWeather)) {
+                            try {
+                                showWeatherController.execute();
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
                         }
                     }
                 }
