@@ -1,4 +1,4 @@
-package main.java.chattingSystem.use_cases.send_message;
+package chattingSystem.use_cases.send_message;
 
 import java.time.LocalDateTime;
 

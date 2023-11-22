@@ -1,14 +1,14 @@
-package main.java.chattingSystem.App;
+package chattingSystem.App;
 
-import main.java.chattingSystem.frameworks_drivers.ui.views.ChatRoomView;
-import main.java.chattingSystem.frameworks_drivers.ui.views.ChatRoomViewManager;
-import main.java.chattingSystem.interface_adapter.controllers.LogOutController;
-import main.java.chattingSystem.interface_adapter.presenter.ChatRoomPresenter;
-import main.java.chattingSystem.interface_adapter.view_models.*;
-import main.java.chattingSystem.use_cases.log_out.LogOutDataAccessBoundary;
-import main.java.chattingSystem.use_cases.log_out.LogOutInputBoundary;
-import main.java.chattingSystem.use_cases.log_out.LogOutInteractor;
-import main.java.chattingSystem.use_cases.log_out.LogOutOutputBoundary;
+import chattingSystem.frameworks_drivers.ui.views.ChatRoomView;
+import chattingSystem.frameworks_drivers.ui.views.ChatRoomViewManager;
+import chattingSystem.interface_adapter.controllers.LogOutController;
+import chattingSystem.interface_adapter.presenter.ChatRoomPresenter;
+import chattingSystem.interface_adapter.view_models.*;
+import chattingSystem.use_cases.log_out.LogOutDataAccessBoundary;
+import chattingSystem.use_cases.log_out.LogOutInputBoundary;
+import chattingSystem.use_cases.log_out.LogOutInteractor;
+import chattingSystem.use_cases.log_out.LogOutOutputBoundary;
 
 import javax.swing.*;
 import java.awt.*;

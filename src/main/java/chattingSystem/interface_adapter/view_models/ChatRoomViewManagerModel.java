@@ -1,4 +1,4 @@
-package main.java.chattingSystem.interface_adapter.view_models;
+package chattingSystem.interface_adapter.view_models;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;

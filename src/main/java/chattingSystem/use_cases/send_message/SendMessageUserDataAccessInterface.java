@@ -1,6 +1,6 @@
-package main.java.chattingSystem.use_cases.send_message;
+package chattingSystem.use_cases.send_message;
 
-import main.java.chattingSystem.entities.Message.Message;
+import chattingSystem.entities.Message.Message;
 
 public interface SendMessageUserDataAccessInterface {
     String getUsername(String username);

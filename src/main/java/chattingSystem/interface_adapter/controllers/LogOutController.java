@@ -1,7 +1,7 @@
-package main.java.chattingSystem.interface_adapter.controllers;
+package chattingSystem.interface_adapter.controllers;
 
-import main.java.chattingSystem.use_cases.log_out.LogOutInputBoundary;
-import main.java.chattingSystem.use_cases.log_out.LogOutInputData;
+import chattingSystem.use_cases.log_out.LogOutInputBoundary;
+import chattingSystem.use_cases.log_out.LogOutInputData;
 
 public class LogOutController {
     private final LogOutInputBoundary logOutInteractor;

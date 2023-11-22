@@ -1,6 +1,6 @@
-package main.java.chattingSystem.entities.User;
+package chattingSystem.entities.User;
 
-import main.java.chattingSystem.entities.Password.Password;
+import chattingSystem.entities.Password.Password;
 
 import java.time.LocalDateTime;
 

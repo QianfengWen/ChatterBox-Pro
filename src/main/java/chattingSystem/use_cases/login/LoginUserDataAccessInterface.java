@@ -1,11 +1,13 @@
-package main.java.chattingSystem.use_cases.login;
+package chattingSystem.use_cases.login;
 
-import main.java.chattingSystem.entities.User.User;
+import chattingSystem.entities.User.User;
+
+import java.io.IOException;
 
 public interface LoginUserDataAccessInterface {
     boolean existsByName(String identifier);
 
-    void save(User user);
+    void save(User user) throws IOException;
 
     User get(String username);
 }

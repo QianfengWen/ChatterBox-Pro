@@ -1,5 +1,5 @@
-package main.java.chattingSystem.use_cases.log_out;
-import main.java.chattingSystem.entities.User.User;
+package chattingSystem.use_cases.log_out;
+import chattingSystem.entities.User.User;
 
 public interface LogOutDataAccessBoundary {
     void logOut(String username);

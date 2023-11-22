@@ -1,9 +1,9 @@
-package main.java.chattingSystem.interface_adapter.controllers;
+package chattingSystem.interface_adapter.controllers;
 
-import main.java.chattingSystem.use_cases.send_message.SendMessageInputBoundary;
-import main.java.chattingSystem.use_cases.send_message.SendMessageInputData;
-import main.java.chattingSystem.use_cases.signup.SignupInputBoundary;
-import main.java.chattingSystem.use_cases.signup.SignupInputData;
+import chattingSystem.use_cases.send_message.SendMessageInputBoundary;
+import chattingSystem.use_cases.send_message.SendMessageInputData;
+import chattingSystem.use_cases.signup.SignupInputBoundary;
+import chattingSystem.use_cases.signup.SignupInputData;
 
 import java.time.LocalDateTime;
 

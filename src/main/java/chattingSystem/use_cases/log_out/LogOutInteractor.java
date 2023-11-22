@@ -1,7 +1,7 @@
-package main.java.chattingSystem.use_cases.log_out;
+package chattingSystem.use_cases.log_out;
 
 
-import main.java.chattingSystem.entities.User.User;
+import chattingSystem.entities.User.User;
 
 public class LogOutInteractor implements LogOutInputBoundary {
     private LogOutOutputBoundary logOutOutputBoundary;

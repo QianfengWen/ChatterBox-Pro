@@ -1,6 +1,6 @@
-package main.java.chattingSystem.use_cases.join_chat_room;
+package chattingSystem.use_cases.join_chat_room;
 
-import main.java.chattingSystem.use_cases.log_out.LogOutDataAccessBoundary;
+import chattingSystem.use_cases.log_out.LogOutDataAccessBoundary;
 
 import java.io.IOException;
 

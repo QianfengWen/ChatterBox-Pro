@@ -1,6 +1,6 @@
-package main.java.chattingSystem.interface_adapter.state;
+package chattingSystem.interface_adapter.state;
 
-import main.java.chattingSystem.entities.User.User;
+import chattingSystem.entities.User.User;
 
 public class ChatRoomState {
 

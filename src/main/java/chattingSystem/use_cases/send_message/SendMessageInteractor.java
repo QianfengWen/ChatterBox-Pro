@@ -1,7 +1,7 @@
-package main.java.chattingSystem.use_cases.send_message;
+package chattingSystem.use_cases.send_message;
 
-import main.java.chattingSystem.entities.Message.Message;
-import main.java.chattingSystem.entities.Message.MessageFactory;
+import chattingSystem.entities.Message.Message;
+import chattingSystem.entities.Message.MessageFactory;
 
 import java.time.LocalDateTime;
 

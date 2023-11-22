@@ -1,7 +1,9 @@
-package main.java.chattingSystem.use_cases.signup;
+package chattingSystem.use_cases.signup;
 
+
+import java.io.IOException;
 
 public interface SignupInputBoundary {
-    void execute(SignupInputData signupInputData);
+    void execute(SignupInputData signupInputData) throws IOException;
 
 }

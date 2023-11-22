@@ -1,7 +1,7 @@
-package main.java.chattingSystem.frameworks_drivers.ui.views;
+package chattingSystem.frameworks_drivers.ui.views;
 
-import main.java.chattingSystem.entities.ChatRoom.ChatRoom;
-import main.java.chattingSystem.interface_adapter.view_models.ViewManagerModel;
+import chattingSystem.entities.ChatRoom.ChatRoom;
+import chattingSystem.interface_adapter.view_models.ViewManagerModel;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,10 +1,11 @@
-package main.java.chattingSystem.use_cases.signup;
+package chattingSystem.use_cases.signup;
 
 
 
-import main.java.chattingSystem.entities.User.User;
-import main.java.chattingSystem.entities.User.UserFactory;
+import chattingSystem.entities.User.User;
+import chattingSystem.entities.User.UserFactory;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class SignupInteractor implements SignupInputBoundary {
@@ -21,7 +22,7 @@ public class SignupInteractor implements SignupInputBoundary {
     }
 
     @Override
-    public void execute(SignupInputData signupInputData) {
+    public void execute(SignupInputData signupInputData) throws IOException {
         if (userDataAccessObject.existsByName(signupInputData.getUsername())) {
             userPresenter.prepareNameFailView("User already exists.");
         } else if (!signupInputData.getPassword().equals(signupInputData.getRepeatPassword())) {

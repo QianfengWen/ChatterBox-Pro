@@ -1,6 +1,6 @@
-package main.java.chattingSystem.use_cases.signup;
+package chattingSystem.use_cases.signup;
 
-import main.java.chattingSystem.entities.Password.Password;
+import chattingSystem.entities.Password.Password;
 
 public class SignupInputData {
     final private String username;

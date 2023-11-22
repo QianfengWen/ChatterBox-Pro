@@ -1,6 +1,6 @@
-package main.java.chattingSystem.use_cases.login;
-import main.java.chattingSystem.entities.User.User;
-import main.java.chattingSystem.use_cases.log_out.LogOutDataAccessBoundary;
+package chattingSystem.use_cases.login;
+import chattingSystem.entities.User.User;
+import chattingSystem.use_cases.log_out.LogOutDataAccessBoundary;
 
 public class LoginInteractor implements LoginInputBoundary{
     final LoginUserDataAccessInterface userDataAccessObject;
