@@ -1,16 +1,23 @@
 package main.java.chattingSystem.App;
 
+import main.java.chattingSystem.entities.Message.TextMessageFactory;
 import main.java.chattingSystem.frameworks_drivers.ui.views.ChatRoomView;
 import main.java.chattingSystem.frameworks_drivers.ui.views.ChatRoomViewManager;
 import main.java.chattingSystem.interface_adapter.controllers.LogOutController;
+import main.java.chattingSystem.interface_adapter.controllers.SendMessageController;
 import main.java.chattingSystem.interface_adapter.controllers.ShowWeatherController;
 import main.java.chattingSystem.interface_adapter.presenter.ChatRoomPresenter;
 import main.java.chattingSystem.interface_adapter.presenter.GetWeatherPresenter;
+import main.java.chattingSystem.interface_adapter.presenter.SendMessagePresenter;
 import main.java.chattingSystem.interface_adapter.view_models.*;
 import main.java.chattingSystem.use_cases.log_out.LogOutDataAccessBoundary;
 import main.java.chattingSystem.use_cases.log_out.LogOutInputBoundary;
 import main.java.chattingSystem.use_cases.log_out.LogOutInteractor;
 import main.java.chattingSystem.use_cases.log_out.LogOutOutputBoundary;
+import main.java.chattingSystem.use_cases.send_message.SendMessageInputBoundary;
+import main.java.chattingSystem.use_cases.send_message.SendMessageInteractor;
+import main.java.chattingSystem.use_cases.send_message.SendMessageOutputBoundary;
+import main.java.chattingSystem.use_cases.send_message.SendMessageUserDataAccessInterface;
 import main.java.chattingSystem.use_cases.show_weather.ShowWeatherInputBoundary;
 import main.java.chattingSystem.use_cases.show_weather.ShowWeatherInteractor;
 import main.java.chattingSystem.use_cases.show_weather.ShowWeatherOutputBoundary;
@@ -21,7 +28,7 @@ import java.io.IOException;
 
 public class ChatRoomFrameFactory {
     private static JFrame currentChatRoomFrame;
-    public static void createChatRoomFrame(ChatRoomViewModel chatRoomViewModel, LogOutDataAccessBoundary logOutDataAccessBoundary){
+    public static void createChatRoomFrame(ChatRoomViewModel chatRoomViewModel, LogOutDataAccessBoundary logOutDataAccessBoundary, SendMessageUserDataAccessInterface sendMessageUserDataAccessInterface){
         JFrame chatRoomFrame = new JFrame("Chat Room");
         chatRoomFrame.setVisible(false);
         chatRoomFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -34,7 +41,8 @@ public class ChatRoomFrameFactory {
         LogOutController logOutController = createLogOutUseCase(logOutDataAccessBoundary);
         GetWeatherViewModel getWeatherViewModel = new GetWeatherViewModel();
         ShowWeatherController showWeatherController = createShowWeatherUseCase(getWeatherViewModel);
-        ChatRoomView chatRoomView = new ChatRoomView(chatRoomViewModel, chatRoomViewManagerModel, chatRoomViewManager, logOutController, showWeatherController);
+        SendMessageController sendMessageController = createSendMessageController(sendMessageUserDataAccessInterface, chatRoomViewModel);
+        ChatRoomView chatRoomView = new ChatRoomView(chatRoomViewModel, chatRoomViewManagerModel, chatRoomViewManager, logOutController, showWeatherController, sendMessageController);
         chatRoomViews.add(chatRoomView, chatRoomView.viewName);
         chatRoomFrame.pack();
         chatRoomFrame.setVisible(true);
@@ -62,6 +70,19 @@ public class ChatRoomFrameFactory {
         ShowWeatherInputBoundary showWeatherInteractor = new ShowWeatherInteractor(showWeatherOutputBoundary);
 
         return new ShowWeatherController(showWeatherInteractor);
+    }
+    public static SendMessageController createSendMessageController(
+            SendMessageUserDataAccessInterface sendMessageUserDataAccessInterface, ChatRoomViewModel chatRoomViewModel
+    ) {
+
+        // Notice how we pass this method's parameters to the Presenter.
+        SendMessageOutputBoundary sendMessageOutputBoundary = new SendMessagePresenter(chatRoomViewModel);
+
+        TextMessageFactory textMessageFactory = new TextMessageFactory();
+
+        SendMessageInputBoundary sendMessageInputBoundary = new SendMessageInteractor(sendMessageUserDataAccessInterface, sendMessageOutputBoundary, textMessageFactory);
+
+        return new SendMessageController(sendMessageInputBoundary);
     }
 }
 

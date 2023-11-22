@@ -3,17 +3,18 @@ package main.java.chattingSystem.frameworks_drivers.data_access;
 
 import main.java.chattingSystem.entities.ChatRoom.ChatRoom;
 import main.java.chattingSystem.entities.ChatRoom.ChatRoomFactory;
-import main.java.chattingSystem.entities.ChatRoom.CommonChatRoom;
+import main.java.chattingSystem.entities.Message.Message;
 import main.java.chattingSystem.entities.User.User;
 import main.java.chattingSystem.entities.User.UserFactory;
 import main.java.chattingSystem.use_cases.get_chat_room.GetChatRoomDataAccessBoundary;
 import main.java.chattingSystem.use_cases.join_chat_room.JoinChatRoomDataAccessBoundary;
+import main.java.chattingSystem.use_cases.send_message.SendMessageUserDataAccessInterface;
 
 import java.io.*;
 import java.time.LocalDateTime;
 import java.util.*;
 
-public class ChatRoomDataAccessObject implements  GetChatRoomDataAccessBoundary, JoinChatRoomDataAccessBoundary{
+public class ChatRoomDataAccessObject implements  GetChatRoomDataAccessBoundary, JoinChatRoomDataAccessBoundary, SendMessageUserDataAccessInterface {
     private final Map<String, ChatRoom> chatRooms = new HashMap<>();
     private final Map<String, Integer> headers = new LinkedHashMap<>();
 
@@ -116,5 +117,19 @@ public class ChatRoomDataAccessObject implements  GetChatRoomDataAccessBoundary,
         return chatRooms.get(id);
     }
 
+    @Override
+    public String getUsername(String username) {
+        return username;
+    }
 
+    @Override
+    public void save(String id, Message message) {
+        chatRooms.get("0").addMessage(message);
+        this.update();
+    }
+
+    @Override
+    public String generateMessageid(String id) {
+        return String.valueOf(chatRooms.get("0").getChatHistory().split("\n").length + 1);
+    }
 }
