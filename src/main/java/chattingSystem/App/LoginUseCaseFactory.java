@@ -1,5 +1,6 @@
 package chattingSystem.App;
 
+
 import chattingSystem.entities.User.CommonUserFactory;
 import chattingSystem.entities.User.UserFactory;
 import chattingSystem.frameworks_drivers.data_access.FileUserDataAccessObject;
@@ -23,6 +24,9 @@ import chattingSystem.use_cases.login.LoginInputBoundary;
 import chattingSystem.use_cases.login.LoginInteractor;
 import chattingSystem.use_cases.login.LoginOutputBoundary;
 import chattingSystem.use_cases.login.LoginUserDataAccessInterface;
+import chattingSystem.use_cases.refresh_messages.RefreshMessagesDataAccessBoundary;
+import chattingSystem.use_cases.send_message.SendMessageUserDataAccessInterface;
+
 
 import javax.swing.*;
 import java.io.IOException;
@@ -38,12 +42,14 @@ public class LoginUseCaseFactory {
             JoinChatRoomDataAccessBoundary joinChatRoomDataAccessBoundary,
             GetChatRoomDataAccessBoundary getChatRoomDataAccessBoundary,
             LogOutDataAccessBoundary logOutDataAccessBoundary,
-            GetUser getUser
+            GetUser getUser,
+            SendMessageUserDataAccessInterface sendMessageUserDataAccessInterface,
+            RefreshMessagesDataAccessBoundary refreshMessagesDataAccessBoundary
     ) {
 
         try {
             LoginController loginController = createLoginUseCase(viewManagerModel, viewManager, loginViewModel, logOutDataAccessBoundary,userDataAccessObject);
-            JoinChatRoomController joinChatRoomController = createJoinChatRoomUseCase(joinChatRoomDataAccessBoundary, getChatRoomDataAccessBoundary, logOutDataAccessBoundary, getUser);
+            JoinChatRoomController joinChatRoomController = createJoinChatRoomUseCase(joinChatRoomDataAccessBoundary, getChatRoomDataAccessBoundary, logOutDataAccessBoundary, getUser, sendMessageUserDataAccessInterface, refreshMessagesDataAccessBoundary);
             return new LoginView(loginController, joinChatRoomController, loginViewModel, viewManagerModel);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
@@ -75,7 +81,8 @@ public class LoginUseCaseFactory {
             JoinChatRoomDataAccessBoundary joinChatRoomDataAccessBoundary,
             GetChatRoomDataAccessBoundary getChatRoomDataAccessBoundary,
             LogOutDataAccessBoundary logOutDataAccessBoundary,
-            GetUser getUser) throws IOException {
+            GetUser getUser, SendMessageUserDataAccessInterface sendMessageUserDataAccessInterface,
+            RefreshMessagesDataAccessBoundary refreshMessagesDataAccessBoundary) throws IOException {
 
         // Notice how we pass this method's parameters to the Presenter.
         JoinChatRoomOutpurBoundary joinChatRoomOutpurBoundary = new ChatRoomPresenter();
@@ -86,7 +93,10 @@ public class LoginUseCaseFactory {
                 joinChatRoomDataAccessBoundary,
                 getChatRoomDataAccessBoundary,
                 logOutDataAccessBoundary,
-                getUser);
+                getUser,
+                sendMessageUserDataAccessInterface,
+                refreshMessagesDataAccessBoundary
+                );
 
 
         return new JoinChatRoomController(joinChatRoomInteractor);

@@ -5,6 +5,7 @@ import chattingSystem.use_cases.send_message.SendMessageInputData;
 import chattingSystem.use_cases.signup.SignupInputBoundary;
 import chattingSystem.use_cases.signup.SignupInputData;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class SendMessageController {
@@ -13,7 +14,7 @@ public class SendMessageController {
         this.userSendMessageUseCaseInteractor = userSendMessageUseCaseInteractor;
     }
 
-    public void execute(String username, String senderID, String message, LocalDateTime timestamp, String chatRoomId) {
+    public void execute(String username, String senderID, String message, LocalDateTime timestamp, String chatRoomId) throws IOException {
         SendMessageInputData sendMessageInputData = new SendMessageInputData(username, senderID, message, timestamp);
         userSendMessageUseCaseInteractor.execute(sendMessageInputData, chatRoomId);
     }

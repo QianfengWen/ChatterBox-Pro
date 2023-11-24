@@ -1,11 +1,13 @@
 package chattingSystem.App;
 
 import chattingSystem.entities.ChatRoom.CommonChatRoomFactory;
+import chattingSystem.entities.Message.TextMessageFactory;
 import chattingSystem.entities.User.CommonUserFactory;
 import chattingSystem.frameworks_drivers.data_access.ChatRoomDataAccessObject;
 import chattingSystem.frameworks_drivers.data_access.FileUserDataAccessObject;
 import chattingSystem.frameworks_drivers.ui.views.*;
 import chattingSystem.interface_adapter.view_models.*;
+import chattingSystem.use_cases.refresh_messages.RefreshMessagesDataAccessBoundary;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoClient;
@@ -21,7 +23,7 @@ import java.util.Arrays;
 
 public class main {
     public static void main(String[] args) throws IOException {
-        // initialize MongoDB
+
 
         // Build the main program window, the main panel containing the
         // various cards, and the layout, and stitch them together.
@@ -54,7 +56,9 @@ public class main {
         ChatRoomDataAccessObject chatRoomDataAccessObject = new ChatRoomDataAccessObject(
                 new CommonChatRoomFactory(),
                 new CommonUserFactory(),
+                new TextMessageFactory(),
                 userDataAccessObject);
+
 
 
         SignupView signupView = SignupUseCaseFactory.create(viewManagerModel,
@@ -74,7 +78,9 @@ public class main {
                 chatRoomDataAccessObject,
                 chatRoomDataAccessObject,
                 userDataAccessObject,
-                userDataAccessObject
+                userDataAccessObject,
+                chatRoomDataAccessObject,
+                chatRoomDataAccessObject
                 );
         assert loginView != null;
         views.add(loginView, loginView.viewName);

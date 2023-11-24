@@ -3,6 +3,7 @@ package chattingSystem.use_cases.send_message;
 import chattingSystem.entities.Message.Message;
 import chattingSystem.entities.Message.MessageFactory;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class SendMessageInteractor implements SendMessageInputBoundary {
@@ -19,12 +20,14 @@ public class SendMessageInteractor implements SendMessageInputBoundary {
     }
 
     @Override
-    public void execute(SendMessageInputData sendMessageInputData, String chatRoomId) {
+    public void execute(SendMessageInputData sendMessageInputData, String chatRoomId) throws IOException {
         LocalDateTime now = LocalDateTime.now();
         String id = userDataAccessInterface.generateMessageid(chatRoomId);
         Message message = messageFactory.create(id, sendMessageInputData.getSenderID(),
                 sendMessageInputData.getUsername(), now, sendMessageInputData.getMessage());
-        userDataAccessInterface.save(chatRoomId, message);
+        userDataAccessInterface.save(id, message);
+
+        userDataAccessInterface.fetchAllMessages();
 
         // need some change to connect with DataAccess.
         SendMessageOutputData sendMessageOutputData = new SendMessageOutputData(sendMessageInputData.getSenderID(),
