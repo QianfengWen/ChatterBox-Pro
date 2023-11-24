@@ -9,5 +9,5 @@ public interface JoinChatRoomDataAccessBoundary {
     boolean existsById(String Id);
     void joinChatRoom(User user) throws IOException;
 
-    List<String> fetchAllMessages();
+    List<String> fetchAllMessages() throws IOException;
 }

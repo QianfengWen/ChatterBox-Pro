@@ -25,9 +25,8 @@ public class SendMessageInteractor implements SendMessageInputBoundary {
         String id = userDataAccessInterface.generateMessageid(chatRoomId);
         Message message = messageFactory.create(id, sendMessageInputData.getSenderID(),
                 sendMessageInputData.getUsername(), now, sendMessageInputData.getMessage());
-        userDataAccessInterface.save(id, message);
-
         userDataAccessInterface.fetchAllMessages();
+        userDataAccessInterface.save(id, message);
 
         // need some change to connect with DataAccess.
         SendMessageOutputData sendMessageOutputData = new SendMessageOutputData(sendMessageInputData.getSenderID(),

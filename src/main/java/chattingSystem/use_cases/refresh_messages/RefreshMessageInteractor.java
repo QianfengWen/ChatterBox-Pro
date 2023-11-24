@@ -6,6 +6,7 @@ import chattingSystem.use_cases.log_out.LogOutInputData;
 import chattingSystem.use_cases.log_out.LogOutOutputBoundary;
 import chattingSystem.use_cases.log_out.LogOutOutputData;
 
+import java.io.IOException;
 import java.util.List;
 
 public class RefreshMessageInteractor implements RefreshMessagesInputBoundary{
@@ -19,8 +20,9 @@ public class RefreshMessageInteractor implements RefreshMessagesInputBoundary{
 
 
     @Override
-    public void execute() {
-        List<String> allMessages = refreshMessagesDataAccessBoundary.fetchAllMessages();
+    public void execute(){
+        List<String> allMessages = null;
+        allMessages = refreshMessagesDataAccessBoundary.fetchAllMessages();
         refreshMessagesOutputBoundary.refreshSuccessView(new RefreshMessageOutputData(allMessages));
     }
 
