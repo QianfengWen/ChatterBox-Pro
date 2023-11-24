@@ -1,7 +1,7 @@
-package main.java.chattingSystem.interface_adapter.controllers;
+package chattingSystem.interface_adapter.controllers;
 
 
-import main.java.chattingSystem.use_cases.show_weather.ShowWeatherInputBoundary;
+import chattingSystem.use_cases.show_weather.ShowWeatherInputBoundary;
 
 import java.io.IOException;
 

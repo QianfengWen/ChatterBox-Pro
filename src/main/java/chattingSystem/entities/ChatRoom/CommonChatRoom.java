@@ -1,7 +1,9 @@
-package main.java.chattingSystem.entities.ChatRoom;
+package chattingSystem.entities.ChatRoom;
 
-import main.java.chattingSystem.entities.Message.Message;
-import main.java.chattingSystem.entities.User.User;
+import chattingSystem.entities.Message.TextMessage;
+import chattingSystem.entities.User.CommonUser;
+import chattingSystem.entities.User.User;
+
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -9,17 +11,14 @@ import java.util.List;
 public class CommonChatRoom implements ChatRoom {
     private final List<User> members;
 
-    private String chatHistory;
-
     private final String chatRoomId;
 
     private LocalDateTime creationTime;
 
 
-    CommonChatRoom(String chatRoomId, List<User> Members, String chatHistory, LocalDateTime creationTime) {
+    CommonChatRoom(String chatRoomId, List<User> Members, LocalDateTime creationTime) {
         this.chatRoomId = chatRoomId;
         this.members = Members;
-        this.chatHistory = chatHistory;
         this.creationTime = creationTime;
     }
 
@@ -51,10 +50,6 @@ public class CommonChatRoom implements ChatRoom {
         return memberString.toString();
     }
 
-    public String getChatHistory() {
-        return chatHistory;
-    }
-
     @Override
     public String getChatHistoryString() {
 //        StringBuilder chatHistoryString = new StringBuilder();
@@ -65,13 +60,6 @@ public class CommonChatRoom implements ChatRoom {
         return "Test";
     }
 
-
-    @Override
-    public void addMessage(Message message) {
-
-//        chatHistory.add(message);
-        return;
-    }
     @Override
     public void addMember(User user) {
         members.add(user);

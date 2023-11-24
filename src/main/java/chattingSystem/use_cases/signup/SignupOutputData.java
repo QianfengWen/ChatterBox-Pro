@@ -1,4 +1,4 @@
-package main.java.chattingSystem.use_cases.signup;
+package chattingSystem.use_cases.signup;
 
 public class SignupOutputData {
     private final String username;

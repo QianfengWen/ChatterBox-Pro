@@ -1,6 +1,6 @@
-package main.java.chattingSystem.use_cases.get_weather;
+package chattingSystem.use_cases.get_weather;
 
-import main.java.chattingSystem.entities.Weather.Weather;
+import chattingSystem.entities.Weather.Weather;
 
 public class GetWeatherOutputData {
     private Weather weatherInfo;

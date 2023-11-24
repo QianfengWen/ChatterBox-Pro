@@ -1,4 +1,4 @@
-package main.java.chattingSystem.frameworks_drivers.ui.views;
+package chattingSystem.frameworks_drivers.ui.views;
 
 import javax.swing.*;
 

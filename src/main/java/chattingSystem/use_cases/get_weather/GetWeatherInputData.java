@@ -1,4 +1,4 @@
-package main.java.chattingSystem.use_cases.get_weather;
+package chattingSystem.use_cases.get_weather;
 
 public class GetWeatherInputData {
     private String cityLocation;

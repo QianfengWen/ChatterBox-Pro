@@ -1,14 +1,14 @@
-package main.java.chattingSystem.interface_adapter.presenter;
+package chattingSystem.interface_adapter.presenter;
 
 
 
-import main.java.chattingSystem.interface_adapter.state.LoginState;
-import main.java.chattingSystem.interface_adapter.state.SignupState;
-import main.java.chattingSystem.interface_adapter.view_models.LoginViewModel;
-import main.java.chattingSystem.interface_adapter.view_models.SignupViewModel;
-import main.java.chattingSystem.interface_adapter.view_models.ViewManagerModel;
-import main.java.chattingSystem.use_cases.signup.SignupOutputBoundary;
-import main.java.chattingSystem.use_cases.signup.SignupOutputData;
+import chattingSystem.interface_adapter.state.LoginState;
+import chattingSystem.interface_adapter.state.SignupState;
+import chattingSystem.interface_adapter.view_models.LoginViewModel;
+import chattingSystem.interface_adapter.view_models.SignupViewModel;
+import chattingSystem.interface_adapter.view_models.ViewManagerModel;
+import chattingSystem.use_cases.signup.SignupOutputBoundary;
+import chattingSystem.use_cases.signup.SignupOutputData;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

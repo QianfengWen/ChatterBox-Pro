@@ -1,4 +1,4 @@
-package main.java.chattingSystem.entities.Password;
+package chattingSystem.entities.Password;
 
 public class Password {
     private String password;

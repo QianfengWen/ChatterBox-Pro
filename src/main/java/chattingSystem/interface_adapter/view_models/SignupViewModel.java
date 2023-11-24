@@ -1,7 +1,7 @@
-package main.java.chattingSystem.interface_adapter.view_models;
+package chattingSystem.interface_adapter.view_models;
 
-import main.java.chattingSystem.interface_adapter.state.SignupState;
-import main.java.chattingSystem.interface_adapter.state.ViewState;
+import chattingSystem.interface_adapter.state.SignupState;
+import chattingSystem.interface_adapter.state.ViewState;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;

@@ -1,4 +1,4 @@
-package main.java.chattingSystem.frameworks_drivers.ui.views;
+package chattingSystem.frameworks_drivers.ui.views;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,11 +8,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
 
-import main.java.chattingSystem.interface_adapter.view_models.SignupViewModel;
-import main.java.chattingSystem.interface_adapter.controllers.SignupController;
-import main.java.chattingSystem.interface_adapter.state.SignupState;
-import main.java.chattingSystem.interface_adapter.view_models.ViewManagerModel;
+import chattingSystem.interface_adapter.view_models.SignupViewModel;
+import chattingSystem.interface_adapter.controllers.SignupController;
+import chattingSystem.interface_adapter.state.SignupState;
+import chattingSystem.interface_adapter.view_models.ViewManagerModel;
 
 public class SignupView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "sign up";
@@ -112,11 +113,15 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
                         if (e.getSource().equals(signUp)) {
                             SignupState currentState = signupViewModel.getState();
 
-                            signupController.execute(
-                                    currentState.getUsername(),
-                                    currentState.getPassword(),
-                                    currentState.getRepeatPassword()
-                            );
+                            try {
+                                signupController.execute(
+                                        currentState.getUsername(),
+                                        currentState.getPassword(),
+                                        currentState.getRepeatPassword()
+                                );
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
                         }
                     }
                 }

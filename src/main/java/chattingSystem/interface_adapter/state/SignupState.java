@@ -1,4 +1,4 @@
-package main.java.chattingSystem.interface_adapter.state;
+package chattingSystem.interface_adapter.state;
 
 public class SignupState implements ViewState {
     private String username = "";

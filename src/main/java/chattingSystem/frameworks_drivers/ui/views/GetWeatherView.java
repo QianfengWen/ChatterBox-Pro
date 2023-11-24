@@ -1,11 +1,11 @@
-package main.java.chattingSystem.frameworks_drivers.ui.views;
+package chattingSystem.frameworks_drivers.ui.views;
 
-import main.java.chattingSystem.interface_adapter.controllers.GetWeatherController;
-import main.java.chattingSystem.interface_adapter.state.GetWeatherState;
-import main.java.chattingSystem.interface_adapter.state.SignupState;
-import main.java.chattingSystem.interface_adapter.view_models.GetWeatherViewManagerModel;
-import main.java.chattingSystem.interface_adapter.view_models.GetWeatherViewModel;
-import main.java.chattingSystem.interface_adapter.view_models.ViewManagerModel;
+import chattingSystem.interface_adapter.controllers.GetWeatherController;
+import chattingSystem.interface_adapter.state.GetWeatherState;
+import chattingSystem.interface_adapter.state.SignupState;
+import chattingSystem.interface_adapter.view_models.GetWeatherViewManagerModel;
+import chattingSystem.interface_adapter.view_models.GetWeatherViewModel;
+import chattingSystem.interface_adapter.view_models.ViewManagerModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,7 +35,8 @@ public class GetWeatherView extends JPanel implements ActionListener, PropertyCh
         getWeatherViewManager.addView(this, viewName);
         getWeatherViewModel.addPropertyChangeListener(this);
 
-        backgroundImage = new ImageIcon(getClass().getResource("weatherimage.png")).getImage();
+        // get the address of the background image
+        backgroundImage = new ImageIcon("src/main/java/chattingSystem/frameworks_drivers/ui/views/weatherimage.png").getImage();
         setLayout(new GridBagLayout());
 
         JLabel titleLabel = new JLabel("Weather Report");

@@ -1,7 +1,7 @@
-package main.java.chattingSystem.frameworks_drivers.api;
+package chattingSystem.frameworks_drivers.api;
 
-import main.java.chattingSystem.entities.Weather.Weather;
-import main.java.chattingSystem.use_cases.get_weather.GetWeatherDataAccessBoundary;
+import chattingSystem.entities.Weather.Weather;
+import chattingSystem.use_cases.get_weather.GetWeatherDataAccessBoundary;
 import okhttp3.*;
 import org.json.JSONException;
 import org.json.JSONObject;

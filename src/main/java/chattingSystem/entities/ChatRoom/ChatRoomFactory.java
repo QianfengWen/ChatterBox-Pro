@@ -1,13 +1,13 @@
-package main.java.chattingSystem.entities.ChatRoom;
+package chattingSystem.entities.ChatRoom;
 
 
-import main.java.chattingSystem.entities.Message.TextMessage;
-import main.java.chattingSystem.entities.User.User;
+import chattingSystem.entities.Message.TextMessage;
+import chattingSystem.entities.User.User;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ChatRoomFactory {
 
-    ChatRoom create(String id, List<User> Members, String Messages, LocalDateTime creationTime);
+    ChatRoom create(String id, List<User> Members, LocalDateTime creationTime);
 }

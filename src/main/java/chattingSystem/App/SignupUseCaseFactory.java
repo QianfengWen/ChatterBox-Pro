@@ -1,18 +1,18 @@
-package main.java.chattingSystem.App;
+package chattingSystem.App;
 
-import main.java.chattingSystem.entities.User.CommonUserFactory;
-import main.java.chattingSystem.entities.User.UserFactory;
-import main.java.chattingSystem.frameworks_drivers.data_access.FileUserDataAccessObject;
-import main.java.chattingSystem.frameworks_drivers.ui.views.SignupView;
-import main.java.chattingSystem.interface_adapter.controllers.SignupController;
-import main.java.chattingSystem.interface_adapter.view_models.LoginViewModel;
-import main.java.chattingSystem.interface_adapter.view_models.SignupViewModel;
-import main.java.chattingSystem.interface_adapter.view_models.ViewManagerModel;
-import main.java.chattingSystem.interface_adapter.presenter.SignupPresenter;
-import main.java.chattingSystem.use_cases.signup.SignupInputBoundary;
-import main.java.chattingSystem.use_cases.signup.SignupInteractor;
-import main.java.chattingSystem.use_cases.signup.SignupOutputBoundary;
-import main.java.chattingSystem.use_cases.signup.SignupUserDataAccessInterface;
+import chattingSystem.entities.User.CommonUserFactory;
+import chattingSystem.entities.User.UserFactory;
+import chattingSystem.frameworks_drivers.data_access.FileUserDataAccessObject;
+import chattingSystem.frameworks_drivers.ui.views.SignupView;
+import chattingSystem.interface_adapter.controllers.SignupController;
+import chattingSystem.interface_adapter.view_models.LoginViewModel;
+import chattingSystem.interface_adapter.view_models.SignupViewModel;
+import chattingSystem.interface_adapter.view_models.ViewManagerModel;
+import chattingSystem.interface_adapter.presenter.SignupPresenter;
+import chattingSystem.use_cases.signup.SignupInputBoundary;
+import chattingSystem.use_cases.signup.SignupInteractor;
+import chattingSystem.use_cases.signup.SignupOutputBoundary;
+import chattingSystem.use_cases.signup.SignupUserDataAccessInterface;
 
 import javax.swing.*;
 import java.io.IOException;

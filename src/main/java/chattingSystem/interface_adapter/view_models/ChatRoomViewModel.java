@@ -1,7 +1,9 @@
-package main.java.chattingSystem.interface_adapter.view_models;
+package chattingSystem.interface_adapter.view_models;
 
-import main.java.chattingSystem.entities.ChatRoom.ChatRoom;
-import main.java.chattingSystem.interface_adapter.state.ChatRoomState;
+import chattingSystem.entities.ChatRoom.ChatRoom;
+import chattingSystem.interface_adapter.state.ChatRoomState;
+
+
 
 import javax.swing.*;
 import java.beans.PropertyChangeListener;

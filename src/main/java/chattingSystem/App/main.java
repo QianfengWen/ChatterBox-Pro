@@ -1,26 +1,32 @@
-package main.java.chattingSystem.App;
+package chattingSystem.App;
 
-import main.java.chattingSystem.entities.ChatRoom.CommonChatRoomFactory;
-import main.java.chattingSystem.entities.User.CommonUserFactory;
-import main.java.chattingSystem.frameworks_drivers.data_access.ChatRoomDataAccessObject;
-import main.java.chattingSystem.frameworks_drivers.data_access.FileUserDataAccessObject;
-import main.java.chattingSystem.frameworks_drivers.ui.views.*;
-import main.java.chattingSystem.interface_adapter.view_models.*;
-import main.java.chattingSystem.use_cases.get_chat_room.GetChatRoomDataAccessBoundary;
-import main.java.chattingSystem.use_cases.get_chat_room.GetUser;
-import main.java.chattingSystem.use_cases.join_chat_room.JoinChatRoomDataAccessBoundary;
-import main.java.chattingSystem.use_cases.login.LoginUserDataAccessInterface;
+import chattingSystem.entities.ChatRoom.CommonChatRoomFactory;
+import chattingSystem.entities.Message.TextMessageFactory;
+import chattingSystem.entities.User.CommonUserFactory;
+import chattingSystem.frameworks_drivers.data_access.ChatRoomDataAccessObject;
+import chattingSystem.frameworks_drivers.data_access.FileUserDataAccessObject;
+import chattingSystem.frameworks_drivers.ui.views.*;
+import chattingSystem.interface_adapter.view_models.*;
+import chattingSystem.use_cases.refresh_messages.RefreshMessagesDataAccessBoundary;
+import com.mongodb.MongoClientSettings;
+import com.mongodb.ServerAddress;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+
+import java.io.IOException;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class main {
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException {
+
+
         // Build the main program window, the main panel containing the
         // various cards, and the layout, and stitch them together.
-
         // The log in and sign up window.
         JFrame application = new JFrame("Application");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -42,15 +48,17 @@ public class main {
 
 
         try {
-            userDataAccessObject = new FileUserDataAccessObject("./users.csv", new CommonUserFactory());
+            userDataAccessObject = new FileUserDataAccessObject(new CommonUserFactory());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        ChatRoomDataAccessObject chatRoomDataAccessObject = new ChatRoomDataAccessObject("./chatrooms.csv",
+        ChatRoomDataAccessObject chatRoomDataAccessObject = new ChatRoomDataAccessObject(
                 new CommonChatRoomFactory(),
                 new CommonUserFactory(),
+                new TextMessageFactory(),
                 userDataAccessObject);
+
 
 
         SignupView signupView = SignupUseCaseFactory.create(viewManagerModel,
@@ -71,6 +79,7 @@ public class main {
                 chatRoomDataAccessObject,
                 userDataAccessObject,
                 userDataAccessObject,
+                chatRoomDataAccessObject,
                 chatRoomDataAccessObject
                 );
         assert loginView != null;

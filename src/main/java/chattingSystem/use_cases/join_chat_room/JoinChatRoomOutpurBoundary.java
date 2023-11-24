@@ -1,12 +1,18 @@
-package main.java.chattingSystem.use_cases.join_chat_room;
+package chattingSystem.use_cases.join_chat_room;
 
-import main.java.chattingSystem.use_cases.log_out.LogOutDataAccessBoundary;
-import main.java.chattingSystem.use_cases.send_message.SendMessageUserDataAccessInterface;
+
+import chattingSystem.use_cases.log_out.LogOutDataAccessBoundary;
+import chattingSystem.use_cases.refresh_messages.RefreshMessagesDataAccessBoundary;
+import chattingSystem.use_cases.send_message.SendMessageUserDataAccessInterface;
+
 
 import java.io.IOException;
 
 public interface JoinChatRoomOutpurBoundary {
-    void prepareSuccessView(JoinChatRoomOutputData joinChatRoomOutputData, LogOutDataAccessBoundary logOutDataAccessBoundary, SendMessageUserDataAccessInterface sendMessageUserDataAccessInterface) throws IOException;
+    void prepareSuccessView(JoinChatRoomOutputData joinChatRoomOutputData,
+                            LogOutDataAccessBoundary logOutDataAccessBoundary,
+                            SendMessageUserDataAccessInterface sendMessageUserDataAccessInterface,
+                            RefreshMessagesDataAccessBoundary refreshMessagesDataAccessBoundary) throws IOException;
 
     void prepareFailView(JoinChatRoomOutputData joinChatRoomOutputData);
 }

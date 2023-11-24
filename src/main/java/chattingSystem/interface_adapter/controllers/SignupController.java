@@ -1,7 +1,9 @@
-package main.java.chattingSystem.interface_adapter.controllers;
+package chattingSystem.interface_adapter.controllers;
 
-import main.java.chattingSystem.use_cases.signup.SignupInputBoundary;
-import main.java.chattingSystem.use_cases.signup.SignupInputData;
+import chattingSystem.use_cases.signup.SignupInputBoundary;
+import chattingSystem.use_cases.signup.SignupInputData;
+
+import java.io.IOException;
 
 public class SignupController {
     final SignupInputBoundary userSignupUseCaseInteractor;
@@ -9,7 +11,7 @@ public class SignupController {
         this.userSignupUseCaseInteractor = userSignupUseCaseInteractor;
     }
 
-    public void execute(String username, String password1, String password2) {
+    public void execute(String username, String password1, String password2) throws IOException {
         SignupInputData signupInputData = new SignupInputData(
                 username, password1, password2);
 

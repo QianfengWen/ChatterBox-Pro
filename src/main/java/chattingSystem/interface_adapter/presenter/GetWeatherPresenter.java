@@ -1,13 +1,13 @@
-package main.java.chattingSystem.interface_adapter.presenter;
+package chattingSystem.interface_adapter.presenter;
 
-import main.java.chattingSystem.frameworks_drivers.api.GetWeatherDataAccessObject;
-import main.java.chattingSystem.interface_adapter.state.GetWeatherState;
-import main.java.chattingSystem.interface_adapter.view_models.GetWeatherViewModel;
-import main.java.chattingSystem.use_cases.get_weather.GetWeatherOutputBoundary;
-import main.java.chattingSystem.use_cases.get_weather.GetWeatherOutputData;
-import main.java.chattingSystem.use_cases.show_weather.ShowWeatherOutputBoundary;
+import chattingSystem.frameworks_drivers.api.GetWeatherDataAccessObject;
+import chattingSystem.interface_adapter.state.GetWeatherState;
+import chattingSystem.interface_adapter.view_models.GetWeatherViewModel;
+import chattingSystem.use_cases.get_weather.GetWeatherOutputBoundary;
+import chattingSystem.use_cases.get_weather.GetWeatherOutputData;
+import chattingSystem.use_cases.show_weather.ShowWeatherOutputBoundary;
 
-import static main.java.chattingSystem.App.ShowWeatherFrameFactory.createShowWeatherFrame;
+import static chattingSystem.App.ShowWeatherFrameFactory.createShowWeatherFrame;
 
 
 public class GetWeatherPresenter implements GetWeatherOutputBoundary, ShowWeatherOutputBoundary {

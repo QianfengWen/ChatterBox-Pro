@@ -1,10 +1,11 @@
-package main.java.chattingSystem.interface_adapter.controllers;
+package chattingSystem.interface_adapter.controllers;
 
-import main.java.chattingSystem.use_cases.send_message.SendMessageInputBoundary;
-import main.java.chattingSystem.use_cases.send_message.SendMessageInputData;
-import main.java.chattingSystem.use_cases.signup.SignupInputBoundary;
-import main.java.chattingSystem.use_cases.signup.SignupInputData;
+import chattingSystem.use_cases.send_message.SendMessageInputBoundary;
+import chattingSystem.use_cases.send_message.SendMessageInputData;
+import chattingSystem.use_cases.signup.SignupInputBoundary;
+import chattingSystem.use_cases.signup.SignupInputData;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class SendMessageController {
@@ -13,7 +14,7 @@ public class SendMessageController {
         this.userSendMessageUseCaseInteractor = userSendMessageUseCaseInteractor;
     }
 
-    public void execute(String username, String senderID, String message, LocalDateTime timestamp, String chatRoomId) {
+    public void execute(String username, String senderID, String message, LocalDateTime timestamp, String chatRoomId) throws IOException {
         SendMessageInputData sendMessageInputData = new SendMessageInputData(username, senderID, message, timestamp);
         userSendMessageUseCaseInteractor.execute(sendMessageInputData, chatRoomId);
     }

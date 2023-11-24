@@ -1,8 +1,8 @@
-package main.java.chattingSystem.interface_adapter.controllers;
+package chattingSystem.interface_adapter.controllers;
 
-import main.java.chattingSystem.entities.User.User;
-import main.java.chattingSystem.use_cases.join_chat_room.JoinChatRoomInputBoundary;
-import main.java.chattingSystem.use_cases.join_chat_room.JoinChatRoomInputData;
+import chattingSystem.entities.User.User;
+import chattingSystem.use_cases.join_chat_room.JoinChatRoomInputBoundary;
+import chattingSystem.use_cases.join_chat_room.JoinChatRoomInputData;
 
 import java.io.IOException;
 

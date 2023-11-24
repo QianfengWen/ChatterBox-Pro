@@ -1,5 +1,5 @@
-package main.java.chattingSystem.use_cases.get_weather;
-import main.java.chattingSystem.entities.Weather.Weather;
+package chattingSystem.use_cases.get_weather;
+import chattingSystem.entities.Weather.Weather;
 
 public class GetWeatherInteractor implements GetWeatherInputBoundary{
     final GetWeatherDataAccessBoundary getWeatherDataAccessObject;

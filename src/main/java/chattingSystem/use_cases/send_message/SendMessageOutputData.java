@@ -1,4 +1,9 @@
-package main.java.chattingSystem.use_cases.send_message;
+package chattingSystem.use_cases.send_message;
+
+
+import chattingSystem.entities.ChatRoom.CommonChatRoom;
+import chattingSystem.entities.User.User;
+
 
 public class SendMessageOutputData {
     private final boolean useCaseFailed;

@@ -1,10 +1,14 @@
-package main.java.chattingSystem.interface_adapter.state;
+package chattingSystem.interface_adapter.state;
 
+
+import chattingSystem.entities.User.User;
 import java.util.ArrayList;
+import java.util.List;
+
 
 public class ChatRoomState {
 
-    private ArrayList<String> messageHistory = new ArrayList<>();
+    private List<String> messageHistory = new ArrayList<>();
 
     private String userName = "";
 
@@ -22,11 +26,11 @@ public class ChatRoomState {
     public void setChatRoomId(String chatRoomId) {this.chatRoomId = chatRoomId;}
     public void setSenderId(String senderId) {this.senderId = senderId;}
 
-    public void addMessage(String message) {this.messageHistory.add(message);}
+    public void setMessage(List<String> messages) {this.messageHistory = messages;}
 
     public String getChatRoomId() {return chatRoomId;}
 
-    public ArrayList<String> getMessageHistory() {
+    public List<String> getMessageHistory() {
         return messageHistory;
     }
 

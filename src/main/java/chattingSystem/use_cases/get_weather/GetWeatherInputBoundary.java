@@ -1,4 +1,4 @@
-package main.java.chattingSystem.use_cases.get_weather;
+package chattingSystem.use_cases.get_weather;
 
 public interface GetWeatherInputBoundary {
     void execute(GetWeatherInputData getWeatherInputDataInputData);

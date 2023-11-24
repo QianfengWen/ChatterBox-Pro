@@ -1,4 +1,4 @@
-package main.java.chattingSystem.entities.Message;
+package chattingSystem.entities.Message;
 
 import java.time.LocalDateTime;
 

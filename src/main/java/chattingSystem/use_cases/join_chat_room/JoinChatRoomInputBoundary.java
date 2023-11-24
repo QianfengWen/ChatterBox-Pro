@@ -1,4 +1,4 @@
-package main.java.chattingSystem.use_cases.join_chat_room;
+package chattingSystem.use_cases.join_chat_room;
 
 import java.io.IOException;
 

@@ -1,7 +1,7 @@
-package main.java.chattingSystem.interface_adapter.controllers;
+package chattingSystem.interface_adapter.controllers;
 
-import main.java.chattingSystem.use_cases.get_weather.GetWeatherInputBoundary;
-import main.java.chattingSystem.use_cases.get_weather.GetWeatherInputData;
+import chattingSystem.use_cases.get_weather.GetWeatherInputBoundary;
+import chattingSystem.use_cases.get_weather.GetWeatherInputData;
 
 
 public class GetWeatherController {

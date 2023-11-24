@@ -1,15 +1,15 @@
-package main.java.chattingSystem.App;
+package chattingSystem.App;
 
-import main.java.chattingSystem.frameworks_drivers.ui.views.GetWeatherView;
-import main.java.chattingSystem.frameworks_drivers.ui.views.GetWeatherViewManager;
-import main.java.chattingSystem.interface_adapter.controllers.GetWeatherController;
-import main.java.chattingSystem.interface_adapter.presenter.GetWeatherPresenter;
-import main.java.chattingSystem.interface_adapter.view_models.GetWeatherViewManagerModel;
-import main.java.chattingSystem.interface_adapter.view_models.GetWeatherViewModel;
-import main.java.chattingSystem.use_cases.get_weather.GetWeatherDataAccessBoundary;
-import main.java.chattingSystem.use_cases.get_weather.GetWeatherInputBoundary;
-import main.java.chattingSystem.use_cases.get_weather.GetWeatherInteractor;
-import main.java.chattingSystem.use_cases.get_weather.GetWeatherOutputBoundary;
+import chattingSystem.frameworks_drivers.ui.views.GetWeatherView;
+import chattingSystem.frameworks_drivers.ui.views.GetWeatherViewManager;
+import chattingSystem.interface_adapter.controllers.GetWeatherController;
+import chattingSystem.interface_adapter.presenter.GetWeatherPresenter;
+import chattingSystem.interface_adapter.view_models.GetWeatherViewManagerModel;
+import chattingSystem.interface_adapter.view_models.GetWeatherViewModel;
+import chattingSystem.use_cases.get_weather.GetWeatherDataAccessBoundary;
+import chattingSystem.use_cases.get_weather.GetWeatherInputBoundary;
+import chattingSystem.use_cases.get_weather.GetWeatherInteractor;
+import chattingSystem.use_cases.get_weather.GetWeatherOutputBoundary;
 
 
 import javax.swing.*;

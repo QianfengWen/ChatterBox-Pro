@@ -1,26 +1,34 @@
-package main.java.chattingSystem.App;
+package chattingSystem.App;
 
-import main.java.chattingSystem.entities.Message.TextMessageFactory;
-import main.java.chattingSystem.frameworks_drivers.ui.views.ChatRoomView;
-import main.java.chattingSystem.frameworks_drivers.ui.views.ChatRoomViewManager;
-import main.java.chattingSystem.interface_adapter.controllers.LogOutController;
-import main.java.chattingSystem.interface_adapter.controllers.SendMessageController;
-import main.java.chattingSystem.interface_adapter.controllers.ShowWeatherController;
-import main.java.chattingSystem.interface_adapter.presenter.ChatRoomPresenter;
-import main.java.chattingSystem.interface_adapter.presenter.GetWeatherPresenter;
-import main.java.chattingSystem.interface_adapter.presenter.SendMessagePresenter;
-import main.java.chattingSystem.interface_adapter.view_models.*;
-import main.java.chattingSystem.use_cases.log_out.LogOutDataAccessBoundary;
-import main.java.chattingSystem.use_cases.log_out.LogOutInputBoundary;
-import main.java.chattingSystem.use_cases.log_out.LogOutInteractor;
-import main.java.chattingSystem.use_cases.log_out.LogOutOutputBoundary;
-import main.java.chattingSystem.use_cases.send_message.SendMessageInputBoundary;
-import main.java.chattingSystem.use_cases.send_message.SendMessageInteractor;
-import main.java.chattingSystem.use_cases.send_message.SendMessageOutputBoundary;
-import main.java.chattingSystem.use_cases.send_message.SendMessageUserDataAccessInterface;
-import main.java.chattingSystem.use_cases.show_weather.ShowWeatherInputBoundary;
-import main.java.chattingSystem.use_cases.show_weather.ShowWeatherInteractor;
-import main.java.chattingSystem.use_cases.show_weather.ShowWeatherOutputBoundary;
+
+import chattingSystem.entities.Message.TextMessageFactory;
+import chattingSystem.frameworks_drivers.ui.views.ChatRoomView;
+import chattingSystem.frameworks_drivers.ui.views.ChatRoomViewManager;
+import chattingSystem.interface_adapter.controllers.LogOutController;
+import chattingSystem.interface_adapter.controllers.RefreshingMessageController;
+import chattingSystem.interface_adapter.controllers.SendMessageController;
+import chattingSystem.interface_adapter.controllers.ShowWeatherController;
+import chattingSystem.interface_adapter.presenter.ChatRoomPresenter;
+import chattingSystem.interface_adapter.presenter.GetWeatherPresenter;
+import chattingSystem.interface_adapter.presenter.RefreshMessagePresenter;
+import chattingSystem.interface_adapter.presenter.SendMessagePresenter;
+import chattingSystem.interface_adapter.state.ChatRoomState;
+import chattingSystem.interface_adapter.view_models.*;
+import chattingSystem.use_cases.log_out.LogOutDataAccessBoundary;
+import chattingSystem.use_cases.log_out.LogOutInputBoundary;
+import chattingSystem.use_cases.log_out.LogOutInteractor;
+import chattingSystem.use_cases.log_out.LogOutOutputBoundary;
+import chattingSystem.use_cases.refresh_messages.RefreshMessageInteractor;
+import chattingSystem.use_cases.refresh_messages.RefreshMessagesDataAccessBoundary;
+import chattingSystem.use_cases.refresh_messages.RefreshMessagesInputBoundary;
+import chattingSystem.use_cases.refresh_messages.RefreshMessagesOutputBoundary;
+import chattingSystem.use_cases.send_message.SendMessageInputBoundary;
+import chattingSystem.use_cases.send_message.SendMessageInteractor;
+import chattingSystem.use_cases.send_message.SendMessageOutputBoundary;
+import chattingSystem.use_cases.send_message.SendMessageUserDataAccessInterface;
+import chattingSystem.use_cases.show_weather.ShowWeatherInputBoundary;
+import chattingSystem.use_cases.show_weather.ShowWeatherInteractor;
+import chattingSystem.use_cases.show_weather.ShowWeatherOutputBoundary;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,7 +36,10 @@ import java.io.IOException;
 
 public class ChatRoomFrameFactory {
     private static JFrame currentChatRoomFrame;
-    public static void createChatRoomFrame(ChatRoomViewModel chatRoomViewModel, LogOutDataAccessBoundary logOutDataAccessBoundary, SendMessageUserDataAccessInterface sendMessageUserDataAccessInterface){
+    public static void createChatRoomFrame(ChatRoomViewModel chatRoomViewModel,
+                                           LogOutDataAccessBoundary logOutDataAccessBoundary,
+                                           SendMessageUserDataAccessInterface sendMessageUserDataAccessInterface,
+                                           RefreshMessagesDataAccessBoundary RefreshMessagesDataAccessBoundary) throws IOException {
         JFrame chatRoomFrame = new JFrame("Chat Room");
         chatRoomFrame.setVisible(false);
         chatRoomFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -42,7 +53,8 @@ public class ChatRoomFrameFactory {
         GetWeatherViewModel getWeatherViewModel = new GetWeatherViewModel();
         ShowWeatherController showWeatherController = createShowWeatherUseCase(getWeatherViewModel);
         SendMessageController sendMessageController = createSendMessageController(sendMessageUserDataAccessInterface, chatRoomViewModel);
-        ChatRoomView chatRoomView = new ChatRoomView(chatRoomViewModel, chatRoomViewManagerModel, chatRoomViewManager, logOutController, showWeatherController, sendMessageController);
+        RefreshingMessageController refreshingMessageController = createRefreshingMessageController(RefreshMessagesDataAccessBoundary, chatRoomViewModel, chatRoomViewModel.getState());
+        ChatRoomView chatRoomView = new ChatRoomView(chatRoomViewModel, chatRoomViewManagerModel, chatRoomViewManager, logOutController, showWeatherController, sendMessageController, refreshingMessageController);
         chatRoomViews.add(chatRoomView, chatRoomView.viewName);
         chatRoomFrame.pack();
         chatRoomFrame.setVisible(true);
@@ -83,6 +95,19 @@ public class ChatRoomFrameFactory {
         SendMessageInputBoundary sendMessageInputBoundary = new SendMessageInteractor(sendMessageUserDataAccessInterface, sendMessageOutputBoundary, textMessageFactory);
 
         return new SendMessageController(sendMessageInputBoundary);
+    }
+
+    public static RefreshingMessageController createRefreshingMessageController(
+            RefreshMessagesDataAccessBoundary refreshMessagesDataAccessBoundary, ChatRoomViewModel chatRoomViewModel, ChatRoomState chatRoomState
+    ) {
+
+        // Notice how we pass this method's parameters to the Presenter.
+        RefreshMessagesOutputBoundary refreshMessagesOutputBoundary = new RefreshMessagePresenter(chatRoomViewModel, chatRoomState);
+
+        RefreshMessagesInputBoundary refreshMessageInputBoundary = new RefreshMessageInteractor(refreshMessagesDataAccessBoundary,
+                refreshMessagesOutputBoundary);
+
+        return new RefreshingMessageController(refreshMessageInputBoundary);
     }
 }
 

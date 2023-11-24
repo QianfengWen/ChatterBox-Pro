@@ -1,6 +1,6 @@
-package main.java.chattingSystem.use_cases.show_weather;
+package chattingSystem.use_cases.show_weather;
 
-import main.java.chattingSystem.use_cases.join_chat_room.JoinChatRoomInputData;
+import chattingSystem.use_cases.join_chat_room.JoinChatRoomInputData;
 
 import java.io.IOException;
 

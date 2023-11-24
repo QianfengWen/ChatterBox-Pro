@@ -1,4 +1,4 @@
-package main.java.chattingSystem.use_cases.log_out;
+package chattingSystem.use_cases.log_out;
 
 public class LogOutOutputData {
     private final String username;

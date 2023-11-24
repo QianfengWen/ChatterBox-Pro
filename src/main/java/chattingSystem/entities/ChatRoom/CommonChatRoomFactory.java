@@ -1,16 +1,16 @@
-package main.java.chattingSystem.entities.ChatRoom;
+package chattingSystem.entities.ChatRoom;
 
-import main.java.chattingSystem.entities.Message.Message;
-import main.java.chattingSystem.entities.Message.TextMessage;
-import main.java.chattingSystem.entities.User.User;
+import chattingSystem.entities.Message.Message;
+import chattingSystem.entities.Message.TextMessage;
+import chattingSystem.entities.User.User;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class CommonChatRoomFactory implements ChatRoomFactory{
     @Override
-    public ChatRoom create(String id, List<User> Member, String Messages, LocalDateTime creationTime) {
-        return new CommonChatRoom(id, Member, Messages, creationTime);
+    public ChatRoom create(String id, List<User> Member, LocalDateTime creationTime) {
+        return new CommonChatRoom(id, Member, creationTime);
     }
 
 }

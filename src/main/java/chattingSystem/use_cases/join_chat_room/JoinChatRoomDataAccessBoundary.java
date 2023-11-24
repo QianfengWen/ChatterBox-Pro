@@ -1,8 +1,13 @@
-package main.java.chattingSystem.use_cases.join_chat_room;
+package chattingSystem.use_cases.join_chat_room;
 
-import main.java.chattingSystem.entities.User.User;
+import chattingSystem.entities.User.User;
+
+import java.io.IOException;
+import java.util.List;
 
 public interface JoinChatRoomDataAccessBoundary {
     boolean existsById(String Id);
-    void joinChatRoom(User user);
+    void joinChatRoom(User user) throws IOException;
+
+    List<String> fetchAllMessages();
 }

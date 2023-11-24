@@ -1,10 +1,10 @@
-package main.java.chattingSystem.frameworks_drivers.ui.views;
+package chattingSystem.frameworks_drivers.ui.views;
 
-import main.java.chattingSystem.interface_adapter.controllers.JoinChatRoomController;
-import main.java.chattingSystem.interface_adapter.controllers.LoginController;
-import main.java.chattingSystem.interface_adapter.state.LoginState;
-import main.java.chattingSystem.interface_adapter.view_models.LoginViewModel;
-import main.java.chattingSystem.interface_adapter.view_models.ViewManagerModel;
+import chattingSystem.interface_adapter.controllers.JoinChatRoomController;
+import chattingSystem.interface_adapter.controllers.LoginController;
+import chattingSystem.interface_adapter.state.LoginState;
+import chattingSystem.interface_adapter.view_models.LoginViewModel;
+import chattingSystem.interface_adapter.view_models.ViewManagerModel;
 
 import javax.swing.*;
 import java.awt.*;

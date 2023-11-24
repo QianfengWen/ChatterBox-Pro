@@ -1,6 +1,6 @@
-package main.java.chattingSystem.interface_adapter.state;
+package chattingSystem.interface_adapter.state;
 
-import main.java.chattingSystem.entities.Weather.Weather;
+import chattingSystem.entities.Weather.Weather;
 
 public class GetWeatherState implements ViewState{
     private String weatherInfoDisplay;

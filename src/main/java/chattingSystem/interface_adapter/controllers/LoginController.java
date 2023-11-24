@@ -1,7 +1,7 @@
-package main.java.chattingSystem.interface_adapter.controllers;
+package chattingSystem.interface_adapter.controllers;
 
-import main.java.chattingSystem.use_cases.login.LoginInputBoundary;
-import main.java.chattingSystem.use_cases.login.LoginInputData;
+import chattingSystem.use_cases.login.LoginInputBoundary;
+import chattingSystem.use_cases.login.LoginInputData;
 
 public class LoginController {
     final LoginInputBoundary loginUseCaseInteractor;

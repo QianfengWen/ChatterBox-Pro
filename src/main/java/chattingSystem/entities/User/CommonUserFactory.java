@@ -1,4 +1,4 @@
-package main.java.chattingSystem.entities.User;
+package chattingSystem.entities.User;
 
 import java.time.LocalDateTime;
 
