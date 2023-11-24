@@ -24,6 +24,7 @@ public class ChatRoomState {
     }
 
     public void setChatRoomId(String chatRoomId) {this.chatRoomId = chatRoomId;}
+
     public void setSenderId(String senderId) {this.senderId = senderId;}
 
     public void setMessage(List<String> messages) {this.messageHistory = messages;}

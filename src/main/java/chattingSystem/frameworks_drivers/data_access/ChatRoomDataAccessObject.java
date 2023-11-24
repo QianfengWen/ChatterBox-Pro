@@ -12,6 +12,7 @@ import chattingSystem.frameworks_drivers.api.MongoDownloadChatRoom;
 import chattingSystem.frameworks_drivers.api.MongoDownloadMessage;
 import chattingSystem.frameworks_drivers.api.MongoUpdateChatRoom;
 import chattingSystem.frameworks_drivers.api.MongoUploadMessage;
+import chattingSystem.interface_adapter.state.ChatRoomState;
 import chattingSystem.use_cases.get_chat_room.GetChatRoomDataAccessBoundary;
 import chattingSystem.use_cases.join_chat_room.JoinChatRoomDataAccessBoundary;
 import chattingSystem.use_cases.refresh_messages.RefreshMessagesDataAccessBoundary;
@@ -20,6 +21,7 @@ import org.json.JSONObject;
 
 
 import java.io.*;
+import java.sql.Time;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -40,7 +42,9 @@ public class ChatRoomDataAccessObject implements  GetChatRoomDataAccessBoundary,
         this.fileUserDataAccessObject = fileUserDataAccessObject;
         this.messageFactory = messageFactory;
         fetchChatRoom();
+        // constant time to fetch all the chat rooms
         fetchMessages();
+
     }
 
     @Override
@@ -132,6 +136,11 @@ public class ChatRoomDataAccessObject implements  GetChatRoomDataAccessBoundary,
 
     @Override
     public List<String> fetchAllMessages() {
+        try {
+            fetchMessages();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         List<String> messagesList = new ArrayList<>();
         for (Message message : messages.values()) {
             String messageString = message.getSenderName()

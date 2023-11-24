@@ -13,5 +13,5 @@ public interface SendMessageUserDataAccessInterface {
 
     String generateMessageid(String id);
 
-    List<String> fetchAllMessages();
+    List<String> fetchAllMessages() throws IOException;
 }

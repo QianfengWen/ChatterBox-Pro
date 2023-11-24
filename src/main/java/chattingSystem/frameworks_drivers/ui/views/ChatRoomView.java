@@ -20,8 +20,6 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class ChatRoomView extends JPanel implements ActionListener, PropertyChangeListener {
 
@@ -37,7 +35,6 @@ public class ChatRoomView extends JPanel implements ActionListener, PropertyChan
     public SendMessageController sendMessageController;
     public RefreshingMessageController refreshingMessageController;
 
-    private Timer timer = new Timer();
 
     private final ChatRoomViewManagerModel chatRoomViewManagerModel;
 
@@ -101,7 +98,6 @@ public class ChatRoomView extends JPanel implements ActionListener, PropertyChan
         gbc.gridwidth = GridBagConstraints.REMAINDER; // Take remaining horizontal space
         gbc.insets = new Insets(5, 5, 5, 10);
         add(scrollPane, gbc);
-        updateMessageDisplayByTime(messageDisplay);
 
 // Message Input
         JTextField messageInput = new JTextField();
@@ -128,9 +124,7 @@ public class ChatRoomView extends JPanel implements ActionListener, PropertyChan
         gbc.insets = new Insets(5, 5, 20, 10);
         add(buttons, gbc);
 
-
         customizeComponents();
-        updateMessageDisplayByTime(messageDisplay);
         logOut.addActionListener(
                 // This creates an anonymous subclass of ActionListener and instantiates it.
                 new ActionListener() {
@@ -191,6 +185,23 @@ public class ChatRoomView extends JPanel implements ActionListener, PropertyChan
                 }
         );
 
+        Timer timer = new Timer(10, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                refreshingMessageController.execute();
+                ChatRoomState currentState = chatRoomViewModel.getState();
+                List<String> messages = currentState.getMessageHistory();
+                messageDisplay.setText(null);
+                for (String message : messages) {
+                    messageDisplay.append(message + "\n");
+                }
+            }
+        });
+        timer.start();
+
+
+
+
     }
     private void customizeComponents() {
         // customize components
@@ -214,21 +225,6 @@ public class ChatRoomView extends JPanel implements ActionListener, PropertyChan
 
     }
 
-    public void updateMessageDisplayByTime(JTextArea messageDisplay){
-        int TimeStep = 10;
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                refreshingMessageController.execute(chatRoomViewModel.getState().getChatRoomId());
-                ChatRoomState currentState = chatRoomViewModel.getState();
-                List<String> messages = currentState.getMessageHistory();
-                messageDisplay.setText(null);
-                for (String message : messages) {
-                    messageDisplay.append(message + "\n");
-                }
-            }
-        }, 0, TimeStep);
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
