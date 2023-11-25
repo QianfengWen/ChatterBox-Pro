@@ -56,13 +56,13 @@ public class FunJokeView extends JPanel implements ActionListener, PropertyChang
         add(titleLabel, titleConstraints);
 
         // Get joke guide
-        JLabel enterCityLabel = new JLabel("   Guide: Click button to get a joke to spice up chat :D");
-        enterCityLabel.setFont(new Font("Arial", Font.BOLD, 15));
-        GridBagConstraints enterCityLabelConstraints = new GridBagConstraints();
-        enterCityLabelConstraints.gridx = 0;
-        enterCityLabelConstraints.gridy = 1;
-        enterCityLabelConstraints.insets = new Insets(0, 10, 5, 5);
-        add(enterCityLabel, enterCityLabelConstraints);
+        JLabel jokeGuideLabel = new JLabel("   Guide: Click button to get a joke to spice up chat :D");
+        jokeGuideLabel.setFont(new Font("Arial", Font.BOLD, 15));
+        GridBagConstraints jokeGuideLabelConstraints = new GridBagConstraints();
+        jokeGuideLabelConstraints.gridx = 0;
+        jokeGuideLabelConstraints.gridy = 1;
+        jokeGuideLabelConstraints.insets = new Insets(0, 10, 5, 5);
+        add(jokeGuideLabel, jokeGuideLabelConstraints);
 
 
         // Get Joke Button
