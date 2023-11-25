@@ -50,7 +50,6 @@ public class FunJokeDataAccessObject implements FunJokeDataAccessBoundary {
                 .build();
         try {
             Response response = client.newCall(request).execute();
-            JSONObject responseBody = new JSONObject(response.body().string());
             if (response.code() == 200) {
                 return true;
             }
