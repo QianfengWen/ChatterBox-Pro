@@ -1,9 +1,6 @@
 package chattingSystem.frameworks_drivers.ui.views;
 
-import chattingSystem.interface_adapter.controllers.LogOutController;
-import chattingSystem.interface_adapter.controllers.RefreshingMessageController;
-import chattingSystem.interface_adapter.controllers.SendMessageController;
-import chattingSystem.interface_adapter.controllers.ShowWeatherController;
+import chattingSystem.interface_adapter.controllers.*;
 import chattingSystem.interface_adapter.state.ChatRoomState;
 import chattingSystem.interface_adapter.view_models.ChatRoomViewManagerModel;
 import chattingSystem.interface_adapter.view_models.ChatRoomViewModel;
@@ -26,11 +23,13 @@ public class ChatRoomView extends JPanel implements ActionListener, PropertyChan
     public final String viewName;
     private final JButton getWeather;
     private final JButton send;
+    private final JButton getJoke;
 
     private final JButton logOut;
     public ChatRoomViewModel chatRoomViewModel;
     public LogOutController logOutController;
     public ShowWeatherController showWeatherController;
+    public ShowJokeController showJokeController;
 
     public SendMessageController sendMessageController;
     public RefreshingMessageController refreshingMessageController;
@@ -44,7 +43,8 @@ public class ChatRoomView extends JPanel implements ActionListener, PropertyChan
                         LogOutController logOutController,
                         ShowWeatherController showWeatherController,
                         SendMessageController sendMessageController,
-                        RefreshingMessageController refreshingMessageController)    {
+                        RefreshingMessageController refreshingMessageController,
+                        ShowJokeController showJokeController)    {
         this.viewName = chatRoomViewModel.getViewName();
         this.chatRoomViewModel = chatRoomViewModel;
         this.chatRoomViewManagerModel = chatRoomViewManagerModel;
@@ -52,6 +52,7 @@ public class ChatRoomView extends JPanel implements ActionListener, PropertyChan
         this.showWeatherController = showWeatherController;
         this.sendMessageController = sendMessageController;
         this.refreshingMessageController = refreshingMessageController;
+        this.showJokeController = showJokeController;
         chatRoomViewManager.addView(this, viewName);
         chatRoomViewModel.addPropertyChangeListener(this);
 
@@ -116,6 +117,8 @@ public class ChatRoomView extends JPanel implements ActionListener, PropertyChan
         buttons.add(getWeather);
         this.send = new JButton(ChatRoomViewModel.SEND_MESSAGE_BUTTON_LABEL);
         buttons.add(send);
+        this.getJoke = new JButton(chatRoomViewModel.GET_JOKE_BUTTON_LABEL);
+        buttons.add(getJoke);
         this.logOut = new JButton(chatRoomViewModel.LOG_OUT_BUTTON_LABEL);
         buttons.add(logOut);
         gbc.gridx = 0;
@@ -185,6 +188,21 @@ public class ChatRoomView extends JPanel implements ActionListener, PropertyChan
                 }
         );
 
+        getJoke.addActionListener(
+                // This creates an anonymous subclass of ActionListener and instantiates it.
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(getJoke)) {
+                            try {
+                                showJokeController.execute();
+                            } catch (IOException ep) {
+                                throw new RuntimeException(ep);
+                            }
+                        }
+                    }
+                }
+        );
+
         Timer timer = new Timer(10, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -221,7 +239,10 @@ public class ChatRoomView extends JPanel implements ActionListener, PropertyChan
         logOut.setFocusPainted(false);
         logOut.setFont(new Font("Tahoma", Font.BOLD, 12));
 
-
+        getJoke.setBackground(new Color(30, 144, 255));
+        getJoke.setForeground(Color.WHITE);
+        getJoke.setFocusPainted(false);
+        getJoke.setFont(new Font("Tahoma", Font.BOLD, 12));
 
     }
 

@@ -18,6 +18,8 @@ public class ChatRoomViewModel extends ViewModel{
 
     public static final String GET_WEATHER_BUTTON_LABEL = "Get Weather";
 
+    public static final String GET_JOKE_BUTTON_LABEL = "Get Joke";
+
     public String MESSAGE_LABEL = "Message";
     public String CHATROOM_ID_LABEL = "";
     public String USER_NAME_LABEL = "";
