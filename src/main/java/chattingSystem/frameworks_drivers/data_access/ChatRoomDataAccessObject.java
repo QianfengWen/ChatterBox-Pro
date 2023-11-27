@@ -26,8 +26,8 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class ChatRoomDataAccessObject implements  GetChatRoomDataAccessBoundary, JoinChatRoomDataAccessBoundary, SendMessageUserDataAccessInterface, RefreshMessagesDataAccessBoundary {
-    private final Map<String, ChatRoom> chatRooms = new HashMap<>();
-    private final Map<String, Message> messages = new HashMap<>();
+    private final Map<String, ChatRoom> chatRooms = new LinkedHashMap<>();
+    private final Map<String, Message> messages = new LinkedHashMap<>();
 
     private FileUserDataAccessObject fileUserDataAccessObject;
 
@@ -142,13 +142,17 @@ public class ChatRoomDataAccessObject implements  GetChatRoomDataAccessBoundary,
             e.printStackTrace();
         }
         List<String> messagesList = new ArrayList<>();
+//        List<String> messagesIds = new ArrayList<>();
         for (Message message : messages.values()) {
             String messageString = message.getSenderName()
                     + "(ID: "+ message.getSenderID() + ")" + " at " +
                     message.getCreationTime().getYear() + "-" + message.getCreationTime().getMonthValue() + "-" + message.getCreationTime().getDayOfMonth() + "-" + message.getCreationTime().getHour() + ":" + message.getCreationTime().getMinute() + ":" + message.getCreationTime().getSecond() +
                     ": " + message.getText();
+            String messageId = message.getMessageID();
+//            messagesIds.add(messageId);
             messagesList.add(messageString);
         }
+//        System.out.println(messagesIds);
         return messagesList;
     }
 }

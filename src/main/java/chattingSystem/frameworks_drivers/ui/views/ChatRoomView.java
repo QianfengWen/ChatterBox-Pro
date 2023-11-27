@@ -85,18 +85,19 @@ public class ChatRoomView extends JPanel implements ActionListener, PropertyChan
         add(messageLabel, gbc);
 
         // Message Display
-        JTextArea messageDisplay = new JTextArea();
+        JTextArea messageDisplay = new JTextArea(20, 20);
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBounds(13, 10, 400, 300);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         messageDisplay.setEditable(false);
-        messageDisplay.setPreferredSize(new Dimension(400, 300)); // Adjusted for more height
         messageDisplay.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         messageDisplay.setLineWrap(true);
         messageDisplay.setWrapStyleWord(true);
-        JScrollPane scrollPane = new JScrollPane(messageDisplay);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         gbc.gridx = 0;
         gbc.gridy = 2; // Adjusted to be below the messageLabel
         gbc.gridwidth = GridBagConstraints.REMAINDER; // Take remaining horizontal space
         gbc.insets = new Insets(5, 5, 5, 10);
+        scrollPane.setViewportView(messageDisplay);
         add(scrollPane, gbc);
 
 // Message Input
@@ -188,12 +189,17 @@ public class ChatRoomView extends JPanel implements ActionListener, PropertyChan
         Timer timer = new Timer(10, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int currentRows = messageDisplay.getLineCount();
+//                System.out.println(currentRows);
                 refreshingMessageController.execute();
                 ChatRoomState currentState = chatRoomViewModel.getState();
                 List<String> messages = currentState.getMessageHistory();
-                messageDisplay.setText(null);
-                for (String message : messages) {
-                    messageDisplay.append(message + "\n");
+//                System.out.println(messages.size() + 1);
+                if (currentRows != messages.size() + 1) {
+                    messageDisplay.setText(null);
+                    for (String message : messages) {
+                        messageDisplay.append(message + "\n");
+                    }
                 }
             }
         });

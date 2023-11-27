@@ -4,12 +4,16 @@ import chattingSystem.entities.User.User;
 import chattingSystem.entities.User.UserFactory;
 import chattingSystem.frameworks_drivers.api.MongoDownloadUsers;
 import chattingSystem.frameworks_drivers.api.MongoUploadUser;
+import chattingSystem.interface_adapter.state.ChatRoomState;
 import chattingSystem.use_cases.get_chat_room.GetUser;
 import chattingSystem.use_cases.log_out.LogOutDataAccessBoundary;
 import chattingSystem.use_cases.login.LoginUserDataAccessInterface;
 import chattingSystem.use_cases.signup.SignupUserDataAccessInterface;
 import org.json.JSONObject;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -20,13 +24,24 @@ import java.util.Map;
 public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface, GetUser, LogOutDataAccessBoundary {
 
 
-    private final Map<String, User> accounts = new HashMap<>();
+    private final Map<String, User> accounts = new LinkedHashMap<>();
 
     private UserFactory userFactory;
 
     public FileUserDataAccessObject(UserFactory userFactory) throws IOException {
         this.userFactory = userFactory;
-        fetchAllUsers();
+        Timer timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    fetchAllUsers();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            }
+        });
+        timer.start();
+
 
 //        csvFile = new File(csvPath);
 //        headers.put("username", 0);
@@ -63,7 +78,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
     public void save(User user) throws IOException {
         accounts.put(user.getUsername(), user);
         MongoUploadUser mongoUploadUser = new MongoUploadUser();
-        mongoUploadUser.uploadUsers(user.getUsername(), user.getUserid(), user.getPassword(), user.getCreationTime().toString());
+        mongoUploadUser.uploadUsers(user.getUsername(), user.getUserid(), user.getPassword(), String.valueOf(user.getIsOnline()), user.getCreationTime().toString());
         fetchAllUsers();
     }
 
@@ -77,9 +92,11 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
             String username = user.getString("username");
             String userid = user.getString("userid");
             String password = user.getString("password");
+            String isOnline = user.getString("isOnline");
             String creationTimeText = user.getString("creation_time");
             LocalDateTime ldt = LocalDateTime.parse(creationTimeText);
             User newUser = userFactory.create(username, userid, password, ldt);
+            newUser.setOnline(Boolean.parseBoolean(isOnline));
             if (!accounts.containsKey(username)) {
                 accounts.put(username, newUser);
             }
@@ -90,28 +107,6 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
     public User get(String username) {
         return accounts.get(username);
     }
-
-//    private void save() {
-////        BufferedWriter writer;
-//        try {
-////            writer = new BufferedWriter(new FileWriter(csvFile));
-////            writer.write(String.join(",", headers.keySet()));
-////            writer.newLine();
-////
-////            for (User user : accounts.values()) {
-////                String line = String.format("%s,%s,%s,%s",
-////                        user.getUsername(), user.getUserid(), user.getPassword(), user.getCreationTime());
-////                writer.write(line);
-////                writer.newLine();
-////            }
-////
-////            writer.close();
-//
-//
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
 
 
     /**
