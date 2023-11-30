@@ -41,37 +41,6 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
             }
         });
         timer.start();
-
-
-//        csvFile = new File(csvPath);
-//        headers.put("username", 0);
-//        headers.put("userid", 1);
-//        headers.put("password", 2);
-//        headers.put("creation_time", 3);
-//
-//        if (csvFile.length() == 0) {
-////            save();
-//        } else {
-//
-//            try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
-//                String header = reader.readLine();
-//
-//                // For later: clean this up by creating a new Exception subclass and handling it in the UI.
-//                assert header.equals("username, userid, password,creation_time");
-//
-//                String row;
-//                while ((row = reader.readLine()) != null) {
-//                    String[] col = row.split(",");
-//                    String username = String.valueOf(col[headers.get("username")]);
-//                    String userid = String.valueOf(col[headers.get("userid")]);
-//                    String password = String.valueOf(col[headers.get("password")]);
-//                    String creationTimeText = String.valueOf(col[headers.get("creation_time")]);
-//                    LocalDateTime ldt = LocalDateTime.parse(creationTimeText);
-//                    User user = userFactory.create(username, userid, password, ldt);
-//                    accounts.put(username, user);
-//                }
-//            }
-//        }
     }
 
     @Override
@@ -143,15 +112,4 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
         userLoggingOut.setOnline(false);
         accounts.put(username, userLoggingOut);
     }
-
-//    @Override
-//    public void deleteAllUsers() {
-//        accounts.clear();
-//        this.save();
-//    }
-
-//    @Override
-//    public Map<String, User> getAccounts() {
-//        return accounts;
-//    }
 }

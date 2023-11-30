@@ -29,7 +29,7 @@ public class main {
         // various cards, and the layout, and stitch them together.
         // The log in and sign up window.
         JFrame application = new JFrame("Application");
-        application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//        application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         CardLayout cardLayout = new CardLayout();
         // The various View objects. Only one view is visible at a time.
         JPanel views = new JPanel(cardLayout);

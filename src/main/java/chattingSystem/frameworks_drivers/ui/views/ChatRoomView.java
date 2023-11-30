@@ -126,6 +126,19 @@ public class ChatRoomView extends JPanel implements ActionListener, PropertyChan
         add(buttons, gbc);
 
         customizeComponents();
+        // if the user clicks the close button on the frame, the user will autonatically log out
+        chatRoomViewModel.getCurrentframe().addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                ChatRoomState currentState = chatRoomViewModel.getState();
+                int JOP = JOptionPane.showConfirmDialog(null, "Are you sure you want to log out?", "Log out", JOptionPane.YES_NO_OPTION);
+                if (JOP == JOptionPane.YES_OPTION){
+                    logOutController.execute(currentState.getUsername());
+                    JFrame currentFrame = chatRoomViewModel.getCurrentframe();
+                    currentFrame.dispose();
+                }
+            }
+        });
         logOut.addActionListener(
                 // This creates an anonymous subclass of ActionListener and instantiates it.
                 new ActionListener() {
