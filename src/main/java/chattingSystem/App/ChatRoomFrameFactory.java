@@ -39,7 +39,6 @@ public class ChatRoomFrameFactory {
                                            RefreshMessagesDataAccessBoundary RefreshMessagesDataAccessBoundary) throws IOException {
         JFrame chatRoomFrame = new JFrame("Chat Room");
         chatRoomFrame.setVisible(false);
-        chatRoomFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         CardLayout chatRoomCardLayout = new CardLayout();
         JPanel chatRoomViews = new JPanel(chatRoomCardLayout);
         chatRoomFrame.add(chatRoomViews);
@@ -53,11 +52,11 @@ public class ChatRoomFrameFactory {
         ShowJokeController showJokeController = createShowJokeUseCase(funJokeViewModel);
         SendMessageController sendMessageController = createSendMessageController(sendMessageUserDataAccessInterface, chatRoomViewModel);
         RefreshingMessageController refreshingMessageController = createRefreshingMessageController(RefreshMessagesDataAccessBoundary, chatRoomViewModel, chatRoomViewModel.getState());
+        chatRoomViewModel.setCurrentframe(chatRoomFrame);
         ChatRoomView chatRoomView = new ChatRoomView(chatRoomViewModel, chatRoomViewManagerModel, chatRoomViewManager, logOutController, showWeatherController, sendMessageController, refreshingMessageController, showJokeController);
         chatRoomViews.add(chatRoomView, chatRoomView.viewName);
         chatRoomFrame.pack();
         chatRoomFrame.setVisible(true);
-        chatRoomViewModel.setCurrentframe(chatRoomFrame);
         currentChatRoomFrame = chatRoomFrame;
     }
 

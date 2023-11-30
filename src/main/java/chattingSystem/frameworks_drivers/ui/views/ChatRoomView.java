@@ -86,18 +86,19 @@ public class ChatRoomView extends JPanel implements ActionListener, PropertyChan
         add(messageLabel, gbc);
 
         // Message Display
-        JTextArea messageDisplay = new JTextArea();
+        JTextArea messageDisplay = new JTextArea(20, 20);
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBounds(13, 10, 400, 300);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         messageDisplay.setEditable(false);
-        messageDisplay.setPreferredSize(new Dimension(400, 300)); // Adjusted for more height
         messageDisplay.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         messageDisplay.setLineWrap(true);
         messageDisplay.setWrapStyleWord(true);
-        JScrollPane scrollPane = new JScrollPane(messageDisplay);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         gbc.gridx = 0;
         gbc.gridy = 2; // Adjusted to be below the messageLabel
         gbc.gridwidth = GridBagConstraints.REMAINDER; // Take remaining horizontal space
         gbc.insets = new Insets(5, 5, 5, 10);
+        scrollPane.setViewportView(messageDisplay);
         add(scrollPane, gbc);
 
 // Message Input
@@ -128,6 +129,19 @@ public class ChatRoomView extends JPanel implements ActionListener, PropertyChan
         add(buttons, gbc);
 
         customizeComponents();
+        // if the user clicks the close button on the frame, the user will autonatically log out
+        chatRoomViewModel.getCurrentframe().addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                ChatRoomState currentState = chatRoomViewModel.getState();
+                int JOP = JOptionPane.showConfirmDialog(null, "Are you sure you want to log out?", "Log out", JOptionPane.YES_NO_OPTION);
+                if (JOP == JOptionPane.YES_OPTION){
+                    logOutController.execute(currentState.getUsername());
+                    JFrame currentFrame = chatRoomViewModel.getCurrentframe();
+                    currentFrame.dispose();
+                }
+            }
+        });
         logOut.addActionListener(
                 // This creates an anonymous subclass of ActionListener and instantiates it.
                 new ActionListener() {
@@ -206,12 +220,17 @@ public class ChatRoomView extends JPanel implements ActionListener, PropertyChan
         Timer timer = new Timer(10, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int currentRows = messageDisplay.getLineCount();
+//                System.out.println(currentRows);
                 refreshingMessageController.execute();
                 ChatRoomState currentState = chatRoomViewModel.getState();
                 List<String> messages = currentState.getMessageHistory();
-                messageDisplay.setText(null);
-                for (String message : messages) {
-                    messageDisplay.append(message + "\n");
+//                System.out.println(messages.size() + 1);
+                if (currentRows != messages.size() + 1) {
+                    messageDisplay.setText(null);
+                    for (String message : messages) {
+                        messageDisplay.append(message + "\n");
+                    }
                 }
             }
         });
