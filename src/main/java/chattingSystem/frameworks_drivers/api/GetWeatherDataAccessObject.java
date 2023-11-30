@@ -41,8 +41,7 @@ public class GetWeatherDataAccessObject implements GetWeatherDataAccessBoundary 
                         .pm(weather.getJSONObject("air_quality").getInt("pm2_5"))
                         .build();
             } else {
-//
-                throw new RuntimeException(responseBody.getString("message"));
+                throw new RuntimeException("Cannot Get Weather Report For Typed city");
             }
         } catch (IOException | JSONException e) {
             throw new RuntimeException(e);
@@ -59,15 +58,13 @@ public class GetWeatherDataAccessObject implements GetWeatherDataAccessBoundary 
                 .build();
         try {
             Response response = client.newCall(request).execute();
-            JSONObject responseBody = new JSONObject(response.body().string());
-
             if (response.code() == 200) {
                 return true;
             } else {
-                return false;
+                throw new RuntimeException("Cannot Get Weather Report For Typed city");
             }
         } catch (IOException | JSONException e) {
-            throw new RuntimeException(e);
+            return false;
         }
     }
 }

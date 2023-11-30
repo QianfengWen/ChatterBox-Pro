@@ -4,14 +4,8 @@ package chattingSystem.App;
 import chattingSystem.entities.Message.TextMessageFactory;
 import chattingSystem.frameworks_drivers.ui.views.ChatRoomView;
 import chattingSystem.frameworks_drivers.ui.views.ChatRoomViewManager;
-import chattingSystem.interface_adapter.controllers.LogOutController;
-import chattingSystem.interface_adapter.controllers.RefreshingMessageController;
-import chattingSystem.interface_adapter.controllers.SendMessageController;
-import chattingSystem.interface_adapter.controllers.ShowWeatherController;
-import chattingSystem.interface_adapter.presenter.ChatRoomPresenter;
-import chattingSystem.interface_adapter.presenter.GetWeatherPresenter;
-import chattingSystem.interface_adapter.presenter.RefreshMessagePresenter;
-import chattingSystem.interface_adapter.presenter.SendMessagePresenter;
+import chattingSystem.interface_adapter.controllers.*;
+import chattingSystem.interface_adapter.presenter.*;
 import chattingSystem.interface_adapter.state.ChatRoomState;
 import chattingSystem.interface_adapter.view_models.*;
 import chattingSystem.use_cases.log_out.LogOutDataAccessBoundary;
@@ -26,6 +20,9 @@ import chattingSystem.use_cases.send_message.SendMessageInputBoundary;
 import chattingSystem.use_cases.send_message.SendMessageInteractor;
 import chattingSystem.use_cases.send_message.SendMessageOutputBoundary;
 import chattingSystem.use_cases.send_message.SendMessageUserDataAccessInterface;
+import chattingSystem.use_cases.show_joke.ShowJokeInputBoundry;
+import chattingSystem.use_cases.show_joke.ShowJokeInteractor;
+import chattingSystem.use_cases.show_joke.ShowJokeOutputBoundry;
 import chattingSystem.use_cases.show_weather.ShowWeatherInputBoundary;
 import chattingSystem.use_cases.show_weather.ShowWeatherInteractor;
 import chattingSystem.use_cases.show_weather.ShowWeatherOutputBoundary;
@@ -51,10 +48,12 @@ public class ChatRoomFrameFactory {
         LogOutController logOutController = createLogOutUseCase(logOutDataAccessBoundary);
         GetWeatherViewModel getWeatherViewModel = new GetWeatherViewModel();
         ShowWeatherController showWeatherController = createShowWeatherUseCase(getWeatherViewModel);
+        FunJokeViewModel funJokeViewModel = new FunJokeViewModel();
+        ShowJokeController showJokeController = createShowJokeUseCase(funJokeViewModel);
         SendMessageController sendMessageController = createSendMessageController(sendMessageUserDataAccessInterface, chatRoomViewModel);
         RefreshingMessageController refreshingMessageController = createRefreshingMessageController(RefreshMessagesDataAccessBoundary, chatRoomViewModel, chatRoomViewModel.getState());
         chatRoomViewModel.setCurrentframe(chatRoomFrame);
-        ChatRoomView chatRoomView = new ChatRoomView(chatRoomViewModel, chatRoomViewManagerModel, chatRoomViewManager, logOutController, showWeatherController, sendMessageController, refreshingMessageController);
+        ChatRoomView chatRoomView = new ChatRoomView(chatRoomViewModel, chatRoomViewManagerModel, chatRoomViewManager, logOutController, showWeatherController, sendMessageController, refreshingMessageController, showJokeController);
         chatRoomViews.add(chatRoomView, chatRoomView.viewName);
         chatRoomFrame.pack();
         chatRoomFrame.setVisible(true);
@@ -81,6 +80,16 @@ public class ChatRoomFrameFactory {
         ShowWeatherInputBoundary showWeatherInteractor = new ShowWeatherInteractor(showWeatherOutputBoundary);
 
         return new ShowWeatherController(showWeatherInteractor);
+    }
+    public static ShowJokeController createShowJokeUseCase(FunJokeViewModel funJokeViewModel
+    ) {
+
+        // Notice how we pass this method's parameters to the Presenter.
+        ShowJokeOutputBoundry showJokeOutputBoundry = new FunJokePresenter(funJokeViewModel);
+
+        ShowJokeInputBoundry showJokeInteractor = new ShowJokeInteractor(showJokeOutputBoundry);
+
+        return new ShowJokeController(showJokeInteractor);
     }
     public static SendMessageController createSendMessageController(
             SendMessageUserDataAccessInterface sendMessageUserDataAccessInterface, ChatRoomViewModel chatRoomViewModel
