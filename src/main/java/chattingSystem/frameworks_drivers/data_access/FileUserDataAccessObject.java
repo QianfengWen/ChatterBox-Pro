@@ -30,6 +30,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
 
     public FileUserDataAccessObject(UserFactory userFactory) throws IOException {
         this.userFactory = userFactory;
+        fetchAllUsers();
         Timer timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
