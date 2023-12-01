@@ -6,14 +6,14 @@ public class Weather implements CommonWeather {
     // Refer to the API documentation for the meaning of these fields.
     private String cityLocation;
     private String lastUpdated;
-    private float temperature;
+    private int temperature;
     private String condition;
     private int windDegree;
     private String windDirection;
     private int humidity;
     private float pm;
 
-    public Weather(String cityLocation, String lastUpdated, float temperature, String condition, int windDegree,
+    public Weather(String cityLocation, String lastUpdated, int temperature, String condition, int windDegree,
                    String windDirection, int humidity, float pm) {
         this.cityLocation = cityLocation;
         this.lastUpdated = lastUpdated;
@@ -52,8 +52,8 @@ public class Weather implements CommonWeather {
             return this;
         }
 
-        public WeatherBuilder temperature(float temp) {
-            this.temperature = temperature;
+        public WeatherBuilder temperature(int temp) {
+            this.temperature = temp;
             return this;
         }
 
