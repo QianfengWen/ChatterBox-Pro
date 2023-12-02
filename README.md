@@ -31,14 +31,15 @@ ChatterBox Pro is built on a solid foundation of Clean Architecture and SOLID pr
 
 - Java JDK 11 or higher
 - MongoDB installed and running
-- Able to run maven projects in IDE.
+- Able to run Maven projects in IDE.
 
 ### Steps
 
 1. Clone the repository
-2. Navigate to the project directory: src/main/java/chattingSystem/app/main.java
-3. Compile the project: Compile main.java
-4. Run the application: Run main.java
+2. Find pom.xml, right click it and set it to a Maven project, then right click it again and click reload project in the Maven option.
+3. Navigate to the project directory: src/main/java/chattingSystem/app/main.java
+4. Compile the project: Compile main.java
+5. Run the application: Run main.java
 
 
 ## Usage
