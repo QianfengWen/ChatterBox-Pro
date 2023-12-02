@@ -23,4 +23,11 @@ public class SignupOutputData {
     public void setCreationTime(String creationTime) {
         this.creationTime = creationTime;
     }
+
+    public boolean getUseCaseFailed() {
+        return useCaseFailed;
+    }
+    public void setUseCaseFailed(boolean useCaseFailed) {
+        this.useCaseFailed = useCaseFailed;
+    }
 }

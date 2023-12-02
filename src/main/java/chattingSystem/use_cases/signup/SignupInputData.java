@@ -17,11 +17,11 @@ public class SignupInputData {
         return username;
     }
 
-    String getPassword() {
+    public String getPassword() {
         return password.getPassword();
     }
 
-    Boolean isValidPassword() {
+    public Boolean isValidPassword() {
         return password.isValid();
     }
 
