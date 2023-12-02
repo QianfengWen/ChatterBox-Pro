@@ -1,0 +1,190 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > main</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">chattingSystem.app</a>
+</div>
+
+<h1>Coverage Summary for Class: main (chattingSystem.app)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">main</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92%
+  </span>
+  <span class="absValue">
+    (23/25)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package chattingSystem.app;
+&nbsp;
+&nbsp;import chattingSystem.entities.ChatRoom.CommonChatRoomFactory;
+&nbsp;import chattingSystem.entities.Message.TextMessageFactory;
+&nbsp;import chattingSystem.entities.User.CommonUserFactory;
+&nbsp;import chattingSystem.frameworks_drivers.data_access.ChatRoomDataAccessObject;
+&nbsp;import chattingSystem.frameworks_drivers.data_access.FileUserDataAccessObject;
+&nbsp;import chattingSystem.frameworks_drivers.ui.views.*;
+&nbsp;import chattingSystem.interface_adapter.view_models.*;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import javax.swing.*;
+&nbsp;import java.awt.*;
+&nbsp;
+<b class="fc">&nbsp;public class main {</b>
+&nbsp;    public static void main(String[] args) throws IOException {
+&nbsp;
+&nbsp;
+&nbsp;        // Build the main program window, the main panel containing the
+&nbsp;        // various cards, and the layout, and stitch them together.
+&nbsp;        // The log in and sign up window.
+<b class="fc">&nbsp;        JFrame application = new JFrame(&quot;Application&quot;);</b>
+&nbsp;//        application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+<b class="fc">&nbsp;        CardLayout cardLayout = new CardLayout();</b>
+&nbsp;        // The various View objects. Only one view is visible at a time.
+<b class="fc">&nbsp;        JPanel views = new JPanel(cardLayout);</b>
+<b class="fc">&nbsp;        application.add(views);</b>
+&nbsp;        // This keeps track of and manages which view is currently showing.
+<b class="fc">&nbsp;        ViewManagerModel viewManagerModel = new ViewManagerModel();</b>
+<b class="fc">&nbsp;        ViewManager viewManager = new ViewManager(views, cardLayout, viewManagerModel);</b>
+&nbsp;        // The data for the views, such as username and password, are in the ViewModels.
+&nbsp;        // This information will be changed by a presenter object that is reporting the
+&nbsp;        // results from the use case. The ViewModels are observable, and will
+&nbsp;        // be observed by the Views.
+<b class="fc">&nbsp;        SignupViewModel signupViewModel = new SignupViewModel();</b>
+<b class="fc">&nbsp;        LoginViewModel loginViewModel = new LoginViewModel();</b>
+&nbsp;
+&nbsp;        FileUserDataAccessObject userDataAccessObject;
+&nbsp;
+&nbsp;
+&nbsp;        try {
+<b class="fc">&nbsp;            userDataAccessObject = new FileUserDataAccessObject(new CommonUserFactory());</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        ChatRoomDataAccessObject chatRoomDataAccessObject = new ChatRoomDataAccessObject(</b>
+&nbsp;                new CommonChatRoomFactory(),
+&nbsp;                new CommonUserFactory(),
+&nbsp;                new TextMessageFactory(),
+&nbsp;                userDataAccessObject);
+&nbsp;
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;        SignupView signupView = SignupUseCaseFactory.create(viewManagerModel,</b>
+&nbsp;                signupViewModel,
+&nbsp;                loginViewModel,
+&nbsp;                userDataAccessObject
+&nbsp;                );
+<b class="fc">&nbsp;        assert signupView != null;</b>
+&nbsp;
+<b class="fc">&nbsp;        views.add(signupView, signupView.viewName);</b>
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel,</b>
+&nbsp;                viewManager,
+&nbsp;                loginViewModel,
+&nbsp;                userDataAccessObject,
+&nbsp;                chatRoomDataAccessObject,
+&nbsp;                chatRoomDataAccessObject,
+&nbsp;                userDataAccessObject,
+&nbsp;                userDataAccessObject,
+&nbsp;                chatRoomDataAccessObject,
+&nbsp;                chatRoomDataAccessObject
+&nbsp;                );
+<b class="fc">&nbsp;        assert loginView != null;</b>
+<b class="fc">&nbsp;        views.add(loginView, loginView.viewName);</b>
+<b class="fc">&nbsp;        viewManagerModel.setActiveView(loginView.viewName);</b>
+<b class="fc">&nbsp;        viewManagerModel.firePropertyChanged();</b>
+&nbsp;
+<b class="fc">&nbsp;        application.setPreferredSize(new Dimension(480, 360));</b>
+<b class="fc">&nbsp;        application.pack();</b>
+<b class="fc">&nbsp;        application.setVisible(true);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-12-02 17:40</div>
+</div>
+</body>
+</html>

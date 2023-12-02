@@ -1,0 +1,226 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > ChatRoomFrameFactory</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">chattingSystem.app</a>
+</div>
+
+<h1>Coverage Summary for Class: ChatRoomFrameFactory (chattingSystem.app)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ChatRoomFrameFactory</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (6/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    97.3%
+  </span>
+  <span class="absValue">
+    (36/37)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package chattingSystem.app;
+&nbsp;
+&nbsp;
+&nbsp;import chattingSystem.entities.Message.TextMessageFactory;
+&nbsp;import chattingSystem.frameworks_drivers.ui.views.ChatRoomView;
+&nbsp;import chattingSystem.frameworks_drivers.ui.views.ChatRoomViewManager;
+&nbsp;import chattingSystem.interface_adapter.controllers.*;
+&nbsp;import chattingSystem.interface_adapter.presenter.*;
+&nbsp;import chattingSystem.interface_adapter.state.ChatRoomState;
+&nbsp;import chattingSystem.interface_adapter.view_models.*;
+&nbsp;import chattingSystem.use_cases.log_out.LogOutDataAccessBoundary;
+&nbsp;import chattingSystem.use_cases.log_out.LogOutInputBoundary;
+&nbsp;import chattingSystem.use_cases.log_out.LogOutInteractor;
+&nbsp;import chattingSystem.use_cases.log_out.LogOutOutputBoundary;
+&nbsp;import chattingSystem.use_cases.refresh_messages.RefreshMessageInteractor;
+&nbsp;import chattingSystem.use_cases.refresh_messages.RefreshMessagesDataAccessBoundary;
+&nbsp;import chattingSystem.use_cases.refresh_messages.RefreshMessagesInputBoundary;
+&nbsp;import chattingSystem.use_cases.refresh_messages.RefreshMessagesOutputBoundary;
+&nbsp;import chattingSystem.use_cases.send_message.SendMessageInputBoundary;
+&nbsp;import chattingSystem.use_cases.send_message.SendMessageInteractor;
+&nbsp;import chattingSystem.use_cases.send_message.SendMessageOutputBoundary;
+&nbsp;import chattingSystem.use_cases.send_message.SendMessageUserDataAccessInterface;
+&nbsp;import chattingSystem.use_cases.show_joke.ShowJokeInputBoundry;
+&nbsp;import chattingSystem.use_cases.show_joke.ShowJokeInteractor;
+&nbsp;import chattingSystem.use_cases.show_joke.ShowJokeOutputBoundry;
+&nbsp;import chattingSystem.use_cases.show_weather.ShowWeatherInputBoundary;
+&nbsp;import chattingSystem.use_cases.show_weather.ShowWeatherInteractor;
+&nbsp;import chattingSystem.use_cases.show_weather.ShowWeatherOutputBoundary;
+&nbsp;
+&nbsp;import javax.swing.*;
+&nbsp;import java.awt.*;
+&nbsp;import java.io.IOException;
+&nbsp;
+<b class="nc">&nbsp;public class ChatRoomFrameFactory {</b>
+&nbsp;    private static JFrame currentChatRoomFrame;
+&nbsp;    public static void createChatRoomFrame(ChatRoomViewModel chatRoomViewModel,
+&nbsp;                                           LogOutDataAccessBoundary logOutDataAccessBoundary,
+&nbsp;                                           SendMessageUserDataAccessInterface sendMessageUserDataAccessInterface,
+&nbsp;                                           RefreshMessagesDataAccessBoundary RefreshMessagesDataAccessBoundary) throws IOException {
+<b class="fc">&nbsp;        JFrame chatRoomFrame = new JFrame(&quot;Chat Room&quot;);</b>
+<b class="fc">&nbsp;        chatRoomFrame.setVisible(false);</b>
+<b class="fc">&nbsp;        CardLayout chatRoomCardLayout = new CardLayout();</b>
+<b class="fc">&nbsp;        JPanel chatRoomViews = new JPanel(chatRoomCardLayout);</b>
+<b class="fc">&nbsp;        chatRoomFrame.add(chatRoomViews);</b>
+&nbsp;        // This keeps track of and manages which view is currently showing.
+<b class="fc">&nbsp;        ChatRoomViewManagerModel chatRoomViewManagerModel = new ChatRoomViewManagerModel();</b>
+<b class="fc">&nbsp;        ChatRoomViewManager chatRoomViewManager = new ChatRoomViewManager(chatRoomViews, chatRoomCardLayout, chatRoomViewManagerModel);</b>
+<b class="fc">&nbsp;        LogOutController logOutController = createLogOutUseCase(logOutDataAccessBoundary);</b>
+<b class="fc">&nbsp;        GetWeatherViewModel getWeatherViewModel = new GetWeatherViewModel();</b>
+<b class="fc">&nbsp;        ShowWeatherController showWeatherController = createShowWeatherUseCase(getWeatherViewModel);</b>
+<b class="fc">&nbsp;        FunJokeViewModel funJokeViewModel = new FunJokeViewModel();</b>
+<b class="fc">&nbsp;        ShowJokeController showJokeController = createShowJokeUseCase(funJokeViewModel);</b>
+<b class="fc">&nbsp;        SendMessageController sendMessageController = createSendMessageController(sendMessageUserDataAccessInterface, chatRoomViewModel);</b>
+<b class="fc">&nbsp;        RefreshingMessageController refreshingMessageController = createRefreshingMessageController(RefreshMessagesDataAccessBoundary, chatRoomViewModel, chatRoomViewModel.getState());</b>
+<b class="fc">&nbsp;        chatRoomViewModel.setCurrentframe(chatRoomFrame);</b>
+<b class="fc">&nbsp;        ChatRoomView chatRoomView = new ChatRoomView(chatRoomViewModel, chatRoomViewManagerModel, chatRoomViewManager, logOutController, showWeatherController, sendMessageController, refreshingMessageController, showJokeController);</b>
+<b class="fc">&nbsp;        chatRoomViews.add(chatRoomView, chatRoomView.viewName);</b>
+<b class="fc">&nbsp;        chatRoomFrame.pack();</b>
+<b class="fc">&nbsp;        chatRoomFrame.setVisible(true);</b>
+<b class="fc">&nbsp;        currentChatRoomFrame = chatRoomFrame;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static LogOutController createLogOutUseCase(
+&nbsp;            LogOutDataAccessBoundary logOutDataAccessBoundary
+&nbsp;            ) {
+&nbsp;
+&nbsp;        // Notice how we pass this method&#39;s parameters to the Presenter.
+<b class="fc">&nbsp;        LogOutOutputBoundary logOutOutputBoundary = new ChatRoomPresenter();</b>
+&nbsp;
+<b class="fc">&nbsp;        LogOutInputBoundary logOutInteractor = new LogOutInteractor(logOutOutputBoundary, logOutDataAccessBoundary);</b>
+&nbsp;
+<b class="fc">&nbsp;        return new LogOutController(logOutInteractor);</b>
+&nbsp;    }
+&nbsp;    public static ShowWeatherController createShowWeatherUseCase(GetWeatherViewModel getWeatherViewModel
+&nbsp;    ) {
+&nbsp;
+&nbsp;        // Notice how we pass this method&#39;s parameters to the Presenter.
+<b class="fc">&nbsp;        ShowWeatherOutputBoundary showWeatherOutputBoundary = new GetWeatherPresenter(getWeatherViewModel);</b>
+&nbsp;
+<b class="fc">&nbsp;        ShowWeatherInputBoundary showWeatherInteractor = new ShowWeatherInteractor(showWeatherOutputBoundary);</b>
+&nbsp;
+<b class="fc">&nbsp;        return new ShowWeatherController(showWeatherInteractor);</b>
+&nbsp;    }
+&nbsp;    public static ShowJokeController createShowJokeUseCase(FunJokeViewModel funJokeViewModel
+&nbsp;    ) {
+&nbsp;
+&nbsp;        // Notice how we pass this method&#39;s parameters to the Presenter.
+<b class="fc">&nbsp;        ShowJokeOutputBoundry showJokeOutputBoundry = new FunJokePresenter(funJokeViewModel);</b>
+&nbsp;
+<b class="fc">&nbsp;        ShowJokeInputBoundry showJokeInteractor = new ShowJokeInteractor(showJokeOutputBoundry);</b>
+&nbsp;
+<b class="fc">&nbsp;        return new ShowJokeController(showJokeInteractor);</b>
+&nbsp;    }
+&nbsp;    public static SendMessageController createSendMessageController(
+&nbsp;            SendMessageUserDataAccessInterface sendMessageUserDataAccessInterface, ChatRoomViewModel chatRoomViewModel
+&nbsp;    ) {
+&nbsp;
+&nbsp;        // Notice how we pass this method&#39;s parameters to the Presenter.
+<b class="fc">&nbsp;        SendMessageOutputBoundary sendMessageOutputBoundary = new SendMessagePresenter(chatRoomViewModel);</b>
+&nbsp;
+<b class="fc">&nbsp;        TextMessageFactory textMessageFactory = new TextMessageFactory();</b>
+&nbsp;
+<b class="fc">&nbsp;        SendMessageInputBoundary sendMessageInputBoundary = new SendMessageInteractor(sendMessageUserDataAccessInterface, sendMessageOutputBoundary, textMessageFactory);</b>
+&nbsp;
+<b class="fc">&nbsp;        return new SendMessageController(sendMessageInputBoundary);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static RefreshingMessageController createRefreshingMessageController(
+&nbsp;            RefreshMessagesDataAccessBoundary refreshMessagesDataAccessBoundary, ChatRoomViewModel chatRoomViewModel, ChatRoomState chatRoomState
+&nbsp;    ) {
+&nbsp;
+&nbsp;        // Notice how we pass this method&#39;s parameters to the Presenter.
+<b class="fc">&nbsp;        RefreshMessagesOutputBoundary refreshMessagesOutputBoundary = new RefreshMessagePresenter(chatRoomViewModel, chatRoomState);</b>
+&nbsp;
+<b class="fc">&nbsp;        RefreshMessagesInputBoundary refreshMessageInputBoundary = new RefreshMessageInteractor(refreshMessagesDataAccessBoundary,</b>
+&nbsp;                refreshMessagesOutputBoundary);
+&nbsp;
+<b class="fc">&nbsp;        return new RefreshingMessageController(refreshMessageInputBoundary);</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-12-02 17:40</div>
+</div>
+</body>
+</html>
