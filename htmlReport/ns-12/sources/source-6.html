@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
-  <title>Coverage Report > LogOutDataAccessBoundary</title>
+  <title>Coverage Report > LogOutOutputBoundary</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">chattingSystem.use_cases.log_out</a>
 </div>
 
-<h1>Coverage Summary for Class: LogOutDataAccessBoundary (chattingSystem.use_cases.log_out)</h1>
+<h1>Coverage Summary for Class: LogOutOutputBoundary (chattingSystem.use_cases.log_out)</h1>
 
 <table class="coverageStats">
 
@@ -30,13 +30,13 @@ Current scope:     <a href="../../index.html">all classes</a>
   <th class="name">Class</th>
 </tr>
   <tr>
-    <td class="name">LogOutDataAccessBoundary$MockitoMock$OzwhHGS8</td>
+    <td class="name">LogOutOutputBoundary$MockitoMock$X11IVYlP</td>
   </tr>
   <tr>
-    <td class="name">LogOutDataAccessBoundary$MockitoMock$OzwhHGS8$auxiliary$1a0iWcjC</td>
+    <td class="name">LogOutOutputBoundary$MockitoMock$X11IVYlP$auxiliary$Wmz9kJgB</td>
   </tr>
   <tr>
-    <td class="name">LogOutDataAccessBoundary$MockitoMock$OzwhHGS8$auxiliary$kNAOM1xV</td>
+    <td class="name">LogOutOutputBoundary$MockitoMock$X11IVYlP$auxiliary$ZcYI9OET</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
@@ -49,11 +49,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package chattingSystem.use_cases.log_out;
-&nbsp;import chattingSystem.entities.User.User;
 &nbsp;
-&nbsp;public interface LogOutDataAccessBoundary {
-&nbsp;    void logOut(String username);
-&nbsp;    User get(String username);
+&nbsp;public interface LogOutOutputBoundary {
+&nbsp;    void prepareSuccessView(LogOutOutputData logOutOutputData);
+&nbsp;    void prepareFailView(LogOutOutputData logOutOutputData);
 &nbsp;}
 </code>
 </pre>
@@ -78,7 +77,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-12-02 17:40</div>
+    <div style="float:right;">generated on 2023-12-02 18:22</div>
 </div>
 </body>
 </html>

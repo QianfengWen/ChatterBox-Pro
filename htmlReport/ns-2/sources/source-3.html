@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
-  <title>Coverage Report > ChatRoom</title>
+  <title>Coverage Report > ChatRoomFactory</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,25 +22,16 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">chattingSystem.entities.ChatRoom</a>
 </div>
 
-<h1>Coverage Summary for Class: ChatRoom (chattingSystem.entities.ChatRoom)</h1>
+<h1>Coverage Summary for Class: ChatRoomFactory (chattingSystem.entities.ChatRoom)</h1>
 
 <table class="coverageStats">
-
 <tr>
   <th class="name">Class</th>
 </tr>
-  <tr>
-    <td class="name">ChatRoom$MockitoMock$dQR6URy4</td>
-  </tr>
-  <tr>
-    <td class="name">ChatRoom$MockitoMock$dQR6URy4$auxiliary$7znOZOGD</td>
-  </tr>
-  <tr>
-    <td class="name">ChatRoom$MockitoMock$dQR6URy4$auxiliary$8aL1Leum</td>
-  </tr>
 <tr>
-  <td class="name"><strong>Total</strong></td>
+  <td class="name">ChatRoomFactory</td>
 </tr>
+
 </table>
 
 <br/>
@@ -50,25 +41,16 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package chattingSystem.entities.ChatRoom;
 &nbsp;
-&nbsp;import chattingSystem.entities.Message.Message;
+&nbsp;
 &nbsp;import chattingSystem.entities.Message.TextMessage;
 &nbsp;import chattingSystem.entities.User.User;
-&nbsp;
 &nbsp;
 &nbsp;import java.time.LocalDateTime;
 &nbsp;import java.util.List;
 &nbsp;
-&nbsp;public interface ChatRoom {
+&nbsp;public interface ChatRoomFactory {
 &nbsp;
-&nbsp;    List&lt;User&gt; getMembers();
-&nbsp;    String getMembersString();
-&nbsp;    String getMembersIdString();
-&nbsp;
-&nbsp;    void addMember(User user);
-&nbsp;    String getChatRoomID();
-&nbsp;
-&nbsp;    LocalDateTime getCreationTime();
-&nbsp;
+&nbsp;    ChatRoom create(String id, List&lt;User&gt; Members, LocalDateTime creationTime);
 &nbsp;}
 </code>
 </pre>
@@ -93,7 +75,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-12-02 17:40</div>
+    <div style="float:right;">generated on 2023-12-02 18:22</div>
 </div>
 </body>
 </html>

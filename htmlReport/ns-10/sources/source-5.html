@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
-  <title>Coverage Report > GetWeatherOutputBoundary</title>
+  <title>Coverage Report > GetWeatherDataAccessBoundary</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,14 +22,14 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">chattingSystem.use_cases.get_weather</a>
 </div>
 
-<h1>Coverage Summary for Class: GetWeatherOutputBoundary (chattingSystem.use_cases.get_weather)</h1>
+<h1>Coverage Summary for Class: GetWeatherDataAccessBoundary (chattingSystem.use_cases.get_weather)</h1>
 
 <table class="coverageStats">
 <tr>
   <th class="name">Class</th>
 </tr>
 <tr>
-  <td class="name">GetWeatherOutputBoundary</td>
+  <td class="name">GetWeatherDataAccessBoundary</td>
 </tr>
 
 </table>
@@ -41,12 +41,14 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package chattingSystem.use_cases.get_weather;
 &nbsp;
-&nbsp;public interface GetWeatherOutputBoundary {
+&nbsp;import chattingSystem.entities.Weather.Weather;
 &nbsp;
-&nbsp;    void prepareSuccessView(GetWeatherOutputData getWeatherOutputData);
-&nbsp;    void prepareFailView(String errorMessage);
+&nbsp;public interface GetWeatherDataAccessBoundary {
+&nbsp;    Weather getWeather(String cityLocation);
+&nbsp;    public boolean WeatherDataIsValid(String cityLocation);
+&nbsp;    }
 &nbsp;
-&nbsp;}
+&nbsp;
 </code>
 </pre>
 </div>
@@ -70,7 +72,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-12-02 17:40</div>
+    <div style="float:right;">generated on 2023-12-02 18:22</div>
 </div>
 </body>
 </html>

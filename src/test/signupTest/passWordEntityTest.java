@@ -1,4 +1,4 @@
-package loginTest;
+package signupTest;
 
 import chattingSystem.entities.FunJoke.FunJoke;
 import chattingSystem.entities.Password.Password;

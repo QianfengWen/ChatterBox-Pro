@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
-  <title>Coverage Report > SignupInputBoundary</title>
+  <title>Coverage Report > SignupOutputBoundary</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,16 +22,25 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">chattingSystem.use_cases.signup</a>
 </div>
 
-<h1>Coverage Summary for Class: SignupInputBoundary (chattingSystem.use_cases.signup)</h1>
+<h1>Coverage Summary for Class: SignupOutputBoundary (chattingSystem.use_cases.signup)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
 </tr>
+  <tr>
+    <td class="name">SignupOutputBoundary$MockitoMock$jCyloz2G</td>
+  </tr>
+  <tr>
+    <td class="name">SignupOutputBoundary$MockitoMock$jCyloz2G$auxiliary$1OMnc8dw</td>
+  </tr>
+  <tr>
+    <td class="name">SignupOutputBoundary$MockitoMock$jCyloz2G$auxiliary$Dkhy68Mh</td>
+  </tr>
 <tr>
-  <td class="name">SignupInputBoundary</td>
+  <td class="name"><strong>Total</strong></td>
 </tr>
-
 </table>
 
 <br/>
@@ -41,12 +50,14 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package chattingSystem.use_cases.signup;
 &nbsp;
+&nbsp;public interface SignupOutputBoundary {
+&nbsp;    void prepareSuccessView(SignupOutputData user);
 &nbsp;
-&nbsp;import java.io.IOException;
+&nbsp;    void prepareNameFailView(String error);
 &nbsp;
-&nbsp;public interface SignupInputBoundary {
-&nbsp;    void execute(SignupInputData signupInputData) throws IOException;
+&nbsp;    void prepareRepeatPWFailView(String error);
 &nbsp;
+&nbsp;    void prepareInvalidPWFailView(String error);
 &nbsp;}
 </code>
 </pre>
@@ -71,7 +82,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-12-02 17:40</div>
+    <div style="float:right;">generated on 2023-12-02 18:22</div>
 </div>
 </body>
 </html>

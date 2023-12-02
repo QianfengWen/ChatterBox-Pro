@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
-  <title>Coverage Report > SendMessageInputBoundary</title>
+  <title>Coverage Report > SendMessageUserDataAccessInterface</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,16 +22,25 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">chattingSystem.use_cases.send_message</a>
 </div>
 
-<h1>Coverage Summary for Class: SendMessageInputBoundary (chattingSystem.use_cases.send_message)</h1>
+<h1>Coverage Summary for Class: SendMessageUserDataAccessInterface (chattingSystem.use_cases.send_message)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
 </tr>
+  <tr>
+    <td class="name">SendMessageUserDataAccessInterface$MockitoMock$O6Dl0YJP</td>
+  </tr>
+  <tr>
+    <td class="name">SendMessageUserDataAccessInterface$MockitoMock$O6Dl0YJP$auxiliary$6h8kfe41</td>
+  </tr>
+  <tr>
+    <td class="name">SendMessageUserDataAccessInterface$MockitoMock$O6Dl0YJP$auxiliary$y5yiLBys</td>
+  </tr>
 <tr>
-  <td class="name">SendMessageInputBoundary</td>
+  <td class="name"><strong>Total</strong></td>
 </tr>
-
 </table>
 
 <br/>
@@ -41,10 +50,20 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package chattingSystem.use_cases.send_message;
 &nbsp;
-&nbsp;import java.io.IOException;
+&nbsp;import chattingSystem.entities.Message.Message;
 &nbsp;
-&nbsp;public interface SendMessageInputBoundary {
-&nbsp;    void execute(SendMessageInputData sendMessageInputData, String chatRoomId) throws IOException;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;
+&nbsp;public interface SendMessageUserDataAccessInterface {
+&nbsp;    String getUsername(String username);
+&nbsp;
+&nbsp;    void save(String id, Message message) throws IOException;
+&nbsp;
+&nbsp;    String generateMessageid(String id);
+&nbsp;
+&nbsp;    List&lt;String&gt; fetchAllMessages() throws IOException;
 &nbsp;}
 </code>
 </pre>
@@ -69,7 +88,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-12-02 17:40</div>
+    <div style="float:right;">generated on 2023-12-02 18:22</div>
 </div>
 </body>
 </html>

@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
-  <title>Coverage Report > JoinChatRoomOutputBoundary</title>
+  <title>Coverage Report > JoinChatRoomInputBoundary</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,25 +22,16 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">chattingSystem.use_cases.join_chat_room</a>
 </div>
 
-<h1>Coverage Summary for Class: JoinChatRoomOutputBoundary (chattingSystem.use_cases.join_chat_room)</h1>
+<h1>Coverage Summary for Class: JoinChatRoomInputBoundary (chattingSystem.use_cases.join_chat_room)</h1>
 
 <table class="coverageStats">
-
 <tr>
   <th class="name">Class</th>
 </tr>
-  <tr>
-    <td class="name">JoinChatRoomOutputBoundary$MockitoMock$znngXt7K</td>
-  </tr>
-  <tr>
-    <td class="name">JoinChatRoomOutputBoundary$MockitoMock$znngXt7K$auxiliary$0KcckwqG</td>
-  </tr>
-  <tr>
-    <td class="name">JoinChatRoomOutputBoundary$MockitoMock$znngXt7K$auxiliary$2ew826Sl</td>
-  </tr>
 <tr>
-  <td class="name"><strong>Total</strong></td>
+  <td class="name">JoinChatRoomInputBoundary</td>
 </tr>
+
 </table>
 
 <br/>
@@ -50,21 +41,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package chattingSystem.use_cases.join_chat_room;
 &nbsp;
-&nbsp;
-&nbsp;import chattingSystem.use_cases.log_out.LogOutDataAccessBoundary;
-&nbsp;import chattingSystem.use_cases.refresh_messages.RefreshMessagesDataAccessBoundary;
-&nbsp;import chattingSystem.use_cases.send_message.SendMessageUserDataAccessInterface;
-&nbsp;
-&nbsp;
 &nbsp;import java.io.IOException;
 &nbsp;
-&nbsp;public interface JoinChatRoomOutputBoundary {
-&nbsp;    void prepareSuccessView(JoinChatRoomOutputData joinChatRoomOutputData,
-&nbsp;                            LogOutDataAccessBoundary logOutDataAccessBoundary,
-&nbsp;                            SendMessageUserDataAccessInterface sendMessageUserDataAccessInterface,
-&nbsp;                            RefreshMessagesDataAccessBoundary refreshMessagesDataAccessBoundary) throws IOException;
-&nbsp;
-&nbsp;    void prepareFailView(JoinChatRoomOutputData joinChatRoomOutputData);
+&nbsp;public interface JoinChatRoomInputBoundary {
+&nbsp;    void execute(JoinChatRoomInputData inputData) throws IOException;
 &nbsp;}
 </code>
 </pre>
@@ -89,7 +69,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-12-02 17:40</div>
+    <div style="float:right;">generated on 2023-12-02 18:22</div>
 </div>
 </body>
 </html>

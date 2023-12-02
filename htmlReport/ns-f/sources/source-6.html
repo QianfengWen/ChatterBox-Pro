@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
-  <title>Coverage Report > FunJokeOutputBoundry</title>
+  <title>Coverage Report > FunJokeDataAccessBoundary</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,14 +22,14 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">chattingSystem.use_cases.fun_joke</a>
 </div>
 
-<h1>Coverage Summary for Class: FunJokeOutputBoundry (chattingSystem.use_cases.fun_joke)</h1>
+<h1>Coverage Summary for Class: FunJokeDataAccessBoundary (chattingSystem.use_cases.fun_joke)</h1>
 
 <table class="coverageStats">
 <tr>
   <th class="name">Class</th>
 </tr>
 <tr>
-  <td class="name">FunJokeOutputBoundry</td>
+  <td class="name">FunJokeDataAccessBoundary</td>
 </tr>
 
 </table>
@@ -41,10 +41,13 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package chattingSystem.use_cases.fun_joke;
 &nbsp;
+&nbsp;import chattingSystem.entities.FunJoke.FunJoke;
 &nbsp;
-&nbsp;public interface FunJokeOutputBoundry {
-&nbsp;    void prepareSuccessView(FunJokeOutputData funJokeOutputData);
-&nbsp;    void prepareFailView(String errorMessage);
+&nbsp;public interface FunJokeDataAccessBoundary {
+&nbsp;
+&nbsp;    FunJoke getFunJoke();
+&nbsp;
+&nbsp;    boolean JokeIsValid();
 &nbsp;}
 </code>
 </pre>
@@ -69,7 +72,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-12-02 17:40</div>
+    <div style="float:right;">generated on 2023-12-02 18:22</div>
 </div>
 </body>
 </html>

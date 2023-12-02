@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
-  <title>Coverage Report > ShowJokeOutputBoundry</title>
+  <title>Coverage Report > ShowJokeInputBoundry</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,14 +22,14 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">chattingSystem.use_cases.show_joke</a>
 </div>
 
-<h1>Coverage Summary for Class: ShowJokeOutputBoundry (chattingSystem.use_cases.show_joke)</h1>
+<h1>Coverage Summary for Class: ShowJokeInputBoundry (chattingSystem.use_cases.show_joke)</h1>
 
 <table class="coverageStats">
 <tr>
   <th class="name">Class</th>
 </tr>
 <tr>
-  <td class="name">ShowJokeOutputBoundry</td>
+  <td class="name">ShowJokeInputBoundry</td>
 </tr>
 
 </table>
@@ -41,11 +41,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package chattingSystem.use_cases.show_joke;
 &nbsp;
-&nbsp;public interface ShowJokeOutputBoundry {
+&nbsp;import java.io.IOException;
 &nbsp;
-&nbsp;    void prepareSuccessView();
+&nbsp;public interface ShowJokeInputBoundry {
 &nbsp;
-&nbsp;    void prepareFailView();
+&nbsp;    void execute() throws IOException;
 &nbsp;}
 </code>
 </pre>
@@ -70,7 +70,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-12-02 17:40</div>
+    <div style="float:right;">generated on 2023-12-02 18:22</div>
 </div>
 </body>
 </html>
