@@ -7,7 +7,7 @@ import chattingSystem.use_cases.get_weather.GetWeatherOutputBoundary;
 import chattingSystem.use_cases.get_weather.GetWeatherOutputData;
 import chattingSystem.use_cases.show_weather.ShowWeatherOutputBoundary;
 
-import static chattingSystem.app.ShowWeatherFrameFactory.createShowWeatherFrame;
+import static chattingSystem.App.ShowWeatherFrameFactory.createShowWeatherFrame;
 
 
 public class GetWeatherPresenter implements GetWeatherOutputBoundary, ShowWeatherOutputBoundary {
