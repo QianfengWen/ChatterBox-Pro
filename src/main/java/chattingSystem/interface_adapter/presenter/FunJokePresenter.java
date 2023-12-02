@@ -7,7 +7,7 @@ import chattingSystem.use_cases.fun_joke.FunJokeOutputBoundry;
 import chattingSystem.use_cases.fun_joke.FunJokeOutputData;
 import chattingSystem.use_cases.show_joke.ShowJokeOutputBoundry;
 
-import static chattingSystem.App.ShowJokeFrameFactory.createShowJokeFrame;
+import static chattingSystem.app.ShowJokeFrameFactory.createShowJokeFrame;
 
 public class FunJokePresenter implements FunJokeOutputBoundry, ShowJokeOutputBoundry {
 

@@ -1,4 +1,4 @@
-import chattingSystem.App.main;
+import chattingSystem.app.main;
 import chattingSystem.entities.User.CommonUserFactory;
 import chattingSystem.entities.User.User;
 import chattingSystem.entities.User.UserFactory;
