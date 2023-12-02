@@ -14,16 +14,9 @@ public class SendMessagePresenter implements SendMessageOutputBoundary {
     }
     @Override
     public void prepareSuccessView(SendMessageOutputData chatroomOutputData) {
-//        ChatRoomState currentState = chatRoomViewModel.getState();
-//        currentState.setSenderId(chatroomOutputData.getSenderId());
-//        currentState.setUsername(chatroomOutputData.getUsername());
-//        currentState.setChatRoomId(chatroomOutputData.getChatRoomId());
-//        chatRoomViewModel.setState(currentState);
-//        chatRoomViewModel.firePropertyChanged();
     }
 
     @Override
     public void prepareFailView(String error) {
-
     }
 }

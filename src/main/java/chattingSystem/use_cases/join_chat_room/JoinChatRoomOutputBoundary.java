@@ -8,7 +8,7 @@ import chattingSystem.use_cases.send_message.SendMessageUserDataAccessInterface;
 
 import java.io.IOException;
 
-public interface JoinChatRoomOutpurBoundary {
+public interface JoinChatRoomOutputBoundary {
     void prepareSuccessView(JoinChatRoomOutputData joinChatRoomOutputData,
                             LogOutDataAccessBoundary logOutDataAccessBoundary,
                             SendMessageUserDataAccessInterface sendMessageUserDataAccessInterface,
