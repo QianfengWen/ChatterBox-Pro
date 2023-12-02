@@ -1,4 +1,3 @@
-package test;
 
 import chattingSystem.entities.Message.Message;
 import chattingSystem.entities.Message.MessageFactory;

@@ -15,8 +15,8 @@ public class SendMessageInputData {
         this.timestamp = timestamp;
     }
 
-    String getUsername() {return username;}
-    String getSenderID() {return senderID;}
-    String getMessage() {return message;}
-    LocalDateTime getTimestap() {return timestamp;}
+    public String getUsername() {return username;}
+    public String getSenderID() {return senderID;}
+    public String getMessage() {return message;}
+    public LocalDateTime getTimestap() {return timestamp;}
 }
