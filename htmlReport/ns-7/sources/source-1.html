@@ -1,0 +1,232 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > Weather</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">chattingSystem.entities.Weather</a>
+</div>
+
+<h1>Coverage Summary for Class: Weather (chattingSystem.entities.Weather)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Weather</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (15/15)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Weather$WeatherBuilder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (18/18)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (33/33)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package chattingSystem.entities.Weather;
+&nbsp;
+&nbsp;
+&nbsp;public class Weather implements CommonWeather {
+&nbsp;
+&nbsp;    // Refer to the API documentation for the meaning of these fields.
+&nbsp;    private String cityLocation;
+&nbsp;    private String lastUpdated;
+&nbsp;    private int temperature;
+&nbsp;    private String condition;
+&nbsp;    private int windDegree;
+&nbsp;    private String windDirection;
+&nbsp;    private int humidity;
+&nbsp;    private float pm;
+&nbsp;
+&nbsp;    public Weather(String cityLocation, String lastUpdated, int temperature, String condition, int windDegree,
+<b class="fc">&nbsp;                   String windDirection, int humidity, float pm) {</b>
+<b class="fc">&nbsp;        this.cityLocation = cityLocation;</b>
+<b class="fc">&nbsp;        this.lastUpdated = lastUpdated;</b>
+<b class="fc">&nbsp;        this.temperature = temperature;</b>
+<b class="fc">&nbsp;        this.condition = condition;</b>
+<b class="fc">&nbsp;        this.windDegree = windDegree;</b>
+<b class="fc">&nbsp;        this.windDirection = windDirection;</b>
+<b class="fc">&nbsp;        this.humidity = humidity;</b>
+<b class="fc">&nbsp;        this.pm = pm;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static WeatherBuilder builder() {
+<b class="fc">&nbsp;        return new WeatherBuilder();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class WeatherBuilder {
+&nbsp;        private String cityLocation;
+&nbsp;        private String lastUpdated;
+&nbsp;        private int temperature;
+&nbsp;        private String condition;
+&nbsp;        private int windDegree;
+&nbsp;        private String windDirection;
+&nbsp;        private int humidity;
+&nbsp;        private float pm;
+&nbsp;
+<b class="fc">&nbsp;        WeatherBuilder() {</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public WeatherBuilder cityLocation(String cityLocation) {
+<b class="fc">&nbsp;            this.cityLocation = cityLocation;</b>
+<b class="fc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public WeatherBuilder lastUpdated(String lastUpdated) {
+<b class="fc">&nbsp;            this.lastUpdated = lastUpdated;</b>
+<b class="fc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public WeatherBuilder temperature(int temp) {
+<b class="fc">&nbsp;            this.temperature = temp;</b>
+<b class="fc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public WeatherBuilder condition(String condition) {
+<b class="fc">&nbsp;            this.condition = condition;</b>
+<b class="fc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public WeatherBuilder windDegree(int windDegree) {
+<b class="fc">&nbsp;            this.windDegree = windDegree;</b>
+<b class="fc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public WeatherBuilder windDirection(String windDirection) {
+<b class="fc">&nbsp;            this.windDirection = windDirection;</b>
+<b class="fc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public WeatherBuilder humidity(int humidity) {
+<b class="fc">&nbsp;            this.humidity = humidity;</b>
+<b class="fc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public WeatherBuilder pm(float pm) {
+<b class="fc">&nbsp;            this.pm = pm;</b>
+<b class="fc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;
+&nbsp;        public Weather build() {
+<b class="fc">&nbsp;            return new Weather(cityLocation, lastUpdated, temperature, condition, windDegree, windDirection, humidity, pm);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="fc">&nbsp;        return  &quot;Location: &quot; + cityLocation + &quot;\n&quot; +</b>
+&nbsp;                &quot;Last updated time: &quot; + lastUpdated + &quot;\n&quot; +
+<b class="fc">&nbsp;                &quot;Temperature in Celsius: &quot; + Float.toString(temperature) + &quot;\n&quot; +</b>
+&nbsp;                &quot;Weather Condition: &quot; + condition + &quot;\n&quot; +
+<b class="fc">&nbsp;                &quot;Wind Degree: &quot; + Integer.toString(windDegree) + &quot;\n&quot; +</b>
+&nbsp;                &quot;Wind direction: &quot; + windDirection + &quot;\n&quot; +
+<b class="fc">&nbsp;                &quot;Humidity: &quot; + Integer.toString(humidity) + &quot;\n&quot; +</b>
+<b class="fc">&nbsp;                &quot;PM 2.5: &quot; + Float.toString(pm) + &quot;\n&quot;;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-12-02 18:22</div>
+</div>
+</body>
+</html>

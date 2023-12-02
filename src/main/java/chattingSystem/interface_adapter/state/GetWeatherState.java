@@ -14,6 +14,7 @@ public class GetWeatherState implements ViewState{
         weatherInfoDisplay = copy.weatherInfoDisplay;
         cityLocation = copy.cityLocation;
         errorMessage = copy.errorMessage;
+
     }
 
     public GetWeatherState() {

@@ -1,0 +1,167 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > JoinChatRoomInteractor</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">chattingSystem.use_cases.join_chat_room</a>
+</div>
+
+<h1>Coverage Summary for Class: JoinChatRoomInteractor (chattingSystem.use_cases.join_chat_room)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JoinChatRoomInteractor</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (18/18)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package chattingSystem.use_cases.join_chat_room;
+&nbsp;
+&nbsp;
+&nbsp;import chattingSystem.entities.ChatRoom.ChatRoom;
+&nbsp;import chattingSystem.entities.User.User;
+&nbsp;import chattingSystem.use_cases.get_chat_room.GetChatRoomDataAccessBoundary;
+&nbsp;import chattingSystem.use_cases.get_chat_room.GetUser;
+&nbsp;import chattingSystem.use_cases.log_out.LogOutDataAccessBoundary;
+&nbsp;import chattingSystem.use_cases.refresh_messages.RefreshMessagesDataAccessBoundary;
+&nbsp;import chattingSystem.use_cases.send_message.SendMessageUserDataAccessInterface;
+&nbsp;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public class JoinChatRoomInteractor implements JoinChatRoomInputBoundary {
+&nbsp;    private JoinChatRoomOutputBoundary joinChatRoomOutputBoundary;
+&nbsp;    private JoinChatRoomDataAccessBoundary joinChatRoomDataAccessBoundary;
+&nbsp;    private GetChatRoomDataAccessBoundary getChatRoomDataAccessBoundary;
+&nbsp;    private LogOutDataAccessBoundary logOutDataAccessBoundary;
+&nbsp;    private SendMessageUserDataAccessInterface sendMessageUserDataAccessInterface;
+&nbsp;
+&nbsp;    private RefreshMessagesDataAccessBoundary refreshMessagesDataAccessBoundary;
+&nbsp;    private GetUser getUser;
+&nbsp;    public JoinChatRoomInteractor(JoinChatRoomOutputBoundary joinChatRoomOutputBoundary,
+&nbsp;                                  JoinChatRoomDataAccessBoundary joinChatRoomDataAccessBoundary,
+&nbsp;                                  GetChatRoomDataAccessBoundary getChatRoomDataAccessBoundary,
+&nbsp;                                  LogOutDataAccessBoundary logOutDataAccessBoundary,
+&nbsp;                                  GetUser getUser, SendMessageUserDataAccessInterface sendMessageUserDataAccessInterface,
+<b class="fc">&nbsp;                                  RefreshMessagesDataAccessBoundary refreshMessagesDataAccessBoundary) {</b>
+<b class="fc">&nbsp;        this.joinChatRoomOutputBoundary = joinChatRoomOutputBoundary;</b>
+<b class="fc">&nbsp;        this.joinChatRoomDataAccessBoundary = joinChatRoomDataAccessBoundary;</b>
+<b class="fc">&nbsp;        this.getChatRoomDataAccessBoundary = getChatRoomDataAccessBoundary;</b>
+<b class="fc">&nbsp;        this.logOutDataAccessBoundary = logOutDataAccessBoundary;</b>
+<b class="fc">&nbsp;        this.sendMessageUserDataAccessInterface = sendMessageUserDataAccessInterface;</b>
+<b class="fc">&nbsp;        this.refreshMessagesDataAccessBoundary = refreshMessagesDataAccessBoundary;</b>
+<b class="fc">&nbsp;        this.getUser = getUser;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void execute(JoinChatRoomInputData inputData) throws IOException {
+&nbsp;        // join chat room
+<b class="fc">&nbsp;        String username = inputData.getUsername();;</b>
+<b class="fc">&nbsp;        if (!joinChatRoomDataAccessBoundary.existsById(&quot;1&quot;)) {</b>
+<b class="fc">&nbsp;            System.out.println(&quot;Chat room does not exist.&quot;);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            ChatRoom chatRoom = getChatRoomDataAccessBoundary.getChatRoom(&quot;1&quot;);</b>
+<b class="fc">&nbsp;            User user = getUser.getUser(username);</b>
+<b class="fc">&nbsp;            List&lt;String&gt; messagesList = joinChatRoomDataAccessBoundary.fetchAllMessages();</b>
+<b class="fc">&nbsp;            if (chatRoom.getMembers().contains(user)) {</b>
+&nbsp;
+<b class="fc">&nbsp;                joinChatRoomOutputBoundary.prepareSuccessView(new JoinChatRoomOutputData(user, true, &quot;1&quot;, messagesList), logOutDataAccessBoundary, sendMessageUserDataAccessInterface, refreshMessagesDataAccessBoundary);</b>
+&nbsp;
+&nbsp;            } else {
+<b class="fc">&nbsp;                joinChatRoomDataAccessBoundary.joinChatRoom(user);</b>
+<b class="fc">&nbsp;                joinChatRoomOutputBoundary.prepareSuccessView(new JoinChatRoomOutputData(user, true, &quot;1&quot;, messagesList), logOutDataAccessBoundary, sendMessageUserDataAccessInterface, refreshMessagesDataAccessBoundary);</b>
+&nbsp;
+&nbsp;            }
+&nbsp;
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-12-02 18:22</div>
+</div>
+</body>
+</html>

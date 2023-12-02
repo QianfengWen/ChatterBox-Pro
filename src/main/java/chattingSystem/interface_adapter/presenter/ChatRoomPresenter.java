@@ -16,7 +16,7 @@ import chattingSystem.use_cases.send_message.SendMessageUserDataAccessInterface;
 import java.io.IOException;
 import java.util.List;
 
-import static chattingSystem.App.ChatRoomFrameFactory.createChatRoomFrame;
+import static chattingSystem.app.ChatRoomFrameFactory.createChatRoomFrame;
 
 
 public class ChatRoomPresenter implements JoinChatRoomOutputBoundary, LogOutOutputBoundary{

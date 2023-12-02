@@ -1,4 +1,4 @@
-import chattingSystem.App.main;
+import chattingSystem.app.main;
 import chattingSystem.entities.User.CommonUserFactory;
 import chattingSystem.entities.User.User;
 import chattingSystem.entities.User.UserFactory;
@@ -464,7 +464,7 @@ public class TestSimpleUseCase {
     }
 
     @Test
-    public void testSendMessage() throws IOException {
+    public void testSendMessage() throws IOException, InterruptedException {
         main.main(null);
         JButton login = getLoginButoon();
         JTextField usernameField = getLoginUserNameField();
@@ -487,15 +487,15 @@ public class TestSimpleUseCase {
                 0, KeyEvent.VK_UNDEFINED, testMessage.charAt(0)));
 
         send.doClick();
+        //wait for 1000ms
+        Thread.sleep(1000);
+        int length = testMessage.length();
 
         String outputMessage = getMessage();
 
-        int length = testMessage.length();
-
         int outLength = outputMessage.length();
-
-        assertEquals(testMessage, outputMessage.substring(outLength - length, outLength));
         assertEquals(username, outputMessage.substring(0, username.length()));
+        assertEquals(testMessage, outputMessage.substring(outLength - length, outLength));
     }
 
     @Test

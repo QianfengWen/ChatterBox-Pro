@@ -1,0 +1,207 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > LoginUseCaseFactory</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">chattingSystem.app</a>
+</div>
+
+<h1>Coverage Summary for Class: LoginUseCaseFactory (chattingSystem.app)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LoginUseCaseFactory</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    78.6%
+  </span>
+  <span class="absValue">
+    (11/14)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package chattingSystem.app;
+&nbsp;
+&nbsp;
+&nbsp;import chattingSystem.entities.User.CommonUserFactory;
+&nbsp;import chattingSystem.entities.User.UserFactory;
+&nbsp;import chattingSystem.frameworks_drivers.data_access.FileUserDataAccessObject;
+&nbsp;import chattingSystem.frameworks_drivers.ui.views.LoginView;
+&nbsp;import chattingSystem.frameworks_drivers.ui.views.ViewManager;
+&nbsp;import chattingSystem.interface_adapter.controllers.JoinChatRoomController;
+&nbsp;import chattingSystem.interface_adapter.controllers.LoginController;
+&nbsp;import chattingSystem.interface_adapter.presenter.ChatRoomPresenter;
+&nbsp;import chattingSystem.interface_adapter.presenter.LoginPresenter;
+&nbsp;import chattingSystem.interface_adapter.view_models.LoginViewModel;
+&nbsp;import chattingSystem.interface_adapter.view_models.ViewManagerModel;
+&nbsp;import chattingSystem.use_cases.get_chat_room.GetChatRoomDataAccessBoundary;
+&nbsp;import chattingSystem.use_cases.get_chat_room.GetUser;
+&nbsp;import chattingSystem.use_cases.join_chat_room.JoinChatRoomDataAccessBoundary;
+&nbsp;import chattingSystem.use_cases.join_chat_room.JoinChatRoomInputBoundary;
+&nbsp;import chattingSystem.use_cases.join_chat_room.JoinChatRoomInteractor;
+&nbsp;import chattingSystem.use_cases.join_chat_room.JoinChatRoomOutputBoundary;
+&nbsp;import chattingSystem.use_cases.log_out.LogOutDataAccessBoundary;
+&nbsp;import chattingSystem.use_cases.login.LoginInputBoundary;
+&nbsp;import chattingSystem.use_cases.login.LoginInteractor;
+&nbsp;import chattingSystem.use_cases.login.LoginOutputBoundary;
+&nbsp;import chattingSystem.use_cases.login.LoginUserDataAccessInterface;
+&nbsp;import chattingSystem.use_cases.refresh_messages.RefreshMessagesDataAccessBoundary;
+&nbsp;import chattingSystem.use_cases.send_message.SendMessageUserDataAccessInterface;
+&nbsp;
+&nbsp;
+&nbsp;import javax.swing.*;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;public class LoginUseCaseFactory {
+&nbsp;    private LoginUseCaseFactory() {}
+&nbsp;
+&nbsp;    public static LoginView create(
+&nbsp;            ViewManagerModel viewManagerModel,
+&nbsp;            ViewManager viewManager,
+&nbsp;            LoginViewModel loginViewModel,
+&nbsp;            FileUserDataAccessObject userDataAccessObject,
+&nbsp;            JoinChatRoomDataAccessBoundary joinChatRoomDataAccessBoundary,
+&nbsp;            GetChatRoomDataAccessBoundary getChatRoomDataAccessBoundary,
+&nbsp;            LogOutDataAccessBoundary logOutDataAccessBoundary,
+&nbsp;            GetUser getUser,
+&nbsp;            SendMessageUserDataAccessInterface sendMessageUserDataAccessInterface,
+&nbsp;            RefreshMessagesDataAccessBoundary refreshMessagesDataAccessBoundary
+&nbsp;    ) {
+&nbsp;
+&nbsp;        try {
+<b class="fc">&nbsp;            LoginController loginController = createLoginUseCase(viewManagerModel, viewManager, loginViewModel, logOutDataAccessBoundary,userDataAccessObject);</b>
+<b class="fc">&nbsp;            JoinChatRoomController joinChatRoomController = createJoinChatRoomUseCase(joinChatRoomDataAccessBoundary, getChatRoomDataAccessBoundary, logOutDataAccessBoundary, getUser, sendMessageUserDataAccessInterface, refreshMessagesDataAccessBoundary);</b>
+<b class="fc">&nbsp;            return new LoginView(loginController, joinChatRoomController, loginViewModel, viewManagerModel);</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            JOptionPane.showMessageDialog(null, &quot;Could not open user data file.&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static LoginController createLoginUseCase(
+&nbsp;            ViewManagerModel viewManagerModel,
+&nbsp;            ViewManager viewManager,
+&nbsp;            LoginViewModel loginViewModel,
+&nbsp;            LogOutDataAccessBoundary logOutDataAccessBoundary,
+&nbsp;            LoginUserDataAccessInterface userDataAccessObject) throws IOException {
+&nbsp;
+&nbsp;        // Notice how we pass this method&#39;s parameters to the Presenter.
+<b class="fc">&nbsp;        LoginOutputBoundary loginOutputBoundary = new LoginPresenter(viewManagerModel,</b>
+&nbsp;                loginViewModel,
+&nbsp;                viewManager);
+&nbsp;
+<b class="fc">&nbsp;        UserFactory userFactory = new CommonUserFactory();</b>
+&nbsp;
+<b class="fc">&nbsp;        LoginInputBoundary loginInteractor = new LoginInteractor(</b>
+&nbsp;                userDataAccessObject, loginOutputBoundary, logOutDataAccessBoundary);
+&nbsp;
+<b class="fc">&nbsp;        return new LoginController(loginInteractor);</b>
+&nbsp;    }
+&nbsp;    public static JoinChatRoomController createJoinChatRoomUseCase(
+&nbsp;            JoinChatRoomDataAccessBoundary joinChatRoomDataAccessBoundary,
+&nbsp;            GetChatRoomDataAccessBoundary getChatRoomDataAccessBoundary,
+&nbsp;            LogOutDataAccessBoundary logOutDataAccessBoundary,
+&nbsp;            GetUser getUser, SendMessageUserDataAccessInterface sendMessageUserDataAccessInterface,
+&nbsp;            RefreshMessagesDataAccessBoundary refreshMessagesDataAccessBoundary) throws IOException {
+&nbsp;
+&nbsp;        // Notice how we pass this method&#39;s parameters to the Presenter.
+<b class="fc">&nbsp;        JoinChatRoomOutputBoundary joinChatRoomOutputBoundary = new ChatRoomPresenter();</b>
+&nbsp;
+<b class="fc">&nbsp;        UserFactory userFactory = new CommonUserFactory();</b>
+&nbsp;
+<b class="fc">&nbsp;        JoinChatRoomInputBoundary joinChatRoomInteractor = new JoinChatRoomInteractor(joinChatRoomOutputBoundary,</b>
+&nbsp;                joinChatRoomDataAccessBoundary,
+&nbsp;                getChatRoomDataAccessBoundary,
+&nbsp;                logOutDataAccessBoundary,
+&nbsp;                getUser,
+&nbsp;                sendMessageUserDataAccessInterface,
+&nbsp;                refreshMessagesDataAccessBoundary
+&nbsp;                );
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;        return new JoinChatRoomController(joinChatRoomInteractor);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-12-02 18:22</div>
+</div>
+</body>
+</html>

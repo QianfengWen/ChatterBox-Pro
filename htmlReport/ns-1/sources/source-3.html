@@ -1,0 +1,150 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > ShowJokeFrameFactory</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">chattingSystem.app</a>
+</div>
+
+<h1>Coverage Summary for Class: ShowJokeFrameFactory (chattingSystem.app)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ShowJokeFrameFactory</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    94.4%
+  </span>
+  <span class="absValue">
+    (17/18)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package chattingSystem.app;
+&nbsp;
+&nbsp;import chattingSystem.frameworks_drivers.ui.views.FunJokeView;
+&nbsp;import chattingSystem.frameworks_drivers.ui.views.FunJokeViewManager;
+&nbsp;import chattingSystem.interface_adapter.controllers.FunJokeController;
+&nbsp;import chattingSystem.interface_adapter.presenter.FunJokePresenter;
+&nbsp;import chattingSystem.interface_adapter.view_models.FunJokeViewManagerModel;
+&nbsp;import chattingSystem.interface_adapter.view_models.FunJokeViewModel;
+&nbsp;import chattingSystem.use_cases.fun_joke.FunJokeDataAccessBoundary;
+&nbsp;import chattingSystem.use_cases.fun_joke.FunJokeInputBountry;
+&nbsp;import chattingSystem.use_cases.fun_joke.FunJokeInteractor;
+&nbsp;import chattingSystem.use_cases.fun_joke.FunJokeOutputBoundry;
+&nbsp;
+&nbsp;import javax.swing.*;
+&nbsp;import java.awt.*;
+&nbsp;
+<b class="nc">&nbsp;public class ShowJokeFrameFactory {</b>
+&nbsp;
+&nbsp;    public static void createShowJokeFrame(FunJokeViewModel funJokeViewModel, FunJokeDataAccessBoundary funJokeDataAccessObject) {
+<b class="fc">&nbsp;        JFrame funJokeFrame = new JFrame(&quot;Have Fun Joke&quot;);</b>
+<b class="fc">&nbsp;        funJokeFrame.setPreferredSize(new Dimension(430, 360));</b>
+<b class="fc">&nbsp;        funJokeFrame.setVisible(false);</b>
+<b class="fc">&nbsp;        FunJokeController funJokeController = createFunJokeUseCase(funJokeDataAccessObject, funJokeViewModel);</b>
+<b class="fc">&nbsp;        CardLayout funJokeCardLayout = new CardLayout();</b>
+<b class="fc">&nbsp;        JPanel funJokeViews = new JPanel(funJokeCardLayout);</b>
+<b class="fc">&nbsp;        funJokeFrame.add(funJokeViews);</b>
+&nbsp;        // This keeps track of and manages which view is currently showing.
+<b class="fc">&nbsp;        FunJokeViewManagerModel funJokeViewManagerModel = new FunJokeViewManagerModel();</b>
+<b class="fc">&nbsp;        FunJokeViewManager funJokeViewManager = new FunJokeViewManager(funJokeViews, funJokeCardLayout, funJokeViewManagerModel);</b>
+<b class="fc">&nbsp;        JPanel funJokeView = new FunJokeView(funJokeController, funJokeViewModel, funJokeViewManagerModel, funJokeViewManager);</b>
+<b class="fc">&nbsp;        funJokeFrame.setContentPane(funJokeView);</b>
+<b class="fc">&nbsp;        funJokeFrame.pack();</b>
+<b class="fc">&nbsp;        funJokeFrame.setVisible(true);</b>
+<b class="fc">&nbsp;        funJokeViewModel.setCurrentFrame(funJokeFrame);</b>
+&nbsp;    }
+&nbsp;    public static FunJokeController createFunJokeUseCase(
+&nbsp;            FunJokeDataAccessBoundary funJokeDataAccessBoundary, FunJokeViewModel funJokeViewModel
+&nbsp;    ) {
+&nbsp;        // Notice how we pass this method&#39;s parameters to the Presenter.
+<b class="fc">&nbsp;        FunJokeOutputBoundry funJokeOutputBoundry = new FunJokePresenter(funJokeViewModel);</b>
+&nbsp;
+<b class="fc">&nbsp;        FunJokeInputBountry funJokeInteractor = new FunJokeInteractor(funJokeDataAccessBoundary, funJokeOutputBoundry);</b>
+&nbsp;
+<b class="fc">&nbsp;        return new FunJokeController(funJokeInteractor);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-12-02 18:22</div>
+</div>
+</body>
+</html>
