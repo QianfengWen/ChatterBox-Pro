@@ -1,12 +1,20 @@
 package chattingSystem.interface_adapter.presenter;
 
+import chattingSystem.entities.ChatRoom.ChatRoom;
+import chattingSystem.frameworks_drivers.ui.views.ChatRoomView;
 import chattingSystem.frameworks_drivers.ui.views.ViewManager;
+import chattingSystem.interface_adapter.state.ChatRoomState;
 import chattingSystem.interface_adapter.state.LoginState;
+import chattingSystem.interface_adapter.view_models.ChatRoomViewModel;
 import chattingSystem.interface_adapter.view_models.LoginViewModel;
 import chattingSystem.interface_adapter.view_models.ViewManagerModel;
 import chattingSystem.use_cases.log_out.LogOutDataAccessBoundary;
 import chattingSystem.use_cases.login.LoginOutputData;
 import chattingSystem.use_cases.login.LoginOutputBoundary;
+
+import java.util.Objects;
+
+import static chattingSystem.App.ChatRoomFrameFactory.createChatRoomFrame;
 
 public class LoginPresenter implements LoginOutputBoundary{
     private final LoginViewModel loginViewModel;
