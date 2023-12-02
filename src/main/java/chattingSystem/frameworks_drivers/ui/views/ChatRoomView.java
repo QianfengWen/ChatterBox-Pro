@@ -25,7 +25,7 @@ public class ChatRoomView extends JPanel implements ActionListener, PropertyChan
     public final JButton send;
     private final JButton getJoke;
 
-    private final JButton logOut;
+    public final JButton logOut;
     private final JTextField messageInput;
     public ChatRoomViewModel chatRoomViewModel;
     public LogOutController logOutController;
