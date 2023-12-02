@@ -26,6 +26,8 @@ public class FunJokePresenter implements FunJokeOutputBoundry, ShowJokeOutputBou
         currentState.setJokeInfoDisplay(jokeInfo.getJokeInfo());
         funJokeViewModel.setState(currentState);
         funJokeViewModel.firePropertyChanged();
+        FunJokeDataAccessObject funJokeDataAccessBoundary = new FunJokeDataAccessObject();
+        createShowJokeFrame(funJokeViewModel, funJokeDataAccessBoundary);
     }
 
 
@@ -40,9 +42,6 @@ public class FunJokePresenter implements FunJokeOutputBoundry, ShowJokeOutputBou
 
     @Override
     public void prepareSuccessView() {
-        FunJokeDataAccessObject funJokeDataAccessBoundary = new FunJokeDataAccessObject();
-        createShowJokeFrame(funJokeViewModel, funJokeDataAccessBoundary);
-
 
     }
 
