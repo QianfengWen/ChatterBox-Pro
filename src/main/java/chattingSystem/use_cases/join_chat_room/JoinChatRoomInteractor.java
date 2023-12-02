@@ -2,14 +2,10 @@ package chattingSystem.use_cases.join_chat_room;
 
 
 import chattingSystem.entities.ChatRoom.ChatRoom;
-import chattingSystem.entities.ChatRoom.ChatRoomFactory;
-import chattingSystem.entities.Message.Message;
 import chattingSystem.entities.User.User;
 import chattingSystem.use_cases.get_chat_room.GetChatRoomDataAccessBoundary;
 import chattingSystem.use_cases.get_chat_room.GetUser;
 import chattingSystem.use_cases.log_out.LogOutDataAccessBoundary;
-import chattingSystem.use_cases.login.LoginOutputBoundary;
-import chattingSystem.use_cases.login.LoginOutputData;
 import chattingSystem.use_cases.refresh_messages.RefreshMessagesDataAccessBoundary;
 import chattingSystem.use_cases.send_message.SendMessageUserDataAccessInterface;
 
@@ -18,7 +14,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class JoinChatRoomInteractor implements JoinChatRoomInputBoundary {
-    private JoinChatRoomOutpurBoundary joinChatRoomOutpurBoundary;
+    private JoinChatRoomOutputBoundary joinChatRoomOutputBoundary;
     private JoinChatRoomDataAccessBoundary joinChatRoomDataAccessBoundary;
     private GetChatRoomDataAccessBoundary getChatRoomDataAccessBoundary;
     private LogOutDataAccessBoundary logOutDataAccessBoundary;
@@ -26,13 +22,13 @@ public class JoinChatRoomInteractor implements JoinChatRoomInputBoundary {
 
     private RefreshMessagesDataAccessBoundary refreshMessagesDataAccessBoundary;
     private GetUser getUser;
-    public JoinChatRoomInteractor(JoinChatRoomOutpurBoundary joinChatRoomOutpurBoundary,
+    public JoinChatRoomInteractor(JoinChatRoomOutputBoundary joinChatRoomOutputBoundary,
                                   JoinChatRoomDataAccessBoundary joinChatRoomDataAccessBoundary,
                                   GetChatRoomDataAccessBoundary getChatRoomDataAccessBoundary,
                                   LogOutDataAccessBoundary logOutDataAccessBoundary,
                                   GetUser getUser, SendMessageUserDataAccessInterface sendMessageUserDataAccessInterface,
                                   RefreshMessagesDataAccessBoundary refreshMessagesDataAccessBoundary) {
-        this.joinChatRoomOutpurBoundary = joinChatRoomOutpurBoundary;
+        this.joinChatRoomOutputBoundary = joinChatRoomOutputBoundary;
         this.joinChatRoomDataAccessBoundary = joinChatRoomDataAccessBoundary;
         this.getChatRoomDataAccessBoundary = getChatRoomDataAccessBoundary;
         this.logOutDataAccessBoundary = logOutDataAccessBoundary;
@@ -54,11 +50,11 @@ public class JoinChatRoomInteractor implements JoinChatRoomInputBoundary {
             List<String> messagesList = joinChatRoomDataAccessBoundary.fetchAllMessages();
             if (chatRoom.getMembers().contains(user)) {
 
-                joinChatRoomOutpurBoundary.prepareSuccessView(new JoinChatRoomOutputData(user, true, "1", messagesList), logOutDataAccessBoundary, sendMessageUserDataAccessInterface, refreshMessagesDataAccessBoundary);
+                joinChatRoomOutputBoundary.prepareSuccessView(new JoinChatRoomOutputData(user, true, "1", messagesList), logOutDataAccessBoundary, sendMessageUserDataAccessInterface, refreshMessagesDataAccessBoundary);
 
             } else {
                 joinChatRoomDataAccessBoundary.joinChatRoom(user);
-                joinChatRoomOutpurBoundary.prepareSuccessView(new JoinChatRoomOutputData(user, true, "1", messagesList), logOutDataAccessBoundary, sendMessageUserDataAccessInterface, refreshMessagesDataAccessBoundary);
+                joinChatRoomOutputBoundary.prepareSuccessView(new JoinChatRoomOutputData(user, true, "1", messagesList), logOutDataAccessBoundary, sendMessageUserDataAccessInterface, refreshMessagesDataAccessBoundary);
 
             }
 

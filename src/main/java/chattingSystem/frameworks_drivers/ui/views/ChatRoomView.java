@@ -22,10 +22,11 @@ public class ChatRoomView extends JPanel implements ActionListener, PropertyChan
 
     public final String viewName;
     private final JButton getWeather;
-    private final JButton send;
+    public final JButton send;
     private final JButton getJoke;
 
     private final JButton logOut;
+    private final JTextField messageInput;
     public ChatRoomViewModel chatRoomViewModel;
     public LogOutController logOutController;
     public ShowWeatherController showWeatherController;
@@ -53,6 +54,7 @@ public class ChatRoomView extends JPanel implements ActionListener, PropertyChan
         this.sendMessageController = sendMessageController;
         this.refreshingMessageController = refreshingMessageController;
         this.showJokeController = showJokeController;
+        this.messageInput = new JTextField();
         chatRoomViewManager.addView(this, viewName);
         chatRoomViewModel.addPropertyChangeListener(this);
 
@@ -102,7 +104,6 @@ public class ChatRoomView extends JPanel implements ActionListener, PropertyChan
         add(scrollPane, gbc);
 
 // Message Input
-        JTextField messageInput = new JTextField();
         messageInput.setPreferredSize(new Dimension(400, 50));
         messageInput.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         gbc.gridx = 0;
@@ -273,5 +274,9 @@ public class ChatRoomView extends JPanel implements ActionListener, PropertyChan
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+    }
+
+    public JTextField getMessageInputField() {
+        return messageInput;
     }
 }

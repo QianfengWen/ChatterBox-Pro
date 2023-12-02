@@ -12,6 +12,10 @@ public class LogOutOutputData {
     public String getUsername() {
         return username;
     }
+
+    public boolean getHasLoggedOut() {
+        return hasLoggedOut;
+    }
 }
 
 

@@ -10,7 +10,6 @@ import chattingSystem.interface_adapter.controllers.JoinChatRoomController;
 import chattingSystem.interface_adapter.controllers.LoginController;
 import chattingSystem.interface_adapter.presenter.ChatRoomPresenter;
 import chattingSystem.interface_adapter.presenter.LoginPresenter;
-import chattingSystem.interface_adapter.view_models.ChatRoomViewModel;
 import chattingSystem.interface_adapter.view_models.LoginViewModel;
 import chattingSystem.interface_adapter.view_models.ViewManagerModel;
 import chattingSystem.use_cases.get_chat_room.GetChatRoomDataAccessBoundary;
@@ -18,7 +17,7 @@ import chattingSystem.use_cases.get_chat_room.GetUser;
 import chattingSystem.use_cases.join_chat_room.JoinChatRoomDataAccessBoundary;
 import chattingSystem.use_cases.join_chat_room.JoinChatRoomInputBoundary;
 import chattingSystem.use_cases.join_chat_room.JoinChatRoomInteractor;
-import chattingSystem.use_cases.join_chat_room.JoinChatRoomOutpurBoundary;
+import chattingSystem.use_cases.join_chat_room.JoinChatRoomOutputBoundary;
 import chattingSystem.use_cases.log_out.LogOutDataAccessBoundary;
 import chattingSystem.use_cases.login.LoginInputBoundary;
 import chattingSystem.use_cases.login.LoginInteractor;
@@ -85,11 +84,11 @@ public class LoginUseCaseFactory {
             RefreshMessagesDataAccessBoundary refreshMessagesDataAccessBoundary) throws IOException {
 
         // Notice how we pass this method's parameters to the Presenter.
-        JoinChatRoomOutpurBoundary joinChatRoomOutpurBoundary = new ChatRoomPresenter();
+        JoinChatRoomOutputBoundary joinChatRoomOutputBoundary = new ChatRoomPresenter();
 
         UserFactory userFactory = new CommonUserFactory();
 
-        JoinChatRoomInputBoundary joinChatRoomInteractor = new JoinChatRoomInteractor(joinChatRoomOutpurBoundary,
+        JoinChatRoomInputBoundary joinChatRoomInteractor = new JoinChatRoomInteractor(joinChatRoomOutputBoundary,
                 joinChatRoomDataAccessBoundary,
                 getChatRoomDataAccessBoundary,
                 logOutDataAccessBoundary,

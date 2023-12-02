@@ -10,7 +10,7 @@ public class JoinChatRoomOutputData {
     private final String chatRoomId;
 
     private List<String> messages;
-    boolean hasJoined;
+    public boolean hasJoined;
     public JoinChatRoomOutputData(User user, boolean hasJoined, String chatRoomId, List<String> messages) {
         this.user = user;
         this.hasJoined = hasJoined;
