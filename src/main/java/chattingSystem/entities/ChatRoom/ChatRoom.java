@@ -14,7 +14,6 @@ public interface ChatRoom {
     String getMembersString();
     String getMembersIdString();
 
-    String getChatHistoryString();
     void addMember(User user);
     String getChatRoomID();
 

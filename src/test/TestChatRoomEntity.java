@@ -1,4 +1,3 @@
-package test;
 
 import chattingSystem.entities.ChatRoom.ChatRoom;
 import chattingSystem.entities.ChatRoom.ChatRoomFactory;

@@ -51,16 +51,6 @@ public class CommonChatRoom implements ChatRoom {
     }
 
     @Override
-    public String getChatHistoryString() {
-//        StringBuilder chatHistoryString = new StringBuilder();
-//        for (TextMessage message : chatHistory) {
-//            chatHistoryString.append(message.toString()).append("\n");
-//        }
-//        return chatHistoryString.toString();
-        return "Test";
-    }
-
-    @Override
     public void addMember(User user) {
         members.add(user);
     }

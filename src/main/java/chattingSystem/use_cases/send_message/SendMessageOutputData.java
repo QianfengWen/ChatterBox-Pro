@@ -28,4 +28,8 @@ public class SendMessageOutputData {
     public String getUsername() {return username;}
     public String getMessage() {return message;}
     public String getSenderId() {return senderId;}
+
+    public boolean isUseCaseFailed() {
+        return useCaseFailed;
+    }
 }
