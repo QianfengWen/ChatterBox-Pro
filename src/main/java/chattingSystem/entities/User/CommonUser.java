@@ -14,7 +14,7 @@ public class CommonUser implements User{
      * @param password
      * @param creationTime
      */
-    CommonUser(String username, String userid, String password, LocalDateTime creationTime) {
+    public CommonUser(String username, String userid, String password, LocalDateTime creationTime) {
         this.username = username;
         this.userid = userid;
         this.password = password;
