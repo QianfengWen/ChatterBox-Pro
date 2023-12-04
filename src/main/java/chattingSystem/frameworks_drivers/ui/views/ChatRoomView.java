@@ -21,9 +21,9 @@ import java.util.Objects;
 public class ChatRoomView extends JPanel implements ActionListener, PropertyChangeListener {
 
     public final String viewName;
-    private final JButton getWeather;
+    public final JButton getWeather;
     public final JButton send;
-    private final JButton getJoke;
+    public final JButton getJoke;
 
     public final JButton logOut;
     private final JTextField messageInput;

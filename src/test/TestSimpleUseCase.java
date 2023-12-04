@@ -2,12 +2,15 @@ import chattingSystem.app.main;
 import chattingSystem.entities.User.CommonUserFactory;
 import chattingSystem.entities.User.User;
 import chattingSystem.entities.User.UserFactory;
+import chattingSystem.entities.Weather.Weather;
 import chattingSystem.frameworks_drivers.data_access.FileUserDataAccessObject;
 import chattingSystem.frameworks_drivers.ui.views.ChatRoomView;
+import chattingSystem.frameworks_drivers.ui.views.GetWeatherView;
 import chattingSystem.frameworks_drivers.ui.views.LoginView;
 import chattingSystem.frameworks_drivers.ui.views.SignupView;
 import chattingSystem.interface_adapter.state.ChatRoomState;
 import chattingSystem.interface_adapter.view_models.ChatRoomViewModel;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,6 +28,10 @@ public class TestSimpleUseCase {
     private String username = "Test";
     private String password = "Qq123123";
     private String testMessage = "Test";
+
+    private String location = "Toronto";
+
+    private String location2 = "Changsha";
 
     public JButton getLoginButoon() {
         JFrame app = null;
@@ -50,6 +57,18 @@ public class TestSimpleUseCase {
         JPanel buttons = (JPanel) lg.getComponent(5);
 
         return (JButton) buttons.getComponent(0);
+    }
+
+    public void disposeAll() {
+        JFrame app = null;
+        Window[] windows = Window.getWindows();
+        for (Window window : windows) {
+            if (window instanceof JFrame) {
+                app = (JFrame) window;
+
+                app.dispose();
+            }
+        }
     }
 
     public JButton getSignupButtonSign() {
@@ -296,6 +315,56 @@ public class TestSimpleUseCase {
         return cv.send;
     }
 
+
+    public JButton getGetWeatherButton() {
+        JFrame app = null;
+        Window[] windows = Window.getWindows();
+        for (Window window : windows) {
+            if (window instanceof JFrame) {
+                app = (JFrame) window;
+            }
+        }
+
+        assertNotNull(app); // found the window?
+
+        Component root = app.getComponent(0);
+
+        Component cp = ((JRootPane) root).getContentPane();
+
+        JPanel jp = (JPanel) cp;
+
+        JPanel jp2 = (JPanel) jp.getComponent(0);
+
+        ChatRoomView cv = (ChatRoomView) jp2.getComponent(0);
+
+        return cv.getWeather;
+    }
+
+    public JButton getJokeButton() {
+        JFrame app = null;
+        Window[] windows = Window.getWindows();
+        for (Window window : windows) {
+            if (window instanceof JFrame) {
+                app = (JFrame) window;
+            }
+        }
+
+        assertNotNull(app); // found the window?
+
+        Component root = app.getComponent(0);
+
+        Component cp = ((JRootPane) root).getContentPane();
+
+        JPanel jp = (JPanel) cp;
+
+        JPanel jp2 = (JPanel) jp.getComponent(0);
+
+        ChatRoomView cv = (ChatRoomView) jp2.getComponent(0);
+
+        return cv.getJoke;
+    }
+
+
     public JTextField getSendField() {
         JFrame app = null;
         Window[] windows = Window.getWindows();
@@ -318,6 +387,67 @@ public class TestSimpleUseCase {
         ChatRoomView cv = (ChatRoomView) jp2.getComponent(0);
 
         return (JTextField) cv.getComponent(3);
+    }
+
+
+    public JTextField getWeatherText() {
+        JFrame app = null;
+        Window[] windows = Window.getWindows();
+        for (Window window : windows) {
+            if (window instanceof JFrame) {
+                app = (JFrame) window;
+            }
+        }
+
+        assertNotNull(app); // found the window?
+
+        Component root = app.getComponent(0);
+
+        Component cp = ((JRootPane) root).getContentPane();
+
+        GetWeatherView getWeatherView = (GetWeatherView) cp;
+
+        return getWeatherView.cityTextField;
+    }
+
+    public JButton getWeatherLocationButton() {
+        JFrame app = null;
+        Window[] windows = Window.getWindows();
+        for (Window window : windows) {
+            if (window instanceof JFrame) {
+                app = (JFrame) window;
+            }
+        }
+
+        assertNotNull(app); // found the window?
+
+        Component root = app.getComponent(0);
+
+        Component cp = ((JRootPane) root).getContentPane();
+
+        GetWeatherView getWeatherView = (GetWeatherView) cp;
+
+        return getWeatherView.getWeatherBotton;
+    }
+
+    public JTextArea getWeatherOutPut() {
+        JFrame app = null;
+        Window[] windows = Window.getWindows();
+        for (Window window : windows) {
+            if (window instanceof JFrame) {
+                app = (JFrame) window;
+            }
+        }
+
+        assertNotNull(app); // found the window?
+
+        Component root = app.getComponent(0);
+
+        Component cp = ((JRootPane) root).getContentPane();
+
+        GetWeatherView getWeatherView = (GetWeatherView) cp;
+
+        return getWeatherView.textDisplayLabel;
     }
 
     public String getMessage() {
@@ -373,31 +503,6 @@ public class TestSimpleUseCase {
     }
 
 
-//    public JButton getWeatherButton() {
-//        JFrame app = null;
-//        Window[] windows = Window.getWindows();
-//        for (Window window : windows) {
-//            if (window instanceof JFrame) {
-//                app = (JFrame) window;
-//            }
-//        }
-//
-//        assertNotNull(app); // found the window?
-//
-//        Component root = app.getComponent(0);
-//
-//        Component cp = ((JRootPane) root).getContentPane();
-//
-//        JPanel jp = (JPanel) cp;
-//
-//        JPanel jp2 = (JPanel) jp.getComponent(0);
-//
-//        ChatRoomView cv = (ChatRoomView) jp2.getComponent(0);
-//
-//        return cv.getWeather;
-//    }
-
-
     @Before
     public void init() throws IOException {
         UserFactory userFactory = new CommonUserFactory();
@@ -438,6 +543,12 @@ public class TestSimpleUseCase {
 
         FileUserDataAccessObject fileUserDataAccessObject = new FileUserDataAccessObject(new CommonUserFactory());
         assertTrue(fileUserDataAccessObject.existsByName(username));
+
+        User user = fileUserDataAccessObject.getUser(username);
+
+        assertEquals(password, user.getPassword());
+
+        disposeAll();
     }
 
 
@@ -461,7 +572,126 @@ public class TestSimpleUseCase {
         Component view = getFirstView();
 
         assertDoesNotThrow(() -> (ChatRoomView) view);
+
+        disposeAll();
     }
+
+//    @Test
+//    public void testLoginDatabase() throws Exception {
+//        main.main(null);
+//        JButton login = getLoginButoon();
+//        JTextField usernameField = getLoginUserNameField();
+//        JTextField passwordField = getLoginPasswordField();
+//
+//        usernameField.setText(username.substring(0, username.length() - 1));
+//        usernameField.dispatchEvent(new KeyEvent(usernameField, KeyEvent.KEY_TYPED, System.currentTimeMillis(),
+//                0, KeyEvent.VK_UNDEFINED, username.charAt(username.length() - 1)));
+//
+//        passwordField.setText(password.substring(0, password.length() - 1));
+//        passwordField.dispatchEvent(new KeyEvent(passwordField, KeyEvent.KEY_TYPED, System.currentTimeMillis(),
+//                0, KeyEvent.VK_UNDEFINED, password.charAt(password.length() - 1)));
+//
+//        login.doClick();
+//
+//        FileUserDataAccessObject fileUserDataAccessObject = new FileUserDataAccessObject(new CommonUserFactory());
+//
+//        User user = fileUserDataAccessObject.getUser(username);
+//
+//        assertEquals(user.getUsername(), username);
+//        assertEquals(user.getPassword(), password);
+//
+//        disposeAll();
+//    }
+
+
+    @Test
+    public void testGetWeather() throws Exception {
+        main.main(null);
+        JButton login = getLoginButoon();
+        JTextField usernameField = getLoginUserNameField();
+        JTextField passwordField = getLoginPasswordField();
+
+        usernameField.setText(username.substring(0, username.length() - 1));
+        usernameField.dispatchEvent(new KeyEvent(usernameField, KeyEvent.KEY_TYPED, System.currentTimeMillis(),
+                0, KeyEvent.VK_UNDEFINED, username.charAt(username.length() - 1)));
+
+        passwordField.setText(password.substring(0, password.length() - 1));
+        passwordField.dispatchEvent(new KeyEvent(passwordField, KeyEvent.KEY_TYPED, System.currentTimeMillis(),
+                0, KeyEvent.VK_UNDEFINED, password.charAt(password.length() - 1)));
+
+        login.doClick();
+
+        Thread.sleep(1000);
+
+        JButton getWeather = getGetWeatherButton();
+
+        assertDoesNotThrow(() -> getWeather.doClick());
+
+        Thread.sleep(1000);
+
+        JTextField locationField = getWeatherText();
+
+        locationField.setText(location.substring(0, location.length() - 1));
+        locationField.dispatchEvent(new KeyEvent(locationField, KeyEvent.KEY_TYPED, System.currentTimeMillis(),
+                0, KeyEvent.VK_UNDEFINED, location.charAt(location.length() - 1)));
+
+        JButton getWeatherLocation = getWeatherLocationButton();
+
+        assertDoesNotThrow(() -> getWeatherLocation.doClick());
+
+        JTextArea text = getWeatherOutPut();
+
+        String returnLocation = text.getText().substring(10, 10 + location.length());
+
+        assertEquals(location, returnLocation);
+
+        Thread.sleep(1000);
+
+        locationField.setText(location2.substring(0, location2.length() - 1));
+        locationField.dispatchEvent(new KeyEvent(locationField, KeyEvent.KEY_TYPED, System.currentTimeMillis(),
+                0, KeyEvent.VK_UNDEFINED, location2.charAt(location2.length() - 1)));
+
+        assertDoesNotThrow(() -> getWeatherLocation.doClick());
+
+        Thread.sleep(1000);
+
+        JTextArea text2 = getWeatherOutPut();
+
+        String returnLocation2 = text2.getText().substring(10, 10 + location2.length());
+
+        assertEquals(location2, returnLocation2);
+
+        disposeAll();
+    }
+
+    @Test
+    public void testGetJoke() throws Exception {
+        main.main(null);
+        JButton login = getLoginButoon();
+        JTextField usernameField = getLoginUserNameField();
+        JTextField passwordField = getLoginPasswordField();
+
+        usernameField.setText(username.substring(0, username.length() - 1));
+        usernameField.dispatchEvent(new KeyEvent(usernameField, KeyEvent.KEY_TYPED, System.currentTimeMillis(),
+                0, KeyEvent.VK_UNDEFINED, username.charAt(username.length() - 1)));
+
+        passwordField.setText(password.substring(0, password.length() - 1));
+        passwordField.dispatchEvent(new KeyEvent(passwordField, KeyEvent.KEY_TYPED, System.currentTimeMillis(),
+                0, KeyEvent.VK_UNDEFINED, password.charAt(password.length() - 1)));
+
+        login.doClick();
+
+        Thread.sleep(1000);
+
+        JButton getJoke = getJokeButton();
+
+        assertDoesNotThrow(() -> getJoke.doClick());
+
+        Thread.sleep(1000);
+
+        disposeAll();
+    }
+
 
     @Test
     public void testSendMessage() throws IOException, InterruptedException {
@@ -489,6 +719,7 @@ public class TestSimpleUseCase {
         send.doClick();
         //wait for 1000ms
         Thread.sleep(1000);
+
         int length = testMessage.length();
 
         String outputMessage = getMessage();
@@ -496,6 +727,8 @@ public class TestSimpleUseCase {
         int outLength = outputMessage.length();
         assertEquals(username, outputMessage.substring(0, username.length()));
         assertEquals(testMessage, outputMessage.substring(outLength - length, outLength));
+
+        disposeAll();
     }
 
     @Test
@@ -524,5 +757,7 @@ public class TestSimpleUseCase {
         User user = fileUserDataAccessObject.getUser(username);
 
         assertFalse(user.getIsOnline());
+
+        disposeAll();
     }
 }
