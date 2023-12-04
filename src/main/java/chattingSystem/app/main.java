@@ -12,9 +12,13 @@ import java.io.IOException;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class main {
     public static void main(String[] args) throws IOException {
+
+        Locale.setDefault(new Locale("en","US"));
 
 
         // Build the main program window, the main panel containing the

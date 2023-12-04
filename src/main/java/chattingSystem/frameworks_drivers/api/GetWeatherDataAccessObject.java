@@ -61,7 +61,8 @@ public class GetWeatherDataAccessObject implements GetWeatherDataAccessBoundary 
             if (response.code() == 200) {
                 return true;
             } else {
-                throw new RuntimeException("Cannot Get Weather Report For Typed city");
+                return false;
+//                throw new RuntimeException("Cannot Get Weather Report For Typed city");
             }
         } catch (IOException | JSONException e) {
             return false;
