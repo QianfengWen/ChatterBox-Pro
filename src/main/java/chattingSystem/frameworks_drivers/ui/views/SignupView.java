@@ -97,8 +97,12 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         gbc.insets = new Insets(10, 10, 10, 10);
         JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
         signUp = new JButton(SignupViewModel.SIGNUP_BUTTON_LABEL);
+        signUp.setOpaque(true);
+        signUp.setBorderPainted(false);
         buttonsPanel.add(signUp);
         cancel = new JButton(SignupViewModel.CANCEL_BUTTON_LABEL);
+        cancel.setOpaque(true);
+        cancel.setBorderPainted(false);
         buttonsPanel.add(cancel);
         add(buttonsPanel, gbc);
 

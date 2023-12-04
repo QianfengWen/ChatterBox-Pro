@@ -7,6 +7,7 @@ import chattingSystem.interface_adapter.view_models.LoginViewModel;
 import chattingSystem.interface_adapter.view_models.ViewManagerModel;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -78,11 +79,17 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
         gbc.insets = new Insets(10, 10, 10, 10);
         JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
         logIn = new JButton(LoginViewModel.LOGIN_BUTTON_LABEL);
+        logIn.setOpaque(true);
+        logIn.setBorderPainted(false);
         buttonsPanel.add(logIn);
         signUp = new JButton("Sign up");
+        signUp.setOpaque(true);
+        signUp.setBorderPainted(false);
         buttonsPanel.add(signUp);
         add(buttonsPanel, gbc);
         cancel = new JButton(LoginViewModel.CANCEL_BUTTON_LABEL);
+        cancel.setOpaque(true);
+        cancel.setBorderPainted(false);
         buttonsPanel.add(cancel);
         add(buttonsPanel, gbc);
 
