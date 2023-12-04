@@ -18,9 +18,9 @@ import java.beans.PropertyChangeListener;
 
 public class GetWeatherView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "Get Weather";
-    private JTextField cityTextField = new JTextField();
-    private JButton getWeatherBotton = new JButton("Get Weather");
-    private JTextArea textDisplayLabel = new JTextArea();
+    public JTextField cityTextField = new JTextField();
+    public JButton getWeatherBotton = new JButton("Get Weather");
+    public JTextArea textDisplayLabel = new JTextArea();
     public GetWeatherViewModel getWeatherViewModel;
     private final GetWeatherViewManagerModel getWeatherViewManagerModel;
     public GetWeatherController getWeatherController;
