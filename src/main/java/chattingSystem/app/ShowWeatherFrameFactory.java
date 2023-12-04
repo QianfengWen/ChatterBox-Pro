@@ -16,6 +16,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ShowWeatherFrameFactory {
+    private static JFrame weatherFrame;
     public static void createShowWeatherFrame(GetWeatherViewModel getWeatherViewModel, GetWeatherDataAccessBoundary getWeatherDataAccessBoundary) {
         JFrame getWeatherFrame = new JFrame("Get Weather");
         getWeatherFrame.setPreferredSize(new Dimension(430, 360));
@@ -32,6 +33,7 @@ public class ShowWeatherFrameFactory {
         getWeatherFrame.pack();
         getWeatherFrame.setVisible(true);
         getWeatherViewModel.setCurrentFrame(getWeatherFrame);
+        weatherFrame = getWeatherFrame;
     }
     public static GetWeatherController createGetWeatherUseCase(
            GetWeatherDataAccessBoundary getWeatherDataAccessBoundary, GetWeatherViewModel getWeatherViewModel
