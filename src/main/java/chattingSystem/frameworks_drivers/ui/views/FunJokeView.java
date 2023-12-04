@@ -75,6 +75,8 @@ public class FunJokeView extends JPanel implements ActionListener, PropertyChang
         funJokeButtonConstraints.gridwidth = 2;
         funJokeButtonConstraints.insets = new Insets(10, 0, 10, 0);
         funJokeButtonConstraints.anchor = GridBagConstraints.CENTER;
+        funJokeBotton.setOpaque(true);
+        funJokeBotton.setBorderPainted(false);
         add(funJokeBotton, funJokeButtonConstraints);
 
         // Text Display Label (Large JLabel with the shape of a box)

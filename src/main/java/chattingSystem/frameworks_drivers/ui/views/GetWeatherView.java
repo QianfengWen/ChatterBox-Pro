@@ -79,6 +79,8 @@ public class GetWeatherView extends JPanel implements ActionListener, PropertyCh
         getWeatherButtonConstraints.gridwidth = 2;
         getWeatherButtonConstraints.insets = new Insets(10, 0, 10, 0);
         getWeatherButtonConstraints.anchor = GridBagConstraints.CENTER;
+        getWeatherBotton.setOpaque(true);
+        getWeatherBotton.setBorderPainted(false);
         add(getWeatherBotton, getWeatherButtonConstraints);
 
         // Text Display Label (Large JLabel with the shape of a box)
